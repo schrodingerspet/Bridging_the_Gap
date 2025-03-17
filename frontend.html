@@ -3,246 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Government Schemes Portal - CSS Only</title>
+  <title>Bridging the Gap - Government Schemes Portal</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f4f7fa;
-      color: #333;
-    }
-    a {
-      text-decoration: none;
-    }
-
-    /* Header Styling */
-    header {
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      color: #fff;
-      padding: 20px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    header h1 {
-      font-size: 2.5rem;
-      text-align: center;
-      margin-bottom: 15px;
-    }
-
-    /* Navigation with Dropdown */
-    nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-    }
-    nav ul li {
-      position: relative;
-    }
-    nav ul li a {
-      color: #fff;
-      font-weight: 600;
-      padding: 8px 15px;
-    }
-    nav ul li a:hover {
-      color: #ffcc00;
-    }
-
-    /* Dropdown Menu: Hidden by default, shown on hover */
-    nav ul li ul {
-      display: block;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: #2a5298; /* Solid dark blue background */
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      opacity: 0; /* Hidden initially */
-      visibility: hidden; /* Removes it from layout */
-      transition: opacity 0.3s, visibility 0s 0.3s; /* Smooth fade effect */
-      z-index: 1001; /* Ensures it appears on top */
-    }
-    nav ul li:hover ul {
-      opacity: 1; /* Fully visible on hover */
-      visibility: visible;
-      transition: opacity 0.3s;
-    }
-    nav ul li ul li {
-      margin: 8px 0;
-    }
-    nav ul li ul li a {
-      color: #fff;
-      font-weight: 400;
-    }
-
-    /* Search Bar */
-    .search-container {
-      margin-top: 15px;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-    }
-    .search-container input {
-      padding: 10px;
-      border: none;
-      border-radius: 25px;
-      width: 300px;
-    }
-    .search-container button {
-      padding: 10px 20px;
-      background-color: #ffcc00;
-      color: #1e3c72;
-      border: none;
-      border-radius: 25px;
-      font-weight: 600;
-    }
-
-    /* Hero Section */
-    .hero {
-      background: url('https://source.unsplash.com/1600x600/?government') no-repeat center center fixed;
-      background-size: cover;
-      height: 90vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      text-align: center;
-      position: relative;
-    }
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-    }
-    .hero-text {
-      position: relative;
-      z-index: 1;
-    }
-    .hero h2 {
-      font-size: 4rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-    .hero p {
-      font-size: 1.5rem;
-      margin-bottom: 30px;
-    }
-    .hero .btn {
-      background-color: #ffcc00;
-      color: #1e3c72;
-      padding: 15px 30px;
-      border-radius: 25px;
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-
-    /* Main Content */
-    main {
-      max-width: 1300px;
-      margin: 50px auto;
-      padding: 0 20px;
-    }
-    .card-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 25px;
-    }
-    .card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
-    .card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-    }
-    .card-content {
-      padding: 20px;
-    }
-    .card-content h2 {
-      color: #1e3c72;
-      font-size: 1.6rem;
-      margin-bottom: 10px;
-    }
-    .card-content p {
-      font-size: 1rem;
-      color: #666;
-      margin-bottom: 15px;
-    }
-    .card-content .btn {
-      background-color: #1e3c72;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-weight: 600;
-    }
-
-    /* Modal Styling */
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9); /* Darker, less transparent */
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-      z-index: 2000;
-    }
-    .modal:target {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .modal-content {
-      background: #fff;
-      margin: 10% auto;
-      padding: 30px;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 700px;
-    }
-    .close {
-      color: #1e3c72;
-      font-size: 30px;
-      font-weight: 700;
-      position: absolute;
-      top: 10px;
-      right: 20px;
-    }
-
-    /* Footer */
-    footer {
-      background: #1e3c72;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-      margin-top: 50px;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Header with Navigation and Dropdown Menus -->
+  <!-- Header -->
   <header>
-    <h1>Government Schemes Portal</h1>
+    <h1>Bridging the Gap</h1>
     <nav>
       <ul>
         <li><a href="#">Home</a></li>
         <li>
           <a href="#">Health</a>
-          <!-- Submenu for Health -->
           <ul>
             <li><a href="#">Ayushman Bharat</a></li>
             <li><a href="#">National Health Mission</a></li>
@@ -250,7 +23,6 @@
         </li>
         <li>
           <a href="#">Farmers</a>
-          <!-- Submenu for Farmers -->
           <ul>
             <li><a href="#">PM-KISAN</a></li>
             <li><a href="#">Soil Health Card</a></li>
@@ -258,16 +30,22 @@
         </li>
         <li>
           <a href="#">Students</a>
-          <!-- Submenu for Students -->
           <ul>
             <li><a href="#">Scholarships</a></li>
             <li><a href="#">Educational Loans</a></li>
           </ul>
         </li>
+        <li>
+          <a href="#">Others</a>
+          <ul>
+            <li><a href="#">Housing Schemes</a></li>
+            <li><a href="#">Employment Programs</a></li>
+          </ul>
+        </li>
       </ul>
     </nav>
     <div class="search-container">
-      <input type="text" placeholder="Search schemes" />
+      <input type="text" placeholder="Search schemes (e.g., PM-KISAN)" />
       <button>Search</button>
     </div>
   </header>
@@ -288,7 +66,7 @@
         <img src="https://source.unsplash.com/600x400/?health" alt="Health Schemes">
         <div class="card-content">
           <h2>Health Schemes</h2>
-          <p>Healthcare programs like Ayushman Bharat.</p>
+          <p>Comprehensive healthcare programs like Ayushman Bharat.</p>
           <a href="#health-modal" class="btn">Explore</a>
         </div>
       </div>
@@ -296,7 +74,7 @@
         <img src="https://source.unsplash.com/600x400/?farmers" alt="Farmers Schemes">
         <div class="card-content">
           <h2>Farmers' Schemes</h2>
-          <p>Support like PM-KISAN for farmers.</p>
+          <p>Support for farmers with PM-KISAN and more.</p>
           <a href="#farmers-modal" class="btn">Explore</a>
         </div>
       </div>
@@ -304,8 +82,16 @@
         <img src="https://source.unsplash.com/600x400/?students" alt="Students Schemes">
         <div class="card-content">
           <h2>Students' Schemes</h2>
-          <p>Scholarships and loans for students.</p>
+          <p>Scholarships and loans for educational growth.</p>
           <a href="#students-modal" class="btn">Explore</a>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://source.unsplash.com/600x400/?community" alt="Other Schemes">
+        <div class="card-content">
+          <h2>Other Schemes</h2>
+          <p>Housing, employment, and welfare initiatives.</p>
+          <a href="#others-modal" class="btn">Explore</a>
         </div>
       </div>
     </div>
@@ -316,27 +102,34 @@
     <div class="modal-content">
       <a href="#" class="close">×</a>
       <h2>Health Schemes</h2>
-      <p>Details about Ayushman Bharat and more.</p>
+      <p>Discover healthcare initiatives like Ayushman Bharat, providing free treatment to millions.</p>
     </div>
   </div>
   <div id="farmers-modal" class="modal">
     <div class="modal-content">
       <a href="#" class="close">×</a>
       <h2>Farmers' Schemes</h2>
-      <p>Learn about PM-KISAN and Soil Health Card.</p>
+      <p>Learn about PM-KISAN, offering financial aid to farmers, and Soil Health Card programs.</p>
     </div>
   </div>
   <div id="students-modal" class="modal">
     <div class="modal-content">
       <a href="#" class="close">×</a>
       <h2>Students' Schemes</h2>
-      <p>Scholarships and loans for your studies.</p>
+      <p>Explore scholarships and educational loans to support your academic journey.</p>
+    </div>
+  </div>
+  <div id="others-modal" class="modal">
+    <div class="modal-content">
+      <a href="#" class="close">×</a>
+      <h2>Other Schemes</h2>
+      <p>Find housing schemes, employment programs, and more for every citizen.</p>
     </div>
   </div>
 
   <!-- Footer -->
   <footer>
-    <p>© 2025 Government Schemes Portal</p>
+    <p>© 2025 Bridging the Gap | Designed with Care</p>
   </footer>
 </body>
 </html>
