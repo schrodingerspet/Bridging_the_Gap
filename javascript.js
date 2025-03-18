@@ -16,7 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Construct the URL – assumes a "schemes" folder with individual HTML files (e.g., health.html)
       let url = `schemes/${scheme}.html`;
-      window.location.href = url;
+      
+      // Open the new URL in a new tab/window
+      window.open(url, '_blank');
     });
   });
 });
