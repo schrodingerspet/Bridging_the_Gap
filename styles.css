@@ -15,7 +15,7 @@ a {
 
 /* Header Styling */
 header {
-  background: -webkit-linear-gradient(135deg, #1e3c72, #2a5298); /* Added vendor prefix */
+  background: -webkit-linear-gradient(135deg, #1e3c72, #2a5298); 
   background: linear-gradient(135deg, #1e3c72, #2a5298);
   color: #fff;
   padding: 20px;
@@ -47,7 +47,7 @@ nav ul li a {
   color: #fff;
   font-weight: 600;
   padding: 8px 15px;
-  -webkit-transition: color 0.3s ease; /* Added vendor prefix */
+  -webkit-transition: color 0.3s ease; 
   transition: color 0.3s ease;
 }
 nav ul li a:hover {
@@ -66,7 +66,7 @@ nav ul li ul {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   opacity: 0;
   visibility: hidden;
-  -webkit-transition: opacity 0.3s ease; /* Simplified and added vendor prefix */
+  -webkit-transition: opacity 0.3s ease; 
   transition: opacity 0.3s ease;
 }
 nav ul li:hover ul {
@@ -87,7 +87,7 @@ nav ul li ul li a {
   display: flex;
   justify-content: center;
   gap: 10px;
-  padding: 0 10px; /* Added for consistency */
+  padding: 0 10px; 
 }
 .search-container input {
   padding: 10px;
@@ -97,8 +97,8 @@ nav ul li ul li a {
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 .search-container input:focus {
-  outline: none; /* Added for better UX */
-  box-shadow: 0 0 5px #ffcc00; /* Added focus effect */
+  outline: none; 
+  box-shadow: 0 0 5px #ffcc00; 
 }
 .search-container button {
   padding: 10px 20px;
@@ -107,8 +107,8 @@ nav ul li ul li a {
   border: none;
   border-radius: 25px;
   font-weight: 600;
-  cursor: pointer; /* Added for usability */
-  -webkit-transition: transform 0.3s ease, background-color 0.3s ease; /* Added vendor prefix */
+  cursor: pointer; 
+  -webkit-transition: transform 0.3s ease, background-color 0.3s ease;
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 .search-container button:hover {
@@ -157,8 +157,8 @@ nav ul li ul li a {
   border-radius: 25px;
   font-size: 1.2rem;
   font-weight: 600;
-  cursor: pointer; /* Added for usability */
-  -webkit-transition: transform 0.3s ease; /* Added vendor prefix */
+  cursor: pointer; 
+  -webkit-transition: transform 0.3s ease; 
   transition: transform 0.3s ease;
 }
 .hero .btn:hover {
@@ -181,7 +181,7 @@ main {
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  -webkit-transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added vendor prefix */
+  -webkit-transition: transform 0.3s ease, box-shadow 0.3s ease; 
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .card:hover {
@@ -212,8 +212,8 @@ main {
   padding: 10px 20px;
   border-radius: 5px;
   font-weight: 600;
-  cursor: pointer; /* Added for usability */
-  -webkit-transition: background-color 0.3s ease; /* Added vendor prefix */
+  cursor: pointer; 
+  -webkit-transition: background-color 0.3s ease; 
   transition: background-color 0.3s ease;
 }
 .card-content .btn:hover {
@@ -230,7 +230,7 @@ main {
   background: rgba(0, 0, 0, 0.7);
   opacity: 0;
   pointer-events: none;
-  -webkit-transition: opacity 0.3s ease; /* Added vendor prefix */
+  -webkit-transition: opacity 0.3s ease; 
   transition: opacity 0.3s ease;
   z-index: 2000;
 }
@@ -246,12 +246,12 @@ main {
   width: 90%;
   max-width: 700px;
   position: relative;
-  transform: translateY(-20px); /* Added for animation */
-  -webkit-transition: transform 0.3s ease; /* Added vendor prefix */
+  transform: translateY(-20px); 
+  -webkit-transition: transform 0.3s ease; 
   transition: transform 0.3s ease;
 }
 .modal:target .modal-content {
-  transform: translateY(0); /* Added for animation */
+  transform: translateY(0); 
 }
 .close {
   color: #1e3c72;
@@ -260,8 +260,8 @@ main {
   position: absolute;
   top: 10px;
   right: 20px;
-  cursor: pointer; /* Added for usability */
-  -webkit-transition: color 0.3s ease; /* Added vendor prefix */
+  cursor: pointer; 
+  -webkit-transition: color 0.3s ease; 
   transition: color 0.3s ease;
 }
 .close:hover {
@@ -294,7 +294,7 @@ footer {
     gap: 15px;
   }
 }
-@media (max-width: 480px) { /* Added for smaller screens */
+@media (max-width: 480px) { 
   nav ul {
     flex-direction: column;
     align-items: center;
