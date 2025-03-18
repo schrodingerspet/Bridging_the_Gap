@@ -4,32 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Schemes - Maharashtra</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background: #2c3e50;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+        }
+
+        .schemes-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .scheme-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            padding: 15px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .scheme-card:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .scheme-card h2 {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .scheme-card:hover .description {
+            max-height: 200px; /* Enough for short description */
+        }
+
+        .description p {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 600px) {
+            .scheme-card {
+                width: 90%;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Government Student Schemes - Maharashtra</h1>
+        <h1>Student Schemes - Maharashtra</h1>
     </header>
     <section class="schemes-container">
+        <!-- Scheme 1 -->
         <div class="scheme-card">
-            <h2>Scholarship for Economically Backward Students</h2>
-            <p>Financial assistance for students from economically weaker sections.</p>
-            <a href="https://mahadbt.maharashtra.gov.in/" target="_blank" class="btn">Visit Official Site</a>
+            <h2>Rajarshi Shahu Maharaj Scholarship</h2>
+            <div class="description">
+                <p>Financial aid for economically weaker students pursuing higher education in professional courses.</p>
+            </div>
         </div>
+        <!-- Scheme 2 -->
         <div class="scheme-card">
-            <h2>Post Matric Scholarship for SC/ST</h2>
-            <p>Scholarship scheme for SC/ST students pursuing higher education.</p>
-            <a href="https://mahadbt.maharashtra.gov.in/" target="_blank" class="btn">Visit Official Site</a>
+            <h2>Post Matric SC Scholarship</h2>
+            <div class="description">
+                <p>Supports SC students with tuition and maintenance for post-matric education.</p>
+            </div>
         </div>
+        <!-- Scheme 3 -->
         <div class="scheme-card">
-            <h2>Merit-Based Scholarship</h2>
-            <p>Scholarship for students with outstanding academic performance.</p>
-            <a href="https://mahadbt.maharashtra.gov.in/" target="_blank" class="btn">Visit Official Site</a>
-        </div>
-        <div class="scheme-card">
-            <h2>Special Assistance for Girl Students</h2>
-            <p>Financial aid and incentives for female students in Maharashtra.</p>
-            <a href="https://mahadbt.maharashtra.gov.in/" target="_blank" class="btn">Visit Official Site</a>
+            <h2>Open Merit Scholarship</h2>
+            <div class="description">
+                <p>Rewards meritorious students with aid for graduation in Arts, Science, or Commerce.</p>
+            </div>
         </div>
     </section>
 </body>
