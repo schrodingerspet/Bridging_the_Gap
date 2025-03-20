@@ -59,15 +59,38 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease;
+            padding-top: 10px;
         }
 
         .scheme-card:hover .description {
-            max-height: 200px; /* Enough for short description */
+            max-height: 500px; /* Increased to fit detailed content */
         }
 
         .description p {
             font-size: 0.9rem;
             line-height: 1.4;
+            margin-bottom: 10px;
+        }
+
+        .description ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        .learn-more {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .learn-more:hover {
+            background-color: #0056b3;
         }
 
         @media (max-width: 600px) {
@@ -86,21 +109,109 @@
         <div class="scheme-card">
             <h2>Rajarshi Shahu Maharaj Scholarship</h2>
             <div class="description">
-                <p>Financial aid for economically weaker students pursuing higher education in professional courses.</p>
+                <p><strong>Eligibility:</strong></p>
+                <ul>
+                    <li>Domicile of Maharashtra</li>
+                    <li>Belong to EBC category</li>
+                    <li>Admitted to professional courses (e.g., Engineering, Medical)</li>
+                    <li>Family income ≤ Rs.8.00 lakh</li>
+                </ul>
+                <p><strong>Benefits:</strong></p>
+                <ul>
+                    <li>50% of tuition and exam fees if income ≤ Rs.2.50 lakh</li>
+                    <li>100% of tuition and exam fees if income > Rs.2.50 lakh but ≤ Rs.8.00 lakh</li>
+                </ul>
+                <p><strong>Application Process:</strong></p>
+                <ul>
+                    <li>Apply online via MahaDBT portal</li>
+                    <li>Submit income certificate, mark sheets, etc.</li>
+                </ul>
+                <a href="https://mahadbt.maharashtra.gov.in/" target="_blank" class="learn-more">Learn More</a>
             </div>
         </div>
         <!-- Scheme 2 -->
         <div class="scheme-card">
             <h2>Post Matric SC Scholarship</h2>
             <div class="description">
-                <p>Supports SC students with tuition and maintenance for post-matric education.</p>
+                <p><strong>Eligibility:</strong></p>
+                <ul>
+                    <li>Belong to SC category</li>
+                    <li>Domicile of Maharashtra</li>
+                    <li>Studying in post-matric courses</li>
+                    <li>Family income ≤ Rs.2.50 lakh</li>
+                </ul>
+                <p><strong>Benefits:</strong></p>
+                <ul>
+                    <li>Full tuition fee reimbursement</li>
+                    <li>Maintenance allowance</li>
+                    <li>Allowances for study tours, etc.</li>
+                </ul>
+                <p><strong>Application Process:</strong></p>
+                <ul>
+                    <li>Apply through MahaDBT portal</li>
+                    <li>Upload caste certificate, income certificate, etc.</li>
+                </ul>
+                <a href="https://mahadbt.maharashtra.gov.in/" target="_blank" class="learn-more">Learn More</a>
             </div>
         </div>
         <!-- Scheme 3 -->
         <div class="scheme-card">
             <h2>Open Merit Scholarship</h2>
             <div class="description">
-                <p>Rewards meritorious students with aid for graduation in Arts, Science, or Commerce.</p>
+                <p><strong>Eligibility:</strong></p>
+                <ul>
+                    <li>Secured ≥60% in SSC exam</li>
+                    <li>Pursuing higher education in Arts, Science, or Commerce</li>
+                </ul>
+                <p><strong>Benefits:</strong></p>
+                <ul>
+                    <li>Financial assistance for tuition fees</li>
+                </ul>
+                <p><strong>Application Process:</strong></p>
+                <ul>
+                    <li>Apply through the educational institution</li>
+                </ul>
+                <a href="https://example.com/open-merit" target="_blank" class="learn-more">Learn More</a>
+            </div>
+        </div>
+        <!-- Scheme 4 -->
+        <div class="scheme-card">
+            <h2>Dr. Punjabrao Deshmukh Hostel Allowance</h2>
+            <div class="description">
+                <p><strong>Eligibility:</strong></p>
+                <ul>
+                    <li>Students from families of registered laborers or marginal farmers</li>
+                    <li>Admitted to hostels in specific cities</li>
+                </ul>
+                <p><strong>Benefits:</strong></p>
+                <ul>
+                    <li>Maintenance allowance for hostel expenses</li>
+                </ul>
+                <p><strong>Application Process:</strong></p>
+                <ul>
+                    <li>Apply online through MahaDBT</li>
+                </ul>
+                <a href="https://mahadbt.maharashtra.gov.in/" target="_blank" class="learn-more">Learn More</a>
+            </div>
+        </div>
+        <!-- Scheme 5 -->
+        <div class="scheme-card">
+            <h2>Eklavya Scholarship</h2>
+            <div class="description">
+                <p><strong>Eligibility:</strong></p>
+                <ul>
+                    <li>Students from tribal communities</li>
+                    <li>Pursuing professional courses</li>
+                </ul>
+                <p><strong>Benefits:</strong></p>
+                <ul>
+                    <li>Scholarship amount for course duration</li>
+                </ul>
+                <p><strong>Application Process:</strong></p>
+                <ul>
+                    <li>Apply via tribal development department portal</li>
+                </ul>
+                <a href="https://example.com/eklavya" target="_blank" class="learn-more">Learn More</a>
             </div>
         </div>
     </section>
