@@ -1,11 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maharashtra Health Schemes</title>
+    <style>
+      /* Basic Reset & Styling */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        background: #2c3e50;
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 2rem;
+      }
+      /* Container for Scheme Cards */
+      .schemes-container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      /* Each Scheme Card */
+      .scheme-card {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        transition: box-shadow 0.3s ease;
+      }
+      .scheme-card:hover {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      }
+      .scheme-card h2 {
+        font-size: 1.5rem;
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+      .scheme-card p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 10px;
+      }
+      .scheme-card ul {
+        margin: 10px 0;
+        padding-left: 20px;
+      }
+      .scheme-card ul li {
+        list-style-type: disc;
+        margin-bottom: 5px;
+      }
+      .scheme-card a {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 15px;
+        background: #2c3e50;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+      }
+      .scheme-card a:hover {
+        background: #1a242f;
+      }
+      @media (max-width: 600px) {
+        .scheme-card {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Maharashtra Health Schemes</h1>
+    </header>
+    <div class="schemes-container">
+      <!-- Scheme Card 1: Ayushman Bharat -->
+      <div class="scheme-card">
+        <h2>Ayushman Bharat Pradhan Mantri Jan Arogya Yojana (PMJAY)</h2>
+        <p>
+          Ayushman Bharat provides a health cover of up to INR 5 lakhs per family per year for secondary and tertiary care hospitalization. This scheme aims to protect economically vulnerable families from high medical expenses.
+        </p>
+        <strong>Eligibility:</strong>
+        <ul>
+          <li>Belong to the economically vulnerable sections.</li>
+          <li>Possess an Ayushman Card issued by the government.</li>
+          <li>Must be an Indian citizen residing in Maharashtra.</li>
+        </ul>
+        <a href="https://www.pmjay.gov.in/" target="_blank">Official Details</a>
+      </div>
+      <!-- Scheme Card 2: Mukhyamantri Amrut Niramay Yojana -->
+      <div class="scheme-card">
+        <h2>Mukhyamantri Amrut Niramay Yojana</h2>
+        <p>
+          This state-specific scheme provides free medical treatment and preventive healthcare services at government hospitals across Maharashtra, ensuring that quality healthcare is accessible to all citizens.
+        </p>
+        <strong>Eligibility:</strong>
+        <ul>
+          <li>Permanent resident of Maharashtra.</li>
+          <li>Open to all citizens irrespective of income.</li>
+          <li>Enrollment may be required at designated government hospitals.</li>
+        </ul>
+        <a href="https://www.maharashtragov.in/amrut-niramay-yojana" target="_blank">Official Details</a>
+      </div>
+      <!-- Scheme Card 3: CM Comprehensive Health Insurance -->
+      <div class="scheme-card">
+        <h2>Chief Minister's Comprehensive Health Insurance Scheme</h2>
+        <p>
+          This scheme offers comprehensive health insurance coverage for residents of Maharashtra, covering a wide range of medical treatments to reduce the financial burden of health emergencies.
+        </p>
+        <strong>Eligibility:</strong>
+        <ul>
+          <li>Must be a resident of Maharashtra.</li>
+          <li>Priority given to families below a specified income threshold.</li>
+          <li>Enrollment through local government offices or hospitals.</li>
+        </ul>
+        <a href="https://www.maharashtragov.in/cm-health-insurance" target="_blank">Official Details</a>
+      </div>
+      <!-- Scheme Card 4: Maharashtra National Health Mission -->
+      <div class="scheme-card">
+        <h2>Maharashtra National Health Mission (MNHM)</h2>
+        <p>
+          MNHM works to enhance healthcare infrastructure and services across the state, focusing on both rural and urban areas. The mission aims to provide accessible and quality healthcare for all citizens.
+        </p>
+        <strong>Eligibility:</strong>
+        <ul>
+          <li>Open to all residents of Maharashtra.</li>
+          <li>Focus on delivering services in underprivileged areas.</li>
+          <li>No direct application process; benefits are availed at government health centers.</li>
+        </ul>
+        <a href="https://www.maharashtragov.in/nhm" target="_blank">Official Details</a>
+      </div>
+    </div>
+  </body>
 </html>
