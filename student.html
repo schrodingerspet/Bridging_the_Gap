@@ -1,162 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Student Schemes - Maharashtra</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maharashtra Student Scholarship Schemes</title>
     <style>
-      /* Global Styles */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      
-      body {
-        font-family: 'Arial', sans-serif;
-        background-color: #f5f5f5;
-        color: #333;
-        padding: 20px;
-      }
-      
-      header {
-        background: #2c3e50;
-        color: #fff;
-        padding: 15px;
-        text-align: center;
-        margin-bottom: 20px;
-      }
-      
-      header h1 {
-        font-size: 2rem;
-      }
-      
-      .schemes-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        gap: 20px;
-      }
-      
-      .scheme-card {
-        background: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        width: 300px;
-        padding: 20px;
-        transition: box-shadow 0.3s ease;
-      }
-      
-      .scheme-card:hover {
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-      }
-      
-      .scheme-card h2 {
-        font-size: 1.4rem;
-        color: #2c3e50;
-        margin-bottom: 10px;
-      }
-      
-      .scheme-card p {
-        font-size: 1rem;
-        margin-bottom: 10px;
-      }
-      
-      .subpoints {
-        margin-left: 20px;
-        margin-bottom: 10px;
-      }
-      
-      .subpoints li {
-        margin-bottom: 5px;
-        font-size: 0.95rem;
-      }
-      
-      a.btn {
-        display: inline-block;
-        padding: 10px 15px;
-        background: #2c3e50;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 5px;
-        transition: background 0.3s ease;
-      }
-      
-      a.btn:hover {
-        background: #34495e;
-      }
-      
-      @media (max-width: 768px) {
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
         .schemes-container {
-          flex-direction: column;
-          align-items: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            gap: 20px;
         }
         .scheme-card {
-          width: 90%;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            transition: box-shadow 0.3s ease;
         }
-      }
+        .scheme-card:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        .scheme-card h2 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .scheme-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .scheme-card ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .scheme-card ul li {
+            list-style-type: disc;
+        }
+        .scheme-card a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #fff;
+            background-color: #2c3e50;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .scheme-card a:hover {
+            background-color: #1a242f;
+        }
+        @media (max-width: 600px) {
+            .scheme-card {
+                width: 100%;
+            }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <header>
-      <h1>Student Schemes - Maharashtra</h1>
+        <h1>Maharashtra Student Scholarship Schemes</h1>
     </header>
     <section class="schemes-container">
-      <!-- Scheme 1 -->
-      <div class="scheme-card">
-        <h2>Rajarshi Shahu Maharaj Scholarship</h2>
-        <p>Provides financial aid to economically disadvantaged students for professional courses.</p>
-        <ul class="subpoints">
-          <li>Tuition fee assistance</li>
-          <li>Monthly stipend</li>
-          <li>Renewable annually</li>
-        </ul>
-        <a class="btn" href="https://www.maharashtrascholarships.gov.in/" target="_blank">Official Site</a>
-      </div>
-      <!-- Scheme 2 -->
-      <div class="scheme-card">
-        <h2>Post Matric SC Scholarship</h2>
-        <p>Supports SC students for post-matric education, covering tuition and maintenance costs.</p>
-        <ul class="subpoints">
-          <li>Tuition fee reimbursement</li>
-          <li>Book and stationery support</li>
-          <li>Hostel allowance</li>
-        </ul>
-        <a class="btn" href="https://scholarship.maharashtra.gov.in/" target="_blank">Official Site</a>
-      </div>
-      <!-- Scheme 3 -->
-      <div class="scheme-card">
-        <h2>Open Merit Scholarship</h2>
-        <p>Merit-based financial assistance for outstanding students in Arts, Science, or Commerce.</p>
-        <ul class="subpoints">
-          <li>Performance-based criteria</li>
-          <li>Annual renewal</li>
-          <li>Special incentives for top performers</li>
-        </ul>
-        <a class="btn" href="https://meritscholarship.maharashtra.gov.in/" target="_blank">Official Site</a>
-      </div>
-      <!-- Scheme 4 -->
-      <div class="scheme-card">
-        <h2>Special Assistance for Girl Students</h2>
-        <p>Focused support for female students to promote education and empowerment.</p>
-        <ul class="subpoints">
-          <li>Tuition fee support</li>
-          <li>Additional incentives for higher studies</li>
-          <li>Mentorship programs</li>
-        </ul>
-        <a class="btn" href="https://girlassist.maharashtra.gov.in/" target="_blank">Official Site</a>
-      </div>
-      <!-- Scheme 5 -->
-      <div class="scheme-card">
-        <h2>Technical Education Scholarship</h2>
-        <p>Encourages students pursuing technical and vocational courses with dedicated financial aid.</p>
-        <ul class="subpoints">
-          <li>Support for polytechnic courses</li>
-          <li>Skill development incentives</li>
-          <li>Internship opportunities</li>
-        </ul>
-        <a class="btn" href="https://techscholar.maharashtra.gov.in/" target="_blank">Official Site</a>
-      </div>
+        <!-- Scheme 1 -->
+        <div class="scheme-card">
+            <h2>Government of India Post-Matric Scholarship for SC Students, Maharashtra</h2>
+            <p>This scholarship provides financial assistance to Scheduled Caste students pursuing post-matriculation or post-secondary education to enable them to complete their education.</p>
+            <strong>Eligibility Criteria:</strong>
+            <ul>
+                <li>Belong to the Scheduled Caste (SC) category.</li>
+                <li>Passed Class 10 examination.</li>
+                <li>Family's annual income should not exceed ₹2.5 lakh.</li>
+            </ul>
+            <a href="https://www.buddy4study.com/article/maharashtra-scholarship" target="_blank">Learn More</a>
+        </div>
+        <!-- Scheme 2 -->
+        <div class="scheme-card">
+            <h2>Post Matric Scholarship Scheme for ST Students, Maharashtra</h2>
+            <p>This scheme aims to provide financial assistance to Scheduled Tribe students studying at post-matriculation levels to support their educational endeavors.</p>
+            <strong>Eligibility Criteria:</strong>
+            <ul>
+                <li>Belong to the Scheduled Tribe (ST) category.</li>
+                <li>Passed the previous examination.</li>
+                <li>Family's annual income should not exceed ₹2.5 lakh.</li>
+            </ul>
+            <a href="https://www.buddy4study.com/article/maharashtra-scholarship" target="_blank">Learn More</a>
+        </div>
+        <!-- Scheme 3 -->
+        <div class="scheme-card">
+            <h2>Tuition Fees and Examination Fees for OBC Students, Maharashtra</h2>
+            <p>This scheme reimburses tuition and examination fees for Other Backward Class (OBC) students to reduce financial barriers in pursuing higher education.</p>
+            <strong>Eligibility Criteria:</strong>
+            <ul>
+                <li>Belong to the Other Backward Class (OBC) category.</li>
+                <li>Studying in Class 11 to postgraduation level.</li>
+                <li>Family's annual income should not exceed ₹8 lakh.</li>
+            </ul>
+            <a href="https://www.buddy4study.com/article/maharashtra-scholarship" target="_blank">Learn More</a>
+        </div>
+        <!-- Scheme 4 -->
+        <div class="scheme-card">
+            <h2>Rajarshi Chhatrapati Shahu Maharaj Merit Scholarship</h2>
+            <p>This merit-based scholarship aims to encourage students from the Denotified Tribes (Vimukta Jatis), Nomadic Tribes, and Special Backward Classes to pursue higher education by providing financial assistance.</p>
+            <strong>Eligibility Criteria:</strong>
+            <ul>
+                <li>Belong to VJNT, OBC, or SBC category.</li>
+                <li>Studying in Class 11 or 12.</li>
+                <li>No academic gap during the course.</li>
+            </ul>
+            <a href="https://www.buddy4study.com/article/rajarshi-chhatrapati-shahu-maharaj-scheme" target="_blank">Learn More</a>
+        </div>
+        <!-- Scheme 5 -->
+        <div class="scheme-card">
+            <h2>Rajarshi Shahu Maharaj Foreign Scholarship Scheme for SC Students</h2>
+            <p>This scheme provides scholarships to Scheduled Caste and Neo-Buddhist students who have secured admission for special studies abroad, aiming to promote higher education on a global platform.</p>
+            <strong>Eligibility Criteria:</strong>
+            <ul>
+                <li>Belong to Scheduled Caste or Neo-Buddhist community.</li>
+                <li>Secured admission for studies abroad.</li>
+                <li>Meet the income limit and other criteria as specified by the Social Justice and Special Assistance Department.</li>
+            </ul>
+            <a href="https://sjsa.maharashtra.gov.in/notice/rajarshi-shahu-maharaj-foreign-scholarship-scheme-for-scheduled-caste-boys-and-girls-for-special-studies-abroad-2025-26/" target="_blank">Learn More</a>
+        </div>
     </section>
-  </body>
-</html>
+</
+::contentReference[oaicite:0]{index=0}
+ 
