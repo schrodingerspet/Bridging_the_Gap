@@ -1,219 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Schemes - Maharashtra</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
-        }
-
-        header {
-            background: #2c3e50;
-            color: #fff;
-            padding: 15px;
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 1.8rem;
-        }
-
+      /* Global Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        padding: 20px;
+      }
+      
+      header {
+        background: #2c3e50;
+        color: #fff;
+        padding: 15px;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      .schemes-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 20px;
+      }
+      
+      .scheme-card {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        padding: 20px;
+        transition: box-shadow 0.3s ease;
+      }
+      
+      .scheme-card:hover {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      }
+      
+      .scheme-card h2 {
+        font-size: 1.4rem;
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+      
+      .scheme-card p {
+        font-size: 1rem;
+        margin-bottom: 10px;
+      }
+      
+      .subpoints {
+        margin-left: 20px;
+        margin-bottom: 10px;
+      }
+      
+      .subpoints li {
+        margin-bottom: 5px;
+        font-size: 0.95rem;
+      }
+      
+      a.btn {
+        display: inline-block;
+        padding: 10px 15px;
+        background: #2c3e50;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+      }
+      
+      a.btn:hover {
+        background: #34495e;
+      }
+      
+      @media (max-width: 768px) {
         .schemes-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            padding: 20px;
+          flex-direction: column;
+          align-items: center;
         }
-
         .scheme-card {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 250px;
-            padding: 15px;
-            transition: box-shadow 0.3s ease;
+          width: 90%;
         }
-
-        .scheme-card:hover {
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        .scheme-card h2 {
-            font-size: 1.2rem;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .description {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
-            padding-top: 10px;
-        }
-
-        .scheme-card:hover .description {
-            max-height: 500px; /* Increased to fit detailed content */
-        }
-
-        .description p {
-            font-size: 0.9rem;
-            line-height: 1.4;
-            margin-bottom: 10px;
-        }
-
-        .description ul {
-            list-style-type: disc;
-            margin-left: 20px;
-            margin-bottom: 10px;
-        }
-
-        .learn-more {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 8px 15px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-        }
-
-        .learn-more:hover {
-            background-color: #0056b3;
-        }
-
-        @media (max-width: 600px) {
-            .scheme-card {
-                width: 90%;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>Student Schemes - Maharashtra</h1>
+      <h1>Student Schemes - Maharashtra</h1>
     </header>
     <section class="schemes-container">
-        <!-- Scheme 1 -->
-        <div class="scheme-card">
-            <h2>Rajarshi Shahu Maharaj Scholarship</h2>
-            <div class="description">
-                <p><strong>Eligibility:</strong></p>
-                <ul>
-                    <li>Domicile of Maharashtra</li>
-                    <li>Belong to EBC category</li>
-                    <li>Admitted to professional courses (e.g., Engineering, Medical)</li>
-                    <li>Family income ≤ Rs.8.00 lakh</li>
-                </ul>
-                <p><strong>Benefits:</strong></p>
-                <ul>
-                    <li>50% of tuition and exam fees if income ≤ Rs.2.50 lakh</li>
-                    <li>100% of tuition and exam fees if income > Rs.2.50 lakh but ≤ Rs.8.00 lakh</li>
-                </ul>
-                <p><strong>Application Process:</strong></p>
-                <ul>
-                    <li>Apply online via MahaDBT portal</li>
-                    <li>Submit income certificate, mark sheets, etc.</li>
-                </ul>
-                <a href="https://mahadbt.maharashtra.gov.in/" target="_blank" class="learn-more">Learn More</a>
-            </div>
-        </div>
-        <!-- Scheme 2 -->
-        <div class="scheme-card">
-            <h2>Post Matric SC Scholarship</h2>
-            <div class="description">
-                <p><strong>Eligibility:</strong></p>
-                <ul>
-                    <li>Belong to SC category</li>
-                    <li>Domicile of Maharashtra</li>
-                    <li>Studying in post-matric courses</li>
-                    <li>Family income ≤ Rs.2.50 lakh</li>
-                </ul>
-                <p><strong>Benefits:</strong></p>
-                <ul>
-                    <li>Full tuition fee reimbursement</li>
-                    <li>Maintenance allowance</li>
-                    <li>Allowances for study tours, etc.</li>
-                </ul>
-                <p><strong>Application Process:</strong></p>
-                <ul>
-                    <li>Apply through MahaDBT portal</li>
-                    <li>Upload caste certificate, income certificate, etc.</li>
-                </ul>
-                <a href="https://mahadbt.maharashtra.gov.in/" target="_blank" class="learn-more">Learn More</a>
-            </div>
-        </div>
-        <!-- Scheme 3 -->
-        <div class="scheme-card">
-            <h2>Open Merit Scholarship</h2>
-            <div class="description">
-                <p><strong>Eligibility:</strong></p>
-                <ul>
-                    <li>Secured ≥60% in SSC exam</li>
-                    <li>Pursuing higher education in Arts, Science, or Commerce</li>
-                </ul>
-                <p><strong>Benefits:</strong></p>
-                <ul>
-                    <li>Financial assistance for tuition fees</li>
-                </ul>
-                <p><strong>Application Process:</strong></p>
-                <ul>
-                    <li>Apply through the educational institution</li>
-                </ul>
-                <a href="https://example.com/open-merit" target="_blank" class="learn-more">Learn More</a>
-            </div>
-        </div>
-        <!-- Scheme 4 -->
-        <div class="scheme-card">
-            <h2>Dr. Punjabrao Deshmukh Hostel Allowance</h2>
-            <div class="description">
-                <p><strong>Eligibility:</strong></p>
-                <ul>
-                    <li>Students from families of registered laborers or marginal farmers</li>
-                    <li>Admitted to hostels in specific cities</li>
-                </ul>
-                <p><strong>Benefits:</strong></p>
-                <ul>
-                    <li>Maintenance allowance for hostel expenses</li>
-                </ul>
-                <p><strong>Application Process:</strong></p>
-                <ul>
-                    <li>Apply online through MahaDBT</li>
-                </ul>
-                <a href="https://mahadbt.maharashtra.gov.in/" target="_blank" class="learn-more">Learn More</a>
-            </div>
-        </div>
-        <!-- Scheme 5 -->
-        <div class="scheme-card">
-            <h2>Eklavya Scholarship</h2>
-            <div class="description">
-                <p><strong>Eligibility:</strong></p>
-                <ul>
-                    <li>Students from tribal communities</li>
-                    <li>Pursuing professional courses</li>
-                </ul>
-                <p><strong>Benefits:</strong></p>
-                <ul>
-                    <li>Scholarship amount for course duration</li>
-                </ul>
-                <p><strong>Application Process:</strong></p>
-                <ul>
-                    <li>Apply via tribal development department portal</li>
-                </ul>
-                <a href="https://example.com/eklavya" target="_blank" class="learn-more">Learn More</a>
-            </div>
-        </div>
+      <!-- Scheme 1 -->
+      <div class="scheme-card">
+        <h2>Rajarshi Shahu Maharaj Scholarship</h2>
+        <p>Provides financial aid to economically disadvantaged students for professional courses.</p>
+        <ul class="subpoints">
+          <li>Tuition fee assistance</li>
+          <li>Monthly stipend</li>
+          <li>Renewable annually</li>
+        </ul>
+        <a class="btn" href="https://www.maharashtrascholarships.gov.in/" target="_blank">Official Site</a>
+      </div>
+      <!-- Scheme 2 -->
+      <div class="scheme-card">
+        <h2>Post Matric SC Scholarship</h2>
+        <p>Supports SC students for post-matric education, covering tuition and maintenance costs.</p>
+        <ul class="subpoints">
+          <li>Tuition fee reimbursement</li>
+          <li>Book and stationery support</li>
+          <li>Hostel allowance</li>
+        </ul>
+        <a class="btn" href="https://scholarship.maharashtra.gov.in/" target="_blank">Official Site</a>
+      </div>
+      <!-- Scheme 3 -->
+      <div class="scheme-card">
+        <h2>Open Merit Scholarship</h2>
+        <p>Merit-based financial assistance for outstanding students in Arts, Science, or Commerce.</p>
+        <ul class="subpoints">
+          <li>Performance-based criteria</li>
+          <li>Annual renewal</li>
+          <li>Special incentives for top performers</li>
+        </ul>
+        <a class="btn" href="https://meritscholarship.maharashtra.gov.in/" target="_blank">Official Site</a>
+      </div>
+      <!-- Scheme 4 -->
+      <div class="scheme-card">
+        <h2>Special Assistance for Girl Students</h2>
+        <p>Focused support for female students to promote education and empowerment.</p>
+        <ul class="subpoints">
+          <li>Tuition fee support</li>
+          <li>Additional incentives for higher studies</li>
+          <li>Mentorship programs</li>
+        </ul>
+        <a class="btn" href="https://girlassist.maharashtra.gov.in/" target="_blank">Official Site</a>
+      </div>
+      <!-- Scheme 5 -->
+      <div class="scheme-card">
+        <h2>Technical Education Scholarship</h2>
+        <p>Encourages students pursuing technical and vocational courses with dedicated financial aid.</p>
+        <ul class="subpoints">
+          <li>Support for polytechnic courses</li>
+          <li>Skill development incentives</li>
+          <li>Internship opportunities</li>
+        </ul>
+        <a class="btn" href="https://techscholar.maharashtra.gov.in/" target="_blank">Official Site</a>
+      </div>
     </section>
-</body>
+  </body>
 </html>
