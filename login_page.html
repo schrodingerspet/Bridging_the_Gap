@@ -63,7 +63,7 @@
             background-color: #0056b3;
         }
 
-        #toggle-form {
+        .toggle-form {
             display: block;
             text-align: center;
             margin-top: 10px;
@@ -71,7 +71,7 @@
             cursor: pointer;
         }
 
-        #toggle-form:hover {
+        .toggle-form:hover {
             text-decoration: underline;
         }
 
@@ -131,14 +131,15 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
     <script>
-        // Replace with your Firebase configuration
+        // Your Firebase configuration for "bridging-the-gap-af65a"
         const firebaseConfig = {
-            apiKey: "your-api-key",
-            authDomain: "your-project-id.firebaseapp.com",
-            projectId: "your-project-id",
-            storageBucket: "your-project-id.appspot.com",
-            messagingSenderId: "your-messaging-sender-id",
-            appId: "your-app-id"
+            apiKey: "AIzaSyD9Y_saGbwRdVsJr_zyFjwAayY8dkBUrXg",
+            authDomain: "bridging-the-gap-af65a.firebaseapp.com",
+            projectId: "bridging-the-gap-af65a",
+            storageBucket: "bridging-the-gap-af65a.firebasestorage.app",
+            messagingSenderId: "608387568756",
+            appId: "1:608387568756:web:a563a78ea0e6e61d3dad21",
+            measurementId: "G-9V1P6M82KD"
         };
 
         // Initialize Firebase
@@ -155,11 +156,13 @@
         toggleToLogin.addEventListener('click', () => {
             signupSection.classList.add('hidden');
             loginSection.classList.remove('hidden');
+            document.getElementById('status-message').innerText = '';
         });
 
         toggleToSignup.addEventListener('click', () => {
             loginSection.classList.add('hidden');
             signupSection.classList.remove('hidden');
+            document.getElementById('status-message').innerText = '';
         });
 
         // Sign-Up Form Submission
@@ -179,13 +182,14 @@
                         createdAt: firebase.firestore.FieldValue.serverTimestamp()
                     })
                     .then(() => {
-                        console.log('User data saved');
+                        console.log('User data saved to Firestore');
                     })
                     .catch((error) => {
                         console.error('Firestore error:', error.message);
                     });
 
-                    // Switch to login
+                    // Clear form and switch to login
+                    document.getElementById('signup-form').reset();
                     signupSection.classList.add('hidden');
                     loginSection.classList.remove('hidden');
                 })
@@ -211,11 +215,14 @@
                         lastLogin: firebase.firestore.FieldValue.serverTimestamp()
                     }, { merge: true })
                     .then(() => {
-                        console.log('Login data saved');
+                        console.log('Login data saved to Firestore');
                     })
                     .catch((error) => {
                         console.error('Firestore error:', error.message);
                     });
+
+                    // Clear form
+                    document.getElementById('login-form').reset();
                 })
                 .catch((error) => {
                     document.getElementById('status-message').innerText = `Login failed: ${error.message}`;
