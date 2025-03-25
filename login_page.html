@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Sign Up & Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,7 +15,7 @@
             margin: 0;
         }
 
-        .login-container {
+        .container {
             background-color: #ffffff;
             padding: 20px;
             border-radius: 5px;
@@ -63,56 +63,164 @@
             background-color: #0056b3;
         }
 
+        #toggle-form {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #007bff;
+            cursor: pointer;
+        }
+
+        #toggle-form:hover {
+            text-decoration: underline;
+        }
+
         #status-message {
             margin-top: 15px;
             text-align: center;
             color: #333333;
         }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form id="login-form">
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Login</button>
-        </form>
+    <div class="container">
+        <!-- Sign-Up Form -->
+        <div id="signup-section">
+            <h2>Sign Up</h2>
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" name="password" required>
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
+            <span id="toggle-to-login" class="toggle-form">Already have an account? Login</span>
+        </div>
+
+        <!-- Login Form -->
+        <div id="login-section" class="hidden">
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <span id="toggle-to-signup" class="toggle-form">No account? Sign Up</span>
+        </div>
+
         <div id="status-message"></div>
     </div>
 
     <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-      
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    <script>
+        // Replace with your Firebase configuration
         const firebaseConfig = {
-          apiKey: "AIzaSyD9Y_saGbwRdVsJr_zyFjwAayY8dkBUrXg",
-          authDomain: "bridging-the-gap-af65a.firebaseapp.com",
-          projectId: "bridging-the-gap-af65a",
-          storageBucket: "bridging-the-gap-af65a.firebasestorage.app",
-          messagingSenderId: "608387568756",
-          appId: "1:608387568756:web:a563a78ea0e6e61d3dad21",
-          measurementId: "G-9V1P6M82KD"
+            apiKey: "your-api-key",
+            authDomain: "your-project-id.firebaseapp.com",
+            projectId: "your-project-id",
+            storageBucket: "your-project-id.appspot.com",
+            messagingSenderId: "your-messaging-sender-id",
+            appId: "your-app-id"
         };
-      
+
         // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-      </script>
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Toggle between forms
+        const signupSection = document.getElementById('signup-section');
+        const loginSection = document.getElementById('login-section');
+        const toggleToLogin = document.getElementById('toggle-to-login');
+        const toggleToSignup = document.getElementById('toggle-to-signup');
+
+        toggleToLogin.addEventListener('click', () => {
+            signupSection.classList.add('hidden');
+            loginSection.classList.remove('hidden');
+        });
+
+        toggleToSignup.addEventListener('click', () => {
+            loginSection.classList.add('hidden');
+            signupSection.classList.remove('hidden');
+        });
+
+        // Sign-Up Form Submission
+        document.getElementById('signup-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    document.getElementById('status-message').innerText = `Account created! Welcome, ${user.email}`;
+
+                    // Save to Firestore
+                    db.collection('users').doc(user.uid).set({
+                        email: user.email,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    })
+                    .then(() => {
+                        console.log('User data saved');
+                    })
+                    .catch((error) => {
+                        console.error('Firestore error:', error.message);
+                    });
+
+                    // Switch to login
+                    signupSection.classList.add('hidden');
+                    loginSection.classList.remove('hidden');
+                })
+                .catch((error) => {
+                    document.getElementById('status-message').innerText = `Sign-up failed: ${error.message}`;
+                });
+        });
+
+        // Login Form Submission
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    document.getElementById('status-message').innerText = `Login successful! Welcome back, ${user.email}`;
+
+                    // Update Firestore
+                    db.collection('users').doc(user.uid).set({
+                        email: user.email,
+                        lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+                    }, { merge: true })
+                    .then(() => {
+                        console.log('Login data saved');
+                    })
+                    .catch((error) => {
+                        console.error('Firestore error:', error.message);
+                    });
+                })
+                .catch((error) => {
+                    document.getElementById('status-message').innerText = `Login failed: ${error.message}`;
+                });
+        });
+    </script>
 </body>
 </html>
