@@ -1,233 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up & Login</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .container {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333333;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #333333;
-        }
-
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #cccccc;
-            border-radius: 3px;
-            box-sizing: border-box;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: #ffffff;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .toggle-form {
-            display: block;
-            text-align: center;
-            margin-top: 10px;
-            color: #007bff;
-            cursor: pointer;
-        }
-
-        .toggle-form:hover {
-            text-decoration: underline;
-        }
-
-        #status-message {
-            margin-top: 15px;
-            text-align: center;
-            color: #333333;
-        }
-
-        .hidden {
-            display: none;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up & Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333333;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333333;
+    }
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #cccccc;
+      border-radius: 3px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .toggle-form {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      color: #007bff;
+      cursor: pointer;
+    }
+    .toggle-form:hover {
+      text-decoration: underline;
+    }
+    #status-message {
+      margin-top: 15px;
+      text-align: center;
+      color: #333333;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Sign-Up Form -->
-        <div id="signup-section">
-            <h2>Sign Up</h2>
-            <form id="signup-form">
-                <div class="form-group">
-                    <label for="signup-email">Email</label>
-                    <input type="email" id="signup-email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="signup-password">Password</label>
-                    <input type="password" id="signup-password" name="password" required>
-                </div>
-                <button type="submit">Sign Up</button>
-            </form>
-            <span id="toggle-to-login" class="toggle-form">Already have an account? Login</span>
+  <div class="container">
+    <!-- Sign-Up Form -->
+    <div id="signup-section">
+      <h2>Sign Up</h2>
+      <form id="signup-form">
+        <div class="form-group">
+          <label for="signup-email">Email</label>
+          <input type="email" id="signup-email" name="email" required>
         </div>
-
-        <!-- Login Form -->
-        <div id="login-section" class="hidden">
-            <h2>Login</h2>
-            <form id="login-form">
-                <div class="form-group">
-                    <label for="login-email">Email</label>
-                    <input type="email" id="login-email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="login-password">Password</label>
-                    <input type="password" id="login-password" name="password" required>
-                </div>
-                <button type="submit">Login</button>
-            </form>
-            <span id="toggle-to-signup" class="toggle-form">No account? Sign Up</span>
+        <div class="form-group">
+          <label for="signup-password">Password</label>
+          <input type="password" id="signup-password" name="password" required>
         </div>
-
-        <div id="status-message"></div>
+        <button type="submit">Sign Up</button>
+      </form>
+      <span id="toggle-to-login" class="toggle-form">Already have an account? Login</span>
     </div>
 
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <!-- Login Form -->
+    <div id="login-section" class="hidden">
+      <h2>Login</h2>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" name="password" required>
+        </div>
+        <button type="submit">Login</button>
+      </form>
+      <span id="toggle-to-signup" class="toggle-form">No account? Sign Up</span>
+    </div>
 
-    <script>
-        // Your Firebase configuration for "bridging-the-gap-af65a"
-        const firebaseConfig = {
-            apiKey: "AIzaSyD9Y_saGbwRdVsJr_zyFjwAayY8dkBUrXg",
-            authDomain: "bridging-the-gap-af65a.firebaseapp.com",
-            projectId: "bridging-the-gap-af65a",
-            storageBucket: "bridging-the-gap-af65a.firebasestorage.app",
-            messagingSenderId: "608387568756",
-            appId: "1:608387568756:web:a563a78ea0e6e61d3dad21",
-            measurementId: "G-9V1P6M82KD"
-        };
+    <div id="status-message"></div>
+  </div>
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
-        // Toggle between forms
-        const signupSection = document.getElementById('signup-section');
-        const loginSection = document.getElementById('login-section');
-        const toggleToLogin = document.getElementById('toggle-to-login');
-        const toggleToSignup = document.getElementById('toggle-to-signup');
+  <script>
+    // Firebase configuration for "bridging-the-gap-af65a"
+    const firebaseConfig = {
+      apiKey: "AIzaSyD9Y_saGbwRdVsJr_zyFjwAayY8dkBUrXg",
+      authDomain: "bridging-the-gap-af65a.firebaseapp.com",
+      projectId: "bridging-the-gap-af65a",
+      storageBucket: "bridging-the-gap-af65a.firebasestorage.app",
+      messagingSenderId: "608387568756",
+      appId: "1:608387568756:web:a563a78ea0e6e61d3dad21",
+      measurementId: "G-9V1P6M82KD"
+    };
 
-        toggleToLogin.addEventListener('click', () => {
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Toggle between forms
+    const signupSection = document.getElementById('signup-section');
+    const loginSection = document.getElementById('login-section');
+    const toggleToLogin = document.getElementById('toggle-to-login');
+    const toggleToSignup = document.getElementById('toggle-to-signup');
+
+    toggleToLogin.addEventListener('click', () => {
+      signupSection.classList.add('hidden');
+      loginSection.classList.remove('hidden');
+      document.getElementById('status-message').innerText = '';
+    });
+
+    toggleToSignup.addEventListener('click', () => {
+      loginSection.classList.add('hidden');
+      signupSection.classList.remove('hidden');
+      document.getElementById('status-message').innerText = '';
+    });
+
+    // Sign-Up Form Submission
+    document.getElementById('signup-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          document.getElementById('status-message').innerText = `Account created! Welcome, ${user.email}. Please log in to verify your account.`;
+
+          // Save to Firestore
+          db.collection('users').doc(user.uid).set({
+            email: user.email,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          })
+          .then(() => {
+            console.log('User data saved to Firestore');
+          })
+          .catch((error) => {
+            console.error('Firestore error:', error.message);
+          });
+
+          // Sign out immediately so user must log in again
+          auth.signOut().then(() => {
+            // Clear form and switch to login view
+            document.getElementById('signup-form').reset();
             signupSection.classList.add('hidden');
             loginSection.classList.remove('hidden');
-            document.getElementById('status-message').innerText = '';
+          });
+        })
+        .catch((error) => {
+          document.getElementById('status-message').innerText = `Sign-up failed: ${error.message}`;
         });
+    });
 
-        toggleToSignup.addEventListener('click', () => {
-            loginSection.classList.add('hidden');
-            signupSection.classList.remove('hidden');
-            document.getElementById('status-message').innerText = '';
+    // Login Form Submission - Redirect to dashboard after successful login
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          document.getElementById('status-message').innerText = `Login successful! Welcome back, ${user.email}`;
+          // Update Firestore
+          db.collection('users').doc(user.uid).set({
+            email: user.email,
+            lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+          }, { merge: true })
+          .then(() => {
+            console.log('Login data saved to Firestore');
+          })
+          .catch((error) => {
+            console.error('Firestore error:', error.message);
+          });
+          document.getElementById('login-form').reset();
+          // Redirect to dashboard page
+          window.location.href = "dashboard.html";
+        })
+        .catch((error) => {
+          document.getElementById('status-message').innerText = `Login failed: ${error.message}`;
         });
-
-        // Sign-Up Form Submission
-        document.getElementById('signup-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const email = document.getElementById('signup-email').value;
-            const password = document.getElementById('signup-password').value;
-
-            auth.createUserWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    document.getElementById('status-message').innerText = `Account created! Welcome, ${user.email}`;
-
-                    // Save to Firestore
-                    db.collection('users').doc(user.uid).set({
-                        email: user.email,
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                    })
-                    .then(() => {
-                        console.log('User data saved to Firestore');
-                    })
-                    .catch((error) => {
-                        console.error('Firestore error:', error.message);
-                    });
-
-                    // Clear form and switch to login
-                    document.getElementById('signup-form').reset();
-                    signupSection.classList.add('hidden');
-                    loginSection.classList.remove('hidden');
-                })
-                .catch((error) => {
-                    document.getElementById('status-message').innerText = `Sign-up failed: ${error.message}`;
-                });
-        });
-
-        // Login Form Submission
-        document.getElementById('login-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-
-            auth.signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    document.getElementById('status-message').innerText = `Login successful! Welcome back, ${user.email}`;
-
-                    // Update Firestore
-                    db.collection('users').doc(user.uid).set({
-                        email: user.email,
-                        lastLogin: firebase.firestore.FieldValue.serverTimestamp()
-                    }, { merge: true })
-                    .then(() => {
-                        console.log('Login data saved to Firestore');
-                    })
-                    .catch((error) => {
-                        console.error('Firestore error:', error.message);
-                    });
-
-                    // Clear form
-                    document.getElementById('login-form').reset();
-                })
-                .catch((error) => {
-                    document.getElementById('status-message').innerText = `Login failed: ${error.message}`;
-                });
-        });
-    </script>
+    });
+  </script>
 </body>
 </html>
