@@ -175,6 +175,10 @@
       .toggle-form:hover {
         color: #16325c;
       }
+      #forgot-password:hover {
+        text-decoration: underline;
+        color: #16325c;
+      }      
       #status-message {
         margin-top: 15px;
         text-align: center;
@@ -248,6 +252,10 @@
             <div class="form-group">
               <label for="login-password">Password</label>
               <input type="password" id="login-password" name="password" required placeholder="Your password" />
+              <p style="text-align:right; margin: 5px 0 15px 0;">
+                <a href="#" id="forgot-password" style="color:#1e3c72; font-size:0.9rem; text-decoration:underline;">Forgot Password?</a>
+              </p>
+              
             </div>
             <button type="submit">Login</button>
           </form>
@@ -356,6 +364,26 @@
             document.getElementById('status-message').innerText = `Login failed: ${error.message}`;
           });
       });
+
+      document.getElementById('forgot-password').addEventListener('click', function (e) {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value;
+      
+        if (!email) {
+          document.getElementById('status-message').innerText = "Please enter your email above to reset your password.";
+          return;
+        }
+      
+        auth.sendPasswordResetEmail(email)
+          .then(() => {
+            document.getElementById('status-message').innerText = `Password reset email sent to ${email}. Check your inbox.`;
+          })
+          .catch((error) => {
+            console.error(error);
+            document.getElementById('status-message').innerText = error.message;
+          });
+      });
+      
   
       // Auto-redirect if user is already logged in & verified
       auth.onAuthStateChanged((user) => {
