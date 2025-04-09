@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maharashtra Sports Schemes</title>
+    <style>
+      /* Reset & Basic Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f0f4f8;
+        color: #333;
+        line-height: 1.6;
+      }
+      header {
+        background: linear-gradient(to right, #2c3e50, #4b6cb7);
+        color: white;
+        padding: 30px 20px;
+        text-align: center;
+      }
+      header h1 {
+        font-size: 2.2rem;
+        font-weight: 600;
+      }
+      /* Container for Scheme Cards */
+      .schemes-container {
+        max-width: 1100px;
+        margin: 30px auto;
+        padding: 0 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+      }
+      /* Scheme Card: Horizontal Layout */
+      .scheme-card {
+        display: flex;
+        flex-direction: row;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .scheme-card:hover {
+        transform: scale(1.01);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      }
+      /* Scheme Content Styling */
+      .scheme-content {
+        padding: 20px 25px;
+        flex: 1;
+      }
+      .scheme-content h2 {
+        color: #2c3e50;
+        font-size: 1.4rem;
+        margin-bottom: 12px;
+      }
+      .scheme-content p {
+        margin-bottom: 10px;
+      }
+      .scheme-content strong {
+        display: block;
+        margin: 15px 0 5px;
+        font-weight: 600;
+        color: #444;
+      }
+      .scheme-content ul {
+        padding-left: 20px;
+        margin-bottom: 10px;
+      }
+      .scheme-content ul li {
+        margin-bottom: 6px;
+      }
+      .scheme-content a {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 15px;
+        background: #2c3e50;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        transition: background 0.3s ease;
+      }
+      .scheme-content a:hover {
+        background: #1a252f;
+      }
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .scheme-card {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Maharashtra Sports Schemes</h1>
+    </header>
+    <div class="schemes-container">
+      <!-- Scheme Card 1: Maharashtra State Sports Promotion Scheme -->
+      <div class="scheme-card">
+        <div class="scheme-content">
+          <h2>Maharashtra State Sports Promotion Scheme</h2>
+          <p>
+            This scheme is designed to foster sports excellence by providing financial assistance for training, equipment, and participation in competitions at both national and international levels.
+          </p>
+          <strong>Eligibility:</strong>
+          <ul>
+            <li>Must be a resident of Maharashtra.</li>
+            <li>Aspiring or active athlete in recognized sports.</li>
+            <li>Must meet performance criteria set by the state sports authority.</li>
+          </ul>
+          <a href="https://www.maharashtragov.in/sports" target="_blank">Official Details</a>
+        </div>
+      </div>
+      <!-- Scheme Card 2: Maharashtra Youth Sports Development Program -->
+      <div class="scheme-card">
+        <div class="scheme-content">
+          <h2>Maharashtra Youth Sports Development Program</h2>
+          <p>
+            Aimed at nurturing young talent, this program offers structured training, coaching, and financial support to promising youth athletes across various sports disciplines.
+          </p>
+          <strong>Eligibility:</strong>
+          <ul>
+            <li>Youth aged between 12 and 25 years.</li>
+            <li>Resident of Maharashtra.</li>
+            <li>Demonstrated potential through participation in local or regional tournaments.</li>
+          </ul>
+          <a href="https://www.maharashtragov.in/sports/youth" target="_blank">Official Details</a>
+        </div>
+      </div>
+      <!-- Scheme Card 3: Maharashtra Khelo Yojana -->
+      <div class="scheme-card">
+        <div class="scheme-content">
+          <h2>Maharashtra Khelo Yojana</h2>
+          <p>
+            Under this initiative, the state provides financial and infrastructural support to sports clubs and individual athletes to promote a thriving sporting ecosystem throughout Maharashtra.
+          </p>
+          <strong>Eligibility:</strong>
+          <ul>
+            <li>Open to all athletes and sports organizations.</li>
+            <li>Must be a resident of Maharashtra.</li>
+            <li>Should be registered with the state sports authority.</li>
+          </ul>
+          <a href="https://www.maharashtragov.in/sports/khelo-yojana" target="_blank">Official Details</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maharashtra Student Scholarship Schemes</title>
+    <style>
+      /* Reset & Basic Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f0f4f8;
+        color: #333;
+        line-height: 1.6;
+      }
+      header {
+        background: linear-gradient(to right, #2c3e50, #4b6cb7);
+        color: white;
+        padding: 30px 20px;
+        text-align: center;
+      }
+      header h1 {
+        font-size: 2.2rem;
+        font-weight: 600;
+      }
+      /* Container for Scheme Cards */
+      .schemes-container {
+        max-width: 1100px;
+        margin: 30px auto;
+        padding: 0 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+      }
+      /* Scheme Card: Horizontal Layout */
+      .scheme-card {
+        display: flex;
+        flex-direction: row;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .scheme-card:hover {
+        transform: scale(1.01);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      }
+      /* Scheme Content Styling */
+      .scheme-content {
+        padding: 20px 25px;
+        flex: 1;
+      }
+      .scheme-content h2 {
+        color: #2c3e50;
+        font-size: 1.4rem;
+        margin-bottom: 12px;
+      }
+      .scheme-content p {
+        margin-bottom: 10px;
+      }
+      .scheme-content strong {
+        display: block;
+        margin: 15px 0 5px;
+        font-weight: 600;
+        color: #444;
+      }
+      .scheme-content ul {
+        padding-left: 20px;
+        margin-bottom: 10px;
+      }
+      .scheme-content ul li {
+        margin-bottom: 6px;
+      }
+      .scheme-content a {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 15px;
+        background: #2c3e50;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        transition: background 0.3s ease;
+      }
+      .scheme-content a:hover {
+        background: #1a252f;
+      }
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .scheme-card {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Maharashtra Student Scholarship Schemes</h1>
+    </header>
+    <div class="schemes-container">
+      <!-- Scheme Card 1: Govt. of India Post-Matric Scholarship for SC Students, Maharashtra -->
+      <div class="scheme-card">
+        <div class="scheme-content">
+          <h2>Govt. of India Post-Matric Scholarship for SC Students, Maharashtra</h2>
+          <p>
+            This scholarship helps Scheduled Caste students continue their post-matric education by covering tuition fees, maintenance, and other education-related expenses.
+          </p>
+          <strong>Eligibility:</strong>
+          <ul>
+            <li>Must be from the Scheduled Caste (SC) category</li>
+            <li>Passed Class 10</li>
+            <li>Family income not exceeding ₹2.5 lakh annually</li>
+            <li>Resident of Maharashtra</li>
+          </ul>
+          <a href="https://mahadbt.maharashtra.gov.in/scholarship-scheme/sc-post-matric" target="_blank">Official Details</a>
+        </div>
+      </div>
+      <!-- Scheme Card 2: Post Matric Scholarship for ST Students, Maharashtra -->
+      <div class="scheme-card">
+        <div class="scheme-content">
+          <h2>Post Matric Scholarship for ST Students, Maharashtra</h2>
+          <p>
+            This scheme offers financial assistance for Scheduled Tribe students to pursue education beyond matriculation, easing their path to higher studies.
+          </p>
+          <strong>Eligibility:</strong>
+          <ul>
+            <li>Must be from the Scheduled Tribe (ST) category</li>
+            <li>Passed previous exams</li>
+            <li>Family income not exceeding ₹2.5 lakh annually</li>
+            <li>Resident of Maharashtra</li>
+          </ul>
+          <a href="https://mahadbt.maharashtra.gov.in/scholarship-scheme/st-post-matric" target="_blank">Official Details</a>
+        </div>
+      </div>
+      <!-- Scheme Card 3: Tuition Fee Reimbursement for OBC Students, Maharashtra -->
+      <div class="scheme-card">
+        <div class="scheme-content">
+          <h2>Tuition Fee Reimbursement for OBC Students, Maharashtra</h2>
+          <p>
+            This initiative reduces financial strain on OBC students by reimbursing tuition and examination fees, making higher education more accessible.
+          </p>
+          <strong>Eligibility:</strong>
+          <ul>
+            <li>Must be from the OBC category</li>
+            <li>Family income below the prescribed threshold</li>
+            <li>Enrolled in a post-matriculation institution</li>
+            <li>Resident of Maharashtra</li>
+          </ul>
+          <a href="https://mahadbt.maharashtra.gov.in/scholarship-scheme/obc-tuition-reimbursement" target="_blank">Official Details</a>
+        </div>
+      </div>
+      <!-- Scheme Card 4: Merit-Based Scholarship for Higher Education, Maharashtra -->
+      <div class="scheme-card">
+        <div class="scheme-content">
+          <h2>Merit-Based Scholarship for Higher Education, Maharashtra</h2>
+          <p>
+            This scholarship rewards high-performing students with financial aid, supporting their undergraduate and postgraduate studies in Maharashtra.
+          </p>
+          <strong>Eligibility:</strong>
+          <ul>
+            <li>High academic performance as per set criteria</li>
+            <li>Enrolled in a recognized higher education institution</li>
+            <li>Resident of Maharashtra</li>
+            <li>Meets additional performance requirements as defined by the scheme</li>
+          </ul>
+          <a href="https://mahadbt.maharashtra.gov.in/scholarship-scheme/merit-based" target="_blank">Official Details</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sign Up & Login - Bridging the Gap</title>
+    <!-- Poppins Font & Font Awesome -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <!-- Lottie Player for Animations -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <style>
+      /* Global Reset & Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #8ec5fc, #e0c3fc);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+      }
+      /* Wrapper: Split Layout */
+      .wrapper {
+        display: flex;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(8px);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        max-width: 900px;
+        width: 90%;
+        overflow: hidden;
+        animation: fadeIn 0.7s ease-out forwards;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      /* Left Panel: Cat & Bubbles */
+      .left-panel {
+        flex: 1.2;
+        position: relative;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        overflow: hidden;
+      }
+      /* Floating bubbles */
+      .bubble {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.3;
+        animation: float 7s infinite ease-in-out;
+      }
+      .bubble1 {
+        width: 100px;
+        height: 100px;
+        background: #ffffff;
+        top: 10%;
+        left: 20%;
+      }
+      .bubble2 {
+        width: 70px;
+        height: 70px;
+        background: #ffcc00;
+        bottom: 20%;
+        left: 10%;
+        animation-delay: 2s;
+      }
+      .bubble3 {
+        width: 80px;
+        height: 80px;
+        background: #ffffff;
+        top: 40%;
+        right: 5%;
+        animation-delay: 4s;
+      }
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-30px); }
+        100% { transform: translateY(0px); }
+      }
+      /* Cat animation container */
+      .cat-container {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 200px;
+        height: 200px;
+        transform: translate(10%, 15%);
+        z-index: 2;
+      }
+      /* Right Panel: Form */
+      .right-panel {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.85);
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+      }
+      .right-panel h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #1e3c72;
+        font-size: 1.8rem;
+        font-weight: 700;
+      }
+      /* Form Elements */
+      .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+      }
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+        font-weight: 600;
+      }
+      input[type="email"],
+      input[type="password"] {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        font-size: 1rem;
+        outline: none;
+        transition: border-color 0.3s;
+      }
+      input[type="email"]:focus,
+      input[type="password"]:focus {
+        border-color: #1e3c72;
+      }
+      /* Buttons & Toggle Link */
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: #1e3c72;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        font-weight: 600;
+        transition: background-color 0.3s;
+      }
+      button:hover {
+        background-color: #16325c;
+      }
+      .toggle-form {
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+        color: #1e3c72;
+        font-weight: 600;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+      .toggle-form:hover {
+        color: #16325c;
+      }
+      #status-message {
+        margin-top: 15px;
+        text-align: center;
+        font-size: 0.95rem;
+        color: #e6007e;
+      }
+      .hidden {
+        display: none;
+      }
+      /* Responsive: Stacks on smaller screens */
+      @media (max-width: 768px) {
+        .wrapper {
+          flex-direction: column;
+          max-width: 400px;
+          width: 95%;
+        }
+        .left-panel {
+          display: none;
+        }
+        .right-panel {
+          flex: 1;
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- Left Panel with cat animation and floating bubbles -->
+      <div class="left-panel">
+        <div class="bubble bubble1"></div>
+        <div class="bubble bubble2"></div>
+        <div class="bubble bubble3"></div>
+        <div class="cat-container">
+          <!-- A Lottie animation for a cute walking cat -->
+          <lottie-player
+            src="https://assets10.lottiefiles.com/packages/lf20_3vbOcw.json"
+            background="transparent"
+            speed="1"
+            loop
+            autoplay
+          ></lottie-player>
+        </div>
+      </div>
+      <!-- Right Panel: Sign-Up/Login Form -->
+      <div class="right-panel">
+        <!-- Sign-Up Section -->
+        <div id="signup-section">
+          <h2>Sign Up</h2>
+          <form id="signup-form">
+            <div class="form-group">
+              <label for="signup-email">Email</label>
+              <input type="email" id="signup-email" name="email" required placeholder="Your email" />
+            </div>
+            <div class="form-group">
+              <label for="signup-password">Password</label>
+              <input type="password" id="signup-password" name="password" required placeholder="Choose a password" />
+            </div>
+            <button type="submit">Sign Up</button>
+          </form>
+          <span id="toggle-to-login" class="toggle-form">Already have an account? Login</span>
+        </div>
+        <!-- Login Section -->
+        <div id="login-section" class="hidden">
+          <h2>Login</h2>
+          <form id="login-form">
+            <div class="form-group">
+              <label for="login-email">Email</label>
+              <input type="email" id="login-email" name="email" required placeholder="Your email" />
+            </div>
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <input type="password" id="login-password" name="password" required placeholder="Your password" />
+            </div>
+            <button type="submit">Login</button>
+          </form>
+          <span id="toggle-to-signup" class="toggle-form">No account? Sign Up</span>
+        </div>
+        <div id="status-message"></div>
+      </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script>
+      // Firebase configuration (securely handle credentials)
+      const firebaseConfig = {
+        apiKey: "AIzaSyD9Y_saGbwRdVsJr_zyFjwAayY8dkBUrXg",
+        authDomain: "bridging-the-gap-af65a.firebaseapp.com",
+        projectId: "bridging-the-gap-af65a",
+        storageBucket: "bridging-the-gap-af65a.firebasestorage.app",
+        messagingSenderId: "608387568756",
+        appId: "1:608387568756:web:a563a78ea0e6e61d3dad21",
+        measurementId: "G-9V1P6M82KD"
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+
+      // Form Toggle Listeners
+      const signupSection = document.getElementById('signup-section');
+      const loginSection = document.getElementById('login-section');
+      const toggleToLogin = document.getElementById('toggle-to-login');
+      const toggleToSignup = document.getElementById('toggle-to-signup');
+
+      toggleToLogin.addEventListener('click', () => {
+        signupSection.classList.add('hidden');
+        loginSection.classList.remove('hidden');
+        document.getElementById('status-message').innerText = '';
+      });
+
+      toggleToSignup.addEventListener('click', () => {
+        loginSection.classList.add('hidden');
+        signupSection.classList.remove('hidden');
+        document.getElementById('status-message').innerText = '';
+      });
+
+      // Sign-Up Form Submission with Auto-Reload Upon Email Verification
+      document.getElementById('signup-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const email = document.getElementById('signup-email').value;
+        const password = document.getElementById('signup-password').value;
+  
+        auth.createUserWithEmailAndPassword(email, password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+            // Send email verification and instruct user to verify
+            user.sendEmailVerification().then(() => {
+              document.getElementById('status-message').innerText =
+                `Account created! Please verify your email (${user.email}). We will log you in automatically once verified.`;
+            });
+            // Begin checking every 3 seconds if user has verified their email
+            const verificationInterval = setInterval(() => {
+              user.reload().then(() => {
+                if (user.emailVerified) {
+                  clearInterval(verificationInterval);
+                  document.getElementById('status-message').innerText = 'Email verified! Logging you in...';
+                  // Wait an additional 3 seconds and then redirect to dashboard
+                  setTimeout(() => {
+                    window.location.href = "dashboard.html";
+                  }, 3000);
+                }
+              });
+            }, 3000);
+          })
+          .catch((error) => {
+            document.getElementById('status-message').innerText = `Sign-up failed: ${error.message}`;
+          });
+      });
+  
+      // Login Form Submission
+      document.getElementById('login-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+  
+        auth.signInWithEmailAndPassword(email, password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+            if (user.emailVerified) {
+              db.collection('users').doc(user.uid).set({
+                email: user.email,
+                lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+              }, { merge: true });
+              window.location.href = "dashboard.html";
+            } else {
+              user.sendEmailVerification().then(() => {
+                document.getElementById('status-message').innerText =
+                  `Please verify your email. A link has been sent to ${user.email}.`;
+              });
+              auth.signOut();
+            }
+          })
+          .catch((error) => {
+            document.getElementById('status-message').innerText = `Login failed: ${error.message}`;
+          });
+      });
+  
+      // Auto-redirect if user is already logged in & verified
+      auth.onAuthStateChanged((user) => {
+        if (user && user.emailVerified) {
+          window.location.href = "dashboard.html";
+        }
+      });
+    </script>
+  </body>
+</html>
