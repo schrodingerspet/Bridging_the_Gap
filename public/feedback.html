@@ -1,81 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Feedback</title>
   <style>
+    :root {
+      --primary-color: #007bff;
+      --primary-dark: #0056b3;
+      --background: #f9f9f9;
+      --text-color: #333;
+      --form-bg: #fff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #f7f7f7;
-      padding: 40px;
-      text-align: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--background);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 16px;
+      min-height: 100vh;
     }
 
-    h2 {
-      color: #333;
-    }
-
-    form {
-      background: #fff;
-      padding: 20px;
+    .form-container {
+      background: var(--form-bg);
+      padding: 24px;
       border-radius: 12px;
-      display: inline-block;
-      text-align: left;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      max-width: 480px;
+      width: 100%;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
     }
 
     label {
-      font-weight: bold;
+      display: block;
+      margin: 12px 0 4px;
+      font-weight: 500;
     }
 
-    input, textarea {
+    input,
+    textarea {
       width: 100%;
-      padding: 10px;
-      margin-top: 4px;
-      margin-bottom: 16px;
+      padding: 10px 14px;
       border: 1px solid #ccc;
       border-radius: 6px;
-      font-size: 16px;
+      font-size: 15px;
+    }
+
+    textarea {
+      resize: vertical;
     }
 
     button {
-      padding: 10px 20px;
-      background: #007bff;
-      color: white;
-      border: none;
-      border-radius: 6px;
+      margin-top: 16px;
+      width: 100%;
+      padding: 12px;
       font-size: 16px;
+      border: none;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 6px;
       cursor: pointer;
+      transition: background 0.3s ease;
     }
 
     button:hover {
-      background: #0056b3;
+      background-color: var(--primary-dark);
     }
 
     #feedback-status {
-      margin-top: 20px;
-      font-weight: bold;
+      margin-top: 16px;
+      text-align: center;
+      font-weight: 500;
+      color: green;
+    }
+
+    @media (max-width: 500px) {
+      .form-container {
+        padding: 20px 16px;
+      }
+
+      .form-container h2 {
+        font-size: 20px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <h2>Send Us Your Feedback</h2>
+  <div class="form-container">
+    <h2>We Value Your Feedback</h2>
+    <form id="feedback-form">
+      <label for="name">Name</label>
+      <input type="text" id="name" required />
 
-  <form id="feedback-form">
-    <label for="name">Name:</label><br />
-    <input type="text" id="name" required><br />
+      <label for="email">Email</label>
+      <input type="email" id="email" required />
 
-    <label for="email">Email:</label><br />
-    <input type="email" id="email" required><br />
+      <label for="message">Message</label>
+      <textarea id="message" rows="4" required></textarea>
 
-    <label for="message">Message:</label><br />
-    <textarea id="message" rows="5" required></textarea><br />
-
-    <button type="submit">Send Feedback</button>
-  </form>
-
-  <p id="feedback-status"></p>
+      <button type="submit">Send Feedback</button>
+    </form>
+    <p id="feedback-status"></p>
+  </div>
 
   <!-- Firebase scripts -->
   <script src="/__/firebase/9.22.0/firebase-app-compat.js"></script>
@@ -92,29 +133,34 @@
       const email = document.getElementById("email").value.trim();
       const message = document.getElementById("message").value.trim();
 
+      const status = document.getElementById("feedback-status");
+
       if (!name || !email || !message) {
-        document.getElementById("feedback-status").innerText = "All fields are required.";
+        status.innerText = "All fields are required.";
+        status.style.color = "red";
         return;
       }
 
       const feedbackRef = firebase.database().ref("feedback");
 
-      feedbackRef.push({
-        name: name,
-        email: email,
-        message: message,
-        timestamp: new Date().toISOString()
-      })
-      .then(() => {
-        document.getElementById("feedback-status").innerText = "Thank you for your feedback!";
-        feedbackForm.reset();
-      })
-      .catch((error) => {
-        console.error("Error submitting feedback:", error);
-        document.getElementById("feedback-status").innerText = "Something went wrong. Try again.";
-      });
+      feedbackRef
+        .push({
+          name,
+          email,
+          message,
+          timestamp: new Date().toISOString()
+        })
+        .then(() => {
+          status.innerText = "Thank you for your feedback!";
+          status.style.color = "green";
+          feedbackForm.reset();
+        })
+        .catch((error) => {
+          console.error("Error submitting feedback:", error);
+          status.innerText = "Something went wrong. Please try again.";
+          status.style.color = "red";
+        });
     });
   </script>
-
 </body>
 </html>
