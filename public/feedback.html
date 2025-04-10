@@ -109,7 +109,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
   
     <script>
-      // Firebase configuration (update with your actual config)
+      // Firebase configuration with updated databaseURL (no trailing slash)
       const firebaseConfig = {
         apiKey: "AIzaSyD9Y_saGbwRdVsJr_zyFjwAayY8dkBUrXg",
         authDomain: "bridging-the-gap-af65a.firebaseapp.com",
@@ -123,49 +123,36 @@
   
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
-  
-      // Verify that Firebase is initialized by logging the database instance
-      console.log("Firebase initialized:", firebase.database());
+      console.log("Firebase initialized", firebase.database());
   
       // Reference to the "feedback" node in Realtime Database
       const feedbackRef = firebase.database().ref("feedback");
   
-      // Reference to the form and status message element
+      // Get a reference to the form and status message element
       const feedbackForm = document.getElementById("feedback-form");
       const statusElem = document.getElementById("feedback-status");
   
-      // Listen for form submission
-      feedbackForm.addEventListener("submit", function (e) {
+      // Listen for form submissions
+      feedbackForm.addEventListener("submit", function(e) {
         e.preventDefault();
         console.log("Form submitted");
   
-        // Gather form input values
         const name = document.getElementById("name").value.trim();
         const email = document.getElementById("email").value.trim();
         const message = document.getElementById("message").value.trim();
   
-        // Simple validation
         if (!name || !email || !message) {
           statusElem.innerText = "All fields are required.";
           statusElem.style.color = "red";
-          console.error("Validation failed: Missing fields");
           return;
         }
   
-        // Prepare the feedback object
-        const feedbackData = {
-          name,
-          email,
-          message,
-          timestamp: new Date().toISOString()
-        };
+        const feedbackData = { name, email, message, timestamp: new Date().toISOString() };
+        console.log("Sending feedback data", feedbackData);
   
-        console.log("Sending feedback:", feedbackData);
-  
-        // Push the feedback object to Firebase Realtime Database
         feedbackRef.push(feedbackData)
           .then(() => {
-            console.log("Feedback successfully submitted");
+            console.log("Feedback submitted successfully");
             statusElem.innerText = "Thank you for your feedback!";
             statusElem.style.color = "green";
             feedbackForm.reset();
