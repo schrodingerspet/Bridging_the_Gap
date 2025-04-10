@@ -140,7 +140,7 @@
       const logoutButtons = document.querySelectorAll("#logout-btn, #logout-btn-mobile");
       const logoutHandler = () => {
         auth.signOut().then(() => {
-          window.location.href = "authentication.html";
+          window.location.href = "index.html";
         }).catch((error) => {
           console.error("Sign-out error:", error);
         });
@@ -150,7 +150,7 @@
       // Protect dashboard: redirect if user is not logged in or not verified
       auth.onAuthStateChanged(user => {
         if (!user || !user.emailVerified) {
-          window.location.href = "authentication.html";
+          window.location.href = "index.html";
         }
       });
 
