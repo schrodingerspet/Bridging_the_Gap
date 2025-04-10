@@ -75,7 +75,7 @@ header {
   display: flex;
   gap: 1.5rem;
   align-items: center;
-  /* margin-left: auto; remove or keep as needed, hamburger is separate now */
+  margin-left: auto;
 }
 .desktop-nav a {
   color: #333;
@@ -104,14 +104,30 @@ header {
   transition: background 0.3s ease, box-shadow 0.3s ease;
   outline: none;
 }
-.btn-primary {
-  background: #6b48ff;
+
+/* Logout Button Styling */
+.btn-primary,
+.desktop-nav .btn-primary,
+.menu button#logout-btn-mobile {
+  border-radius: 25px;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-weight: 600;
+  background-color: #6b48ff;
   color: #fff;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
-.btn-primary:hover {
-  background: #5a3de6;
+.btn-primary:hover,
+.desktop-nav .btn-primary:hover,
+.menu button#logout-btn-mobile:hover {
+  background-color: #5a3de6;
 }
-.btn-primary:focus {
+.btn-primary:focus,
+.desktop-nav .btn-primary:focus,
+.menu button#logout-btn-mobile:focus {
+  outline: none;
   box-shadow: 0 0 3px #aaa;
 }
 
@@ -123,7 +139,7 @@ header {
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  /* margin-left: auto;  optional, or keep for alignment */
+  margin-left: 1rem;
 }
 .hamburger .bar {
   height: 4px;
@@ -245,37 +261,6 @@ main {
   color: #5a3de6;
 }
 
-/* --------------------
-   LOGOUT BUTTON STYLING
--------------------- */
-.header-actions .btn-primary,
-.desktop-nav .btn-primary,
-.menu button#logout-btn-mobile {
-  /* Common pill shape */
-  border-radius: 25px;
-  padding: 0.6rem 1.2rem;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  font-weight: 600;
-  background-color: #6b48ff;
-  color: #fff;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-
-.header-actions .btn-primary:hover,
-.desktop-nav .btn-primary:hover,
-.menu button#logout-btn-mobile:hover {
-  background-color: #5a3de6;
-}
-
-.header-actions .btn-primary:focus,
-.desktop-nav .btn-primary:focus,
-.menu button#logout-btn-mobile:focus {
-  outline: none;
-  box-shadow: 0 0 3px #aaa;
-}
-
 /* Footer */
 footer {
   background: #f8f5f0;
@@ -292,11 +277,12 @@ footer {
   .search-container {
     display: none;
   }
-  .hamburger, .menu {
+  .hamburger,
+  .menu {
     display: flex;
   }
   .hamburger {
-    margin-left: auto; /* hamburger on the right for mobile */
+    margin-left: auto;
   }
   .hero-content h1 {
     font-size: 2.5rem;
@@ -305,7 +291,6 @@ footer {
     font-size: 1rem;
   }
 }
-
 @media (max-width: 480px) {
   .logo {
     font-size: 1.2rem;
