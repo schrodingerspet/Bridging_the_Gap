@@ -92,58 +92,60 @@
       <form id="feedback-form">
         <label for="name">Name</label>
         <input type="text" id="name" required />
-
+  
         <label for="email">Email</label>
         <input type="email" id="email" required />
-
+  
         <label for="message">Message</label>
         <textarea id="message" rows="4" required></textarea>
-
+  
         <button type="submit">Send Feedback</button>
       </form>
       <p id="feedback-status"></p>
     </div>
-
-    <!-- Firebase CDN: Using compat libraries for ease of migration -->
+  
+    <!-- Firebase CDN: Using compat libraries -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
-
+  
     <script>
+      // Firebase configuration (replace with your values)
       const firebaseConfig = {
         apiKey: "AIzaSyD9Y_saGbwRdVsJr_zyFjwAayY8dkBUrXg",
         authDomain: "bridging-the-gap-af65a.firebaseapp.com",
-        databaseURL: "https://bridging-the-gap-af65a-default-rtdb.firebaseio.com/",
         projectId: "bridging-the-gap-af65a",
         storageBucket: "bridging-the-gap-af65a.firebasestorage.app",
         messagingSenderId: "608387568756",
-        appId: "1:608387568756:web:a563a78ea0e6e61d3dad21"
+        appId: "1:608387568756:web:a563a78ea0e6e61d3dad21",
+        measurementId: "G-9V1P6M82KD",
+        databaseURL: "https://bridging-the-gap-af65a-default-rtdb.firebaseio.com/"
       };
-
+  
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
-
-      // Reference to the "feedback" node in the database
+  
+      // Reference to the "feedback" node in Realtime Database
       const feedbackRef = firebase.database().ref("feedback");
-
-      // Get a reference to the form and status paragraph
+  
       const feedbackForm = document.getElementById("feedback-form");
       const statusElem = document.getElementById("feedback-status");
-
+  
       feedbackForm.addEventListener("submit", function (e) {
         e.preventDefault();
-
-        // Read the values from the form
+  
+        // Gather input data
         const name = document.getElementById("name").value.trim();
         const email = document.getElementById("email").value.trim();
         const message = document.getElementById("message").value.trim();
-
+  
+        // Validate inputs
         if (!name || !email || !message) {
           statusElem.innerText = "All fields are required.";
           statusElem.style.color = "red";
           return;
         }
-
-        // Push the feedback object to Firebase Realtime Database
+  
+        // Push feedback data into the database
         feedbackRef.push({
           name: name,
           email: email,
