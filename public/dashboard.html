@@ -13,9 +13,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <!-- Custom CSS -->
   <link rel="stylesheet" href="dashboard.css" />
-  <!-- Additional inline styles for Support dropdown --> 
+  <!-- Inline styles for Support dropdown (if needed) --> 
   <style>
-    /* Support Dropdown inside Desktop Navigation */
+    /* Desktop Support Dropdown (on hover) */
     .support-dropdown {
       position: relative;
     }
@@ -23,7 +23,7 @@
       display: none;
       position: absolute;
       background-color: #fff;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       padding: 10px;
       border-radius: 8px;
       top: 30px;
@@ -31,12 +31,20 @@
       z-index: 10;
       white-space: nowrap;
     }
-    .support-dropdown-content p {
-      margin: 5px 10px;
-      font-size: 0.9rem;
-    }
     .support-dropdown:hover .support-dropdown-content {
       display: block;
+    }
+    /* Mobile Support Dropdown - initial hidden state */
+    .support-dropdown-mobile .support-dropdown-content-mobile {
+      display: none;
+    }
+    .support-dropdown-mobile .support-dropdown-content-mobile.show {
+      display: block;
+      background-color: #fff;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 5px;
     }
   </style>
 </head>
@@ -54,6 +62,7 @@
     
     <!-- Right: Desktop Navigation + Logout -->
     <nav class="desktop-nav">
+      <!-- Desktop Support Dropdown -->
       <div class="support-dropdown">
         <a href="#">Support</a>
         <div class="support-dropdown-content">
@@ -71,8 +80,15 @@
       <div class="bar"></div>
       <div class="bar"></div>
     </div>
+    <!-- Mobile Menu with clickable Support dropdown -->
     <div class="menu" id="menu">
-      <a href="#">Support</a>
+      <div class="support-dropdown-mobile">
+        <a href="#" id="mobile-support">Support</a>
+        <div class="support-dropdown-content-mobile">
+          <p><strong>Email:</strong> support@example.com</p>
+          <p><strong>Contact:</strong> +91-9876543210</p>
+        </div>
+      </div>
       <a href="feedback.html">Feedback</a>
       <button id="logout-btn-mobile">Logout</button>
     </div>
@@ -160,12 +176,11 @@
       appId: "1:608387568756:web:a563a78ea0e6e61d3dad21",
       measurementId: "G-9V1P6M82KD"
     };
-
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
     document.addEventListener("DOMContentLoaded", () => {
-      // Attach logout handlers for desktop and mobile buttons
+      // Logout functionality for desktop and mobile
       const logoutButtons = document.querySelectorAll("#logout-btn, #logout-btn-mobile");
       const logoutHandler = () => {
         auth.signOut().then(() => {
@@ -176,7 +191,7 @@
       };
       logoutButtons.forEach(btn => btn.addEventListener("click", logoutHandler));
 
-      // Protect dashboard: redirect if user is not logged in or email not verified
+      // Protect dashboard: redirect if user is not logged in or not verified
       auth.onAuthStateChanged(user => {
         if (!user || !user.emailVerified) {
           window.location.href = "index.html";
@@ -191,11 +206,22 @@
         menu.classList.toggle("show");
       });
 
+      // Mobile Support dropdown functionality (toggle on click)
+      const mobileSupport = document.getElementById("mobile-support");
+      if(mobileSupport) {
+        mobileSupport.addEventListener("click", (e) => {
+          e.preventDefault();
+          const dropdown = document.querySelector(".support-dropdown-mobile .support-dropdown-content-mobile");
+          if (dropdown) {
+            dropdown.classList.toggle("show");
+          }
+        });
+      }
+
       // Search functionality for cards
       const searchBtn = document.getElementById("search-btn");
       const searchInput = document.getElementById("search-input");
       const cards = document.querySelectorAll(".card");
-
       searchBtn.addEventListener("click", () => {
         const query = searchInput.value.trim().toLowerCase();
         cards.forEach(card => {
