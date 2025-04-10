@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <!-- Meta Tags -->
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="A portal to explore government schemes for health, farmers, students, and more.">
   <title>Bridging the Gap - Government Schemes Portal</title>
@@ -28,9 +28,9 @@
     
     <!-- Right: Desktop Navigation + Logout -->
     <nav class="desktop-nav">
-      <!--<a href="#">Schemes</a>-->
       <a href="#">Support</a>
-      <a href="#">Feedback</a>
+      <!-- Updated Feedback link -->
+      <a href="feedback.html">Feedback</a>
       <button class="btn btn-primary" id="logout-btn">Logout</button>
     </nav>
     
@@ -43,7 +43,8 @@
     <div class="menu" id="menu">
       <a href="#">Schemes</a>
       <a href="#">Support</a>
-      <a href="#">Feedback</a>
+      <!-- Updated Feedback link for mobile -->
+      <a href="feedback.html">Feedback</a>
       <button id="logout-btn-mobile">Logout</button>
     </div>
   </header>
@@ -154,7 +155,7 @@
         }
       });
 
-      // Hamburger menu functionality
+      // Hamburger menu functionality for mobile
       const hamburger = document.getElementById("hamburger");
       const menu = document.getElementById("menu");
       hamburger.addEventListener("click", () => {
