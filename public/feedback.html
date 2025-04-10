@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Feedback</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      padding: 40px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      display: inline-block;
+      text-align: left;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 4px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    #feedback-status {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Send Us Your Feedback</h2>
+
+  <form id="feedback-form">
+    <label for="name">Name:</label><br />
+    <input type="text" id="name" required><br />
+
+    <label for="email">Email:</label><br />
+    <input type="email" id="email" required><br />
+
+    <label for="message">Message:</label><br />
+    <textarea id="message" rows="5" required></textarea><br />
+
+    <button type="submit">Send Feedback</button>
+  </form>
+
+  <p id="feedback-status"></p>
+
+  <!-- Firebase scripts -->
+  <script src="/__/firebase/9.22.0/firebase-app-compat.js"></script>
+  <script src="/__/firebase/9.22.0/firebase-database-compat.js"></script>
+  <script src="/__/firebase/init.js"></script>
+
+  <script>
+    const feedbackForm = document.getElementById("feedback-form");
+
+    feedbackForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      if (!name || !email || !message) {
+        document.getElementById("feedback-status").innerText = "All fields are required.";
+        return;
+      }
+
+      const feedbackRef = firebase.database().ref("feedback");
+
+      feedbackRef.push({
+        name: name,
+        email: email,
+        message: message,
+        timestamp: new Date().toISOString()
+      })
+      .then(() => {
+        document.getElementById("feedback-status").innerText = "Thank you for your feedback!";
+        feedbackForm.reset();
+      })
+      .catch((error) => {
+        console.error("Error submitting feedback:", error);
+        document.getElementById("feedback-status").innerText = "Something went wrong. Try again.";
+      });
+    });
+  </script>
+
+</body>
+</html>
