@@ -1,48 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Oops! Page Not Found</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 - Page Not Found</title>
   <style>
-    /* Global Styles */
-    body {
-      background: #ECEFF1;
-      color: #333;
-      font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    /* Global Reset */
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+    /* Body Styles */
+    body {
+      font-family: 'Roboto', Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, #f1f8ff, #e7f0fa);
+      color: #333;
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
+      padding: 20px;
     }
-    /* Container for the error message */
+    /* Container */
     #container {
       background: #fff;
-      padding: 40px 20px;
-      max-width: 480px;
-      margin: 20px;
       border-radius: 8px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      padding: 30px 20px;
+      max-width: 480px;
+      width: 100%;
       text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     }
-    /* Animated icon */
-    .icon {
-      font-size: 5rem;
-      color: #FFA100;
-      margin-bottom: 20px;
-      animation: spin 4s linear infinite;
+    /* Image Styling */
+    .anime-image {
+      width: 250px;
+      height: auto;
+      margin: 0 auto 20px;
     }
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    /* Error headings and text */
+    /* Heading Animations */
     h1 {
       font-size: 3rem;
+      font-weight: 300;
+      color: #ff6f61;
       margin-bottom: 10px;
-      color: #FF6F61;
       animation: bounce 1.5s ease-in-out infinite;
     }
     @keyframes bounce {
@@ -51,8 +52,8 @@
     }
     h2 {
       font-size: 1.5rem;
+      color: #ffa100;
       margin-bottom: 20px;
-      color: #FFA100;
     }
     p {
       font-size: 1rem;
@@ -61,8 +62,8 @@
     }
     a {
       display: inline-block;
-      text-decoration: none;
       text-transform: uppercase;
+      text-decoration: none;
       background: #039be5;
       color: #fff;
       padding: 12px 20px;
@@ -72,11 +73,9 @@
     a:hover {
       background: #0288d1;
     }
-    /* Responsive design */
     @media (max-width: 600px) {
       #container {
-        margin: 20px;
-        padding: 30px 15px;
+        padding: 20px;
       }
       h1 {
         font-size: 2.5rem;
@@ -92,17 +91,14 @@
 </head>
 <body>
   <div id="container">
-    <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
+    <img class="anime-image" src="https://res.cloudinary.com/ddkisbcrp/image/upload/f_auto,q_auto/v1/anime/cdapr7e0yukcqnzghn96" alt="Anime Inspired 404">
     <h1>404</h1>
-    <h2>Uh oh! Something's missing.</h2>
+    <h2>Oops! Page Not Found</h2>
     <p>
-      We can't seem to find the page you're looking for.
-      It might have been moved or deleted... or maybe it never existed!
-      <br /><em>Don't worry—every mistake is an opportunity to learn!</em>
+      We couldn’t find the page you’re looking for. It seems it’s been lost at sea.<br>
+      Double-check the URL or head back home.
     </p>
     <a href="/">Go Home</a>
   </div>
-  <!-- Font Awesome for icon support (if not already loaded) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 </body>
 </html>
