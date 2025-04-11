@@ -6,19 +6,11 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "headers": [
+    "rewrites": [
       {
-        "source": "**/*.@(js|css|html)",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "no-cache"
-          }
-        ]
+        "source": "**",
+        "destination": "/index.html"
       }
-    ],
-    "errorPages": {
-      "404": "/404.html"
-    }
+    ]
   }
 }
