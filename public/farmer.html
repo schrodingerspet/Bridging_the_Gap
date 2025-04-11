@@ -1,137 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Maharashtra Farmers Schemes</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        font-family: 'Segoe UI', sans-serif;
-        background-color: #f0f4f8;
-        color: #333;
-        line-height: 1.6;
-      }
-      header {
-        background: linear-gradient(to right, #2c3e50, #4b6cb7);
-        color: white;
-        padding: 30px 20px;
-        text-align: center;
-      }
-      header h1 {
-        font-size: 2.2rem;
-        font-weight: 600;
-      }
-      .schemes-container {
-        max-width: 1100px;
-        margin: 30px auto;
-        padding: 0 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 25px;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Maharashtra Farmers Schemes</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f4f8;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(to right, #2c3e50, #4b6cb7);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+    }
+    .schemes-container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+    .scheme-card {
+      display: flex;
+      flex-direction: row;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .scheme-card:hover {
+      transform: scale(1.01);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+    .scheme-content {
+      padding: 20px 25px;
+      flex: 1;
+    }
+    .scheme-content h2 {
+      color: #2c3e50;
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+    .scheme-content p {
+      margin-bottom: 10px;
+    }
+    .scheme-content strong {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: 600;
+      color: #444;
+    }
+    .scheme-content ul {
+      padding-left: 20px;
+      margin-bottom: 10px;
+    }
+    .scheme-content ul li {
+      margin-bottom: 6px;
+    }
+    .scheme-content a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 15px;
+      background: #2c3e50;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      transition: background 0.3s ease;
+    }
+    .scheme-content a:hover {
+      background: #1a252f;
+    }
+    .status-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      border: none;
+      cursor: default;
+    }
+    .expired {
+      background-color: #e74c3c;
+      color: white;
+    }
+    .active {
+      background-color: #2ecc71;
+      color: white;
+    }
+    @media (max-width: 768px) {
       .scheme-card {
-        display: flex;
-        flex-direction: row;
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-        overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        flex-direction: column;
       }
-      .scheme-card:hover {
-        transform: scale(1.01);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-      }
-      .scheme-content {
-        padding: 20px 25px;
-        flex: 1;
-      }
-      .scheme-content h2 {
-        color: #2c3e50;
-        font-size: 1.4rem;
-        margin-bottom: 12px;
-      }
-      .scheme-content p {
-        margin-bottom: 10px;
-      }
-      .scheme-content strong {
-        display: block;
-        margin: 15px 0 5px;
-        font-weight: 600;
-        color: #444;
-      }
-      .scheme-content ul {
-        padding-left: 20px;
-        margin-bottom: 10px;
-      }
-      .scheme-content ul li {
-        margin-bottom: 6px;
-      }
-      .scheme-content a {
-        display: inline-block;
-        margin-top: 10px;
-        padding: 10px 15px;
-        background: #2c3e50;
-        color: white;
-        text-decoration: none;
-        border-radius: 6px;
-        font-size: 0.95rem;
-        transition: background 0.3s ease;
-      }
-      .scheme-content a:hover {
-        background: #1a252f;
-      }
-      @media (max-width: 768px) {
-        .scheme-card {
-          flex-direction: column;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1>Maharashtra Farmers Schemes</h1>
-    </header>
-    <div class="schemes-container">
-      <div class="scheme-card">
-        <div class="scheme-content">
-          <h2>Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)</h2>
-          <p>
-            PM-KISAN is a central government initiative that provides income support to small and marginal farmers by directly transferring financial assistance to their bank accounts.
-          </p>
-          <strong>Start Date:</strong> December 2018<br />
-          <strong>End Date:</strong> Ongoing<br />
-          <strong>Eligibility:</strong>
-          <ul>
-            <li>Small and marginal farmers with cultivable land</li>
-            <li>Excludes institutional landholders and certain farmer groups</li>
-            <li>Must have a valid Aadhaar and bank account</li>
-          </ul>
-          <a href="https://pmkisan.gov.in/" target="_blank">Official Details</a>
-        </div>
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Maharashtra Farmers Schemes</h1>
+  </header>
+  <div class="schemes-container">
+
+    <!-- Scheme Template -->
+    <div class="scheme-card">
+      <div class="scheme-content">
+        <h2>Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)</h2>
+        <p>
+          PM-KISAN is a central government initiative that provides income support to small and marginal farmers by directly transferring financial assistance to their bank accounts.
+        </p>
+        <strong>Start Date:</strong> <span class="start">2018-12-01</span><br/>
+        <strong>End Date:</strong> <span class="end">2030-12-31</span><br/>
+        <strong>Eligibility:</strong>
+        <ul>
+          <li>Small and marginal farmers with cultivable land</li>
+          <li>Excludes institutional landholders and certain farmer groups</li>
+          <li>Must have a valid Aadhaar and bank account</li>
+        </ul>
+        <a href="https://pmkisan.gov.in/" target="_blank">Official Details</a>
+        <button class="status-btn">Checking...</button>
       </div>
-      <div class="scheme-card">
-        <div class="scheme-content">
-          <h2>Soil Health Card Scheme</h2>
-          <p>
-            This scheme provides farmers with a Soil Health Card that contains crop-wise recommendations of fertilizers and amendments, aiming to improve soil productivity and overall crop yield.
-          </p>
-          <strong>Start Date:</strong> February 2015<br />
-          <strong>End Date:</strong> Ongoing<br />
-          <strong>Eligibility:</strong>
-          <ul>
-            <li>All farmers owning cultivable land</li>
-            <li>Request for the card can be made at designated centers</li>
-          </ul>
-          <a href="https://soilhealth.dac.gov.in/" target="_blank">Official Details</a>
-        </div>
+    </div>
+
+    <div class="scheme-card">
+      <div class="scheme-content">
+        <h2>Soil Health Card Scheme</h2>
+        <p>
+          This scheme provides farmers with a Soil Health Card that contains crop-wise recommendations of fertilizers and amendments, aiming to improve soil productivity and overall crop yield.
+        </p>
+        <strong>Start Date:</strong> <span class="start">2015-02-01</span><br/>
+        <strong>End Date:</strong> <span class="end">2024-03-31</span><br/>
+        <strong>Eligibility:</strong>
+        <ul>
+          <li>All farmers owning cultivable land</li>
+          <li>Request for the card can be made at designated centers</li>
+        </ul>
+        <a href="https://soilhealth.dac.gov.in/" target="_blank">Official Details</a>
+        <button class="status-btn">Checking...</button>
       </div>
-      <div class="scheme-card">
+    </div>
+
+    <div class="scheme-card">
         <div class="scheme-content">
           <h2>Pradhan Mantri Fasal Bima Yojana (PMFBY)</h2>
           <p>
@@ -181,7 +205,66 @@
           </ul>
           <a href="https://mahadbt.maharashtra.gov.in/" target="_blank">Official Details</a>
         </div>
-      </div>
-    </div>
-  </body>
+  </div>
+
+  <script>
+    const cards = document.querySelectorAll('.scheme-card');
+  
+    cards.forEach(card => {
+      let btn = card.querySelector('.status-btn');
+  
+      // If button not found, create one
+      if (!btn) {
+        btn = document.createElement('button');
+        btn.classList.add('status-btn');
+        card.querySelector('.scheme-content').appendChild(btn);
+      }
+  
+      const allStrongTags = card.querySelectorAll('strong');
+      let endDateText = '';
+  
+      allStrongTags.forEach(strong => {
+        const text = strong.textContent.trim().toLowerCase();
+        if (text.includes('end date')) {
+          // Try to find text node or sibling span
+          const next = strong.nextSibling;
+  
+          if (next && next.nodeType === Node.TEXT_NODE) {
+            endDateText = next.textContent.trim();
+          }
+  
+          const span = strong.nextElementSibling;
+          if (span && span.classList.contains('end')) {
+            endDateText = span.textContent.trim();
+          }
+        }
+      });
+  
+      const today = new Date();
+  
+      // Clear previous status
+      btn.classList.remove('active', 'expired');
+  
+      if (endDateText.toLowerCase() === 'ongoing') {
+        btn.textContent = 'Active';
+        btn.classList.add('active');
+      } else {
+        const parsedDate = new Date(endDateText);
+  
+        if (!isNaN(parsedDate)) {
+          if (parsedDate < today) {
+            btn.textContent = 'Expired';
+            btn.classList.add('expired');
+          } else {
+            btn.textContent = 'Active';
+            btn.classList.add('active');
+          }
+        } else {
+          btn.textContent = 'Invalid Date';
+          btn.classList.add('expired');
+        }
+      }
+    });
+  </script>  
+</body>
 </html>
