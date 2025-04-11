@@ -25,6 +25,13 @@ header {
   z-index: 1000;
 }
 
+/* Left Section (Logo + Search) */
+.header-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
 /* Left: Logo */
 .logo {
   font-size: 1.5rem;
@@ -34,8 +41,8 @@ header {
 
 /* Center: Search Container */
 .search-container {
-  flex: 1;
   text-align: center;
+  margin-left: 2rem;
 }
 .search-container input {
   padding: 0.5rem 1rem;
@@ -57,6 +64,7 @@ header {
   font-weight: 600;
   cursor: pointer;
   transition: background 0.3s ease;
+  margin-left: 0.5rem;
 }
 .search-container button:hover {
   background: #e0e0e0;
@@ -87,27 +95,34 @@ header {
   gap: 1rem;
   margin-left: 1rem;
 }
-.header-actions .btn {
-  padding: 0.5rem 1rem;
+
+/* Logout Button Styling */
+.btn-primary,
+.desktop-nav .btn-primary,
+.menu button#logout-btn-mobile {
   border-radius: 25px;
-  font-weight: 600;
-  cursor: pointer;
+  padding: 0.6rem 1.2rem;
   border: none;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
   outline: none;
-}
-.btn-primary {
-  background: #6b48ff;
+  cursor: pointer;
+  font-weight: 600;
+  background-color: #6b48ff;
   color: #fff;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
-.btn-primary:hover {
-  background: #5a3de6;
+.btn-primary:hover,
+.desktop-nav .btn-primary:hover,
+.menu button#logout-btn-mobile:hover {
+  background-color: #5a3de6;
 }
-.btn-primary:focus {
+.btn-primary:focus,
+.desktop-nav .btn-primary:focus,
+.menu button#logout-btn-mobile:focus {
+  outline: none;
   box-shadow: 0 0 3px #aaa;
 }
 
-/* Hamburger Icon (for Mobile) */
+/* Mobile Hamburger Icon */
 .hamburger {
   width: 30px;
   height: 20px;
@@ -237,38 +252,6 @@ main {
   color: #5a3de6;
 }
 
-/* --------------------
-   LOGOUT BUTTON STYLING
--------------------- */
-.header-actions .btn-primary,
-.desktop-nav .btn-primary,
-.menu button#logout-btn-mobile {
-  /* Common pill shape */
-  border-radius: 25px;
-  padding: 0.6rem 1.2rem;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  font-weight: 600;
-  background-color: #6b48ff;
-  color: #fff;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-
-.header-actions .btn-primary:hover,
-.desktop-nav .btn-primary:hover,
-.menu button#logout-btn-mobile:hover {
-  background-color: #5a3de6;
-}
-
-.header-actions .btn-primary:focus,
-.desktop-nav .btn-primary:focus,
-.menu button#logout-btn-mobile:focus {
-  outline: none;
-  box-shadow: 0 0 3px #aaa;
-}
-
-
 /* Footer */
 footer {
   background: #f8f5f0;
@@ -285,8 +268,12 @@ footer {
   .search-container {
     display: none;
   }
-  .hamburger, .menu {
+  .hamburger,
+  .menu {
     display: flex;
+  }
+  .hamburger {
+    margin-left: auto;
   }
   .hero-content h1 {
     font-size: 2.5rem;
@@ -295,7 +282,6 @@ footer {
     font-size: 1rem;
   }
 }
-
 @media (max-width: 480px) {
   .logo {
     font-size: 1.2rem;

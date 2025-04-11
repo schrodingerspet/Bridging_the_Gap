@@ -10,26 +10,22 @@
         padding: 0;
         box-sizing: border-box;
       }
-
       body {
         font-family: 'Segoe UI', sans-serif;
         background-color: #f0f4f8;
         color: #333;
         line-height: 1.6;
       }
-
       header {
         background: linear-gradient(to right, #2c3e50, #4b6cb7);
         color: white;
         padding: 30px 20px;
         text-align: center;
       }
-
       header h1 {
         font-size: 2.2rem;
         font-weight: 600;
       }
-
       .schemes-container {
         max-width: 1100px;
         margin: 30px auto;
@@ -38,7 +34,6 @@
         flex-direction: column;
         gap: 25px;
       }
-
       .scheme-card {
         display: flex;
         flex-direction: row;
@@ -48,43 +43,35 @@
         overflow: hidden;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
-
       .scheme-card:hover {
         transform: scale(1.01);
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
       }
-
       .scheme-content {
         padding: 20px 25px;
         flex: 1;
       }
-
       .scheme-content h2 {
         color: #2c3e50;
         font-size: 1.4rem;
         margin-bottom: 12px;
       }
-
       .scheme-content p {
         margin-bottom: 10px;
       }
-
       .scheme-content strong {
         display: block;
         margin: 15px 0 5px;
         font-weight: 600;
         color: #444;
       }
-
       .scheme-content ul {
         padding-left: 20px;
         margin-bottom: 10px;
       }
-
       .scheme-content ul li {
         margin-bottom: 6px;
       }
-
       .scheme-content a {
         display: inline-block;
         margin-top: 10px;
@@ -96,11 +83,9 @@
         font-size: 0.95rem;
         transition: background 0.3s ease;
       }
-
       .scheme-content a:hover {
         background: #1a252f;
       }
-
       @media (max-width: 768px) {
         .scheme-card {
           flex-direction: column;
@@ -113,13 +98,14 @@
       <h1>Maharashtra Farmers Schemes</h1>
     </header>
     <div class="schemes-container">
-      <!-- PM-KISAN -->
       <div class="scheme-card">
         <div class="scheme-content">
           <h2>Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)</h2>
           <p>
             PM-KISAN is a central government initiative that provides income support to small and marginal farmers by directly transferring financial assistance to their bank accounts.
           </p>
+          <strong>Start Date:</strong> December 2018<br />
+          <strong>End Date:</strong> Ongoing<br />
           <strong>Eligibility:</strong>
           <ul>
             <li>Small and marginal farmers with cultivable land</li>
@@ -129,14 +115,14 @@
           <a href="https://pmkisan.gov.in/" target="_blank">Official Details</a>
         </div>
       </div>
-
-      <!-- Soil Health Card Scheme -->
       <div class="scheme-card">
         <div class="scheme-content">
           <h2>Soil Health Card Scheme</h2>
           <p>
             This scheme provides farmers with a Soil Health Card that contains crop-wise recommendations of fertilizers and amendments, aiming to improve soil productivity and overall crop yield.
           </p>
+          <strong>Start Date:</strong> February 2015<br />
+          <strong>End Date:</strong> Ongoing<br />
           <strong>Eligibility:</strong>
           <ul>
             <li>All farmers owning cultivable land</li>
@@ -145,14 +131,14 @@
           <a href="https://soilhealth.dac.gov.in/" target="_blank">Official Details</a>
         </div>
       </div>
-
-      <!-- PM Fasal Bima Yojana -->
       <div class="scheme-card">
         <div class="scheme-content">
           <h2>Pradhan Mantri Fasal Bima Yojana (PMFBY)</h2>
           <p>
             PMFBY provides insurance coverage and financial support to farmers in the event of crop failure due to natural calamities, pests, or diseases, aiming to reduce the financial burden during tough times.
           </p>
+          <strong>Start Date:</strong> April 2016<br />
+          <strong>End Date:</strong> Ongoing<br />
           <strong>Eligibility:</strong>
           <ul>
             <li>All farmers with cultivable land are eligible</li>
@@ -162,14 +148,14 @@
           <a href="https://pmfby.gov.in/" target="_blank">Official Details</a>
         </div>
       </div>
-
-      <!-- Maharashtra KCC Scheme -->
       <div class="scheme-card">
         <div class="scheme-content">
           <h2>Maharashtra Kisan Credit Card (KCC) Scheme</h2>
           <p>
             The Kisan Credit Card scheme facilitates timely access to short-term credit for farmers, helping them meet agricultural and operational expenses with minimal collateral requirements.
           </p>
+          <strong>Start Date:</strong> August 1998<br />
+          <strong>End Date:</strong> Ongoing<br />
           <strong>Eligibility:</strong>
           <ul>
             <li>Farmers owning cultivable land in Maharashtra</li>
@@ -177,6 +163,23 @@
             <li>Offers flexible interest rates and repayment options</li>
           </ul>
           <a href="https://www.maharashtragov.in/" target="_blank">Official Details</a>
+        </div>
+      </div>
+      <div class="scheme-card">
+        <div class="scheme-content">
+          <h2>Mahadbt Krishi Sanjeevani Yojana</h2>
+          <p>
+            A scheme under Mahadbt portal providing direct benefit transfer of subsidies to farmers for seeds, irrigation equipment, and other agricultural resources.
+          </p>
+          <strong>Start Date:</strong> June 2020<br />
+          <strong>End Date:</strong> Ongoing<br />
+          <strong>Eligibility:</strong>
+          <ul>
+            <li>Registered farmers on Mahadbt portal</li>
+            <li>Residents of Maharashtra</li>
+            <li>Eligible crops and seasons as per government guidelines</li>
+          </ul>
+          <a href="https://mahadbt.maharashtra.gov.in/" target="_blank">Official Details</a>
         </div>
       </div>
     </div>

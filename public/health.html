@@ -3,9 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Health Scheme: Ayushman Bharat PMJAY</title>
+    <title>Health Schemes</title>
     <style>
-      /* Reset & basic styles */
       * {
         margin: 0;
         padding: 0;
@@ -27,13 +26,11 @@
         font-size: 2.2rem;
         font-weight: 600;
       }
-      /* Container for the scheme card */
       .schemes-container {
         max-width: 1100px;
         margin: 30px auto;
         padding: 0 20px;
       }
-      /* Scheme Card: horizontal layout */
       .scheme-card {
         display: flex;
         flex-direction: row;
@@ -42,12 +39,12 @@
         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
         overflow: hidden;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 20px;
       }
       .scheme-card:hover {
         transform: scale(1.01);
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
       }
-      /* Content styling for the scheme card */
       .scheme-content {
         padding: 20px 25px;
         flex: 1;
@@ -87,7 +84,6 @@
       .scheme-content a:hover {
         background: #1a252f;
       }
-      /* Responsive adjustments */
       @media (max-width: 768px) {
         .scheme-card {
           flex-direction: column;
@@ -97,16 +93,17 @@
   </head>
   <body>
     <header>
-      <h1>Health Scheme: Ayushman Bharat PMJAY</h1>
+      <h1>Health Schemes</h1>
     </header>
     <div class="schemes-container">
-      <!-- Single Scheme Card: Ayushman Bharat PMJAY -->
       <div class="scheme-card">
         <div class="scheme-content">
           <h2>Ayushman Bharat Pradhan Mantri Jan Arogya Yojana (PMJAY)</h2>
           <p>
             Ayushman Bharat provides a health cover of up to ₹5 lakhs per family per year for secondary and tertiary care hospitalization, protecting economically vulnerable families from high medical expenses.
           </p>
+          <strong>Start Date:</strong> September 2018<br />
+          <strong>End Date:</strong> Ongoing<br />
           <strong>Eligibility:</strong>
           <ul>
             <li>Belong to the economically vulnerable sections as per government criteria</li>
@@ -114,6 +111,74 @@
             <li>Indian citizen residing in Maharashtra</li>
           </ul>
           <a href="https://pmjay.gov.in/" target="_blank">Official Details</a>
+        </div>
+      </div>
+      <div class="scheme-card">
+        <div class="scheme-content">
+          <h2>Pradhan Mantri Swasthya Suraksha Yojana (PMSSY)</h2>
+          <p>
+            Aimed at correcting regional imbalances in affordable tertiary healthcare services and augmenting medical education.
+          </p>
+          <strong>Start Date:</strong> March 2006<br />
+          <strong>End Date:</strong> Ongoing<br />
+          <strong>Eligibility:</strong>
+          <ul>
+            <li>Open to Indian citizens</li>
+            <li>Focus on underserved regions</li>
+            <li>Referral-based for tertiary care</li>
+          </ul>
+          <a href="https://pmssy-mohfw.nic.in/" target="_blank">Official Details</a>
+        </div>
+      </div>
+      <div class="scheme-card">
+        <div class="scheme-content">
+          <h2>Rashtriya Arogya Nidhi (RAN)</h2>
+          <p>
+            Provides financial help to BPL families for life-threatening diseases requiring hospital treatment.
+          </p>
+          <strong>Start Date:</strong> 1997<br />
+          <strong>End Date:</strong> Ongoing<br />
+          <strong>Eligibility:</strong>
+          <ul>
+            <li>BPL families with proof</li>
+            <li>Diagnosis of serious disease</li>
+            <li>Treatment at government hospitals</li>
+          </ul>
+          <a href="https://main.mohfw.gov.in/" target="_blank">Official Details</a>
+        </div>
+      </div>
+      <div class="scheme-card">
+        <div class="scheme-content">
+          <h2>National Health Mission (NHM)</h2>
+          <p>
+            Provides accessible, affordable, and quality healthcare especially in rural areas.
+          </p>
+          <strong>Start Date:</strong> April 2005<br />
+          <strong>End Date:</strong> Ongoing<br />
+          <strong>Eligibility:</strong>
+          <ul>
+            <li>Available to rural and low-income populations</li>
+            <li>Focus on maternal and child health</li>
+            <li>State and district level implementation</li>
+          </ul>
+          <a href="https://nhm.gov.in/" target="_blank">Official Details</a>
+        </div>
+      </div>
+      <div class="scheme-card">
+        <div class="scheme-content">
+          <h2>Central Government Health Scheme (CGHS)</h2>
+          <p>
+            Healthcare facilities to central government employees, pensioners and dependents in CGHS-covered cities.
+          </p>
+          <strong>Start Date:</strong> 1954<br />
+          <strong>End Date:</strong> Ongoing<br />
+          <strong>Eligibility:</strong>
+          <ul>
+            <li>Central govt. employees and pensioners</li>
+            <li>Eligible family members</li>
+            <li>In CGHS-covered cities only</li>
+          </ul>
+          <a href="https://cghs.gov.in/" target="_blank">Official Details</a>
         </div>
       </div>
     </div>
