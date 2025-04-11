@@ -1,168 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Feedback</title>
-    <style>
-      :root {
-        --primary-color: #007bff;
-        --primary-dark: #0056b3;
-        --background: #f9f9f9;
-        --text-color: #333;
-        --form-bg: #fff;
-      }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: var(--background);
-        color: var(--text-color);
-        display: flex;
-        justify-content: center;
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feedback</title>
+  <style>
+    :root {
+      --primary-color: #4e54c8;
+      --secondary-color: #8f94fb;
+      --background: linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%);
+      --card-bg: #ffffff;
+      --text-color: #2c3e50;
+      --border-radius: 16px;
+      --box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--background);
+      color: var(--text-color);
+      padding: 40px 20px;
+    }
+    .page-layout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+      justify-content: center;
+    }
+    .sidebar {
+      flex: 1;
+      min-width: 250px;
+      max-width: 280px;
+      background: var(--card-bg);
+      padding: 24px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+    .form-main {
+      flex: 2;
+      min-width: 300px;
+      max-width: 640px;
+    }
+    .form-container,
+    #feedback-list {
+      background: var(--card-bg);
+      padding: 24px;
+      margin-bottom: 24px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+    .form-container h2,
+    #feedback-list h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+    label {
+      display: block;
+      margin-top: 16px;
+      font-weight: 600;
+    }
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px 16px;
+      margin-top: 8px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 5px var(--primary-color);
+    }
+    button {
+      margin-top: 24px;
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      border: none;
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      color: white;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.4s ease;
+    }
+    button:hover {
+      transform: scale(1.03);
+      background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+    }
+    #feedback-status {
+      margin-top: 16px;
+      text-align: center;
+      font-weight: 500;
+    }
+    .feedback-item {
+      border-left: 4px solid var(--primary-color);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+      background: #f7f9fb;
+      transition: background 0.3s ease;
+    }
+    .feedback-item:hover {
+      background: #edf1f7;
+    }
+    .feedback-item strong {
+      font-size: 17px;
+      color: var(--primary-color);
+    }
+    .feedback-item span {
+      font-size: 13px;
+      color: #777;
+    }
+    .feedback-item p {
+      margin: 10px 0;
+      font-size: 15px;
+    }
+    .admin-reply {
+      background: #d4edda;
+      padding: 10px;
+      border-left: 4px solid #28a745;
+      border-radius: 4px;
+      font-weight: bold;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #155724;
+    }
+    .side-box h4 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+    .side-box ul {
+      list-style: disc;
+      padding-left: 18px;
+      line-height: 1.6;
+    }
+    .side-box a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+    .side-box a:hover {
+      text-decoration: underline;
+    }
+    .image-box img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-top: 16px;
+    }
+    @media (max-width: 768px) {
+      .page-layout {
+        flex-direction: column;
         align-items: center;
-        padding: 30px 16px;
-        min-height: 100vh;
       }
-      .form-container {
-        background: var(--form-bg);
-        padding: 24px;
-        border-radius: 12px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-        max-width: 480px;
-        width: 100%;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-color);
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--secondary-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="page-layout">
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <div class="side-box">
+        <h4>Why Feedback Matters?</h4>
+        <ul>
+          <li>Improve our services</li>
+          <li>Help us fix bugs</li>
+          <li>Share your experience</li>
+          <li>We listen to you!</li>
+        </ul>
+      </div>
+    </aside>
+    <!-- Main Content -->
+    <main class="form-main">
+      <div class="form-container">
+        <h2>We Value Your Feedback</h2>
+        <form id="feedback-form">
+          <label for="name">Name</label>
+          <input type="text" id="name" required />
+          <label for="email">Email</label>
+          <input type="email" id="email" required />
+          <label for="message">Message</label>
+          <textarea id="message" rows="4" required></textarea>
+          <button type="submit">Send Feedback</button>
+        </form>
+        <p id="feedback-status"></p>
+      </div>
+      <div id="feedback-list">
+        <h3>Recent Feedback</h3>
+        <div id="feedback-items"><p>Loading feedback...</p></div>
+      </div>
+    </main>
+    <!-- Right Sidebar -->
+    <aside class="sidebar">
+      <div class="side-box">
+        <h4>Did You Know?</h4>
+        <ul>
+          <li>Feedback increases engagement by 70%</li>
+          <li>90% of users trust peer reviews</li>
+          <li>Your voice shapes our features!</li>
+        </ul>
+      </div>
+      <div class="side-box">
+        <h4>Need Help?</h4>
+        <ul>
+          <li><a href="#">Visit FAQ</a></li>
+          <li><a href="#">Contact Support</a></li>
+          <li><a href="#">Join Community</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+  <!-- Firebase Integration -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyD9Y_saGbwRdVsJr_zyFjwAayY8dkBUrXg",
+      authDomain: "bridging-the-gap-af65a.firebaseapp.com",
+      projectId: "bridging-the-gap-af65a",
+      storageBucket: "bridging-the-gap-af65a.appspot.com",
+      messagingSenderId: "608387568756",
+      appId: "1:608387568756:web:a563a78ea0e6e61d3dad21",
+      measurementId: "G-9V1P6M82KD",
+      databaseURL: "https://bridging-the-gap-af65a-default-rtdb.firebaseio.com"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const feedbackRef = firebase.database().ref("feedback");
+
+    const feedbackForm = document.getElementById("feedback-form");
+    const statusElem = document.getElementById("feedback-status");
+
+    feedbackForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      if (!name || !email || !message) {
+        statusElem.innerText = "All fields are required.";
+        statusElem.style.color = "red";
+        return;
       }
-      .form-container h2 {
-        text-align: center;
-        margin-bottom: 20px;
-        font-size: 24px;
-      }
-      label {
-        display: block;
-        margin: 12px 0 4px;
-        font-weight: 500;
-      }
-      input,
-      textarea {
-        width: 100%;
-        padding: 10px 14px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        font-size: 15px;
-      }
-      textarea {
-        resize: vertical;
-      }
-      button {
-        margin-top: 16px;
-        width: 100%;
-        padding: 12px;
-        font-size: 16px;
-        border: none;
-        background-color: var(--primary-color);
-        color: white;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-      }
-      button:hover {
-        background-color: var(--primary-dark);
-      }
-      #feedback-status {
-        margin-top: 16px;
-        text-align: center;
-        font-weight: 500;
-      }
-      @media (max-width: 500px) {
-        .form-container {
-          padding: 20px 16px;
-        }
-        .form-container h2 {
-          font-size: 20px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="form-container">
-      <h2>We Value Your Feedback</h2>
-      <form id="feedback-form">
-        <label for="name">Name</label>
-        <input type="text" id="name" required />
-  
-        <label for="email">Email</label>
-        <input type="email" id="email" required />
-  
-        <label for="message">Message</label>
-        <textarea id="message" rows="4" required></textarea>
-  
-        <button type="submit">Send Feedback</button>
-      </form>
-      <p id="feedback-status"></p>
-    </div>
-  
-    <!-- Firebase CDN: Using compat libraries -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
-  
-    <script>
-      // Firebase configuration with updated databaseURL (no trailing slash)
-      const firebaseConfig = {
-        apiKey: "AIzaSyD9Y_saGbwRdVsJr_zyFjwAayY8dkBUrXg",
-        authDomain: "bridging-the-gap-af65a.firebaseapp.com",
-        projectId: "bridging-the-gap-af65a",
-        storageBucket: "bridging-the-gap-af65a.firebasestorage.app",
-        messagingSenderId: "608387568756",
-        appId: "1:608387568756:web:a563a78ea0e6e61d3dad21",
-        measurementId: "G-9V1P6M82KD",
-        databaseURL: "https://bridging-the-gap-af65a-default-rtdb.firebaseio.com"
+
+      const feedbackData = {
+        name,
+        email,
+        message,
+        timestamp: new Date().toISOString()
       };
-  
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-      console.log("Firebase initialized", firebase.database());
-  
-      // Reference to the "feedback" node in Realtime Database
-      const feedbackRef = firebase.database().ref("feedback");
-  
-      // Get a reference to the form and status message element
-      const feedbackForm = document.getElementById("feedback-form");
-      const statusElem = document.getElementById("feedback-status");
-  
-      // Listen for form submissions
-      feedbackForm.addEventListener("submit", function(e) {
-        e.preventDefault();
-        console.log("Form submitted");
-  
-        const name = document.getElementById("name").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const message = document.getElementById("message").value.trim();
-  
-        if (!name || !email || !message) {
-          statusElem.innerText = "All fields are required.";
+
+      feedbackRef.push(feedbackData)
+        .then(() => {
+          statusElem.innerText = "Thank you for your feedback!";
+          statusElem.style.color = "green";
+          feedbackForm.reset();
+        })
+        .catch((error) => {
+          console.error("Error submitting feedback:", error);
+          statusElem.innerText = "Something went wrong. Please try again.";
           statusElem.style.color = "red";
-          return;
-        }
-  
-        const feedbackData = { name, email, message, timestamp: new Date().toISOString() };
-        console.log("Sending feedback data", feedbackData);
-  
-        feedbackRef.push(feedbackData)
-          .then(() => {
-            console.log("Feedback submitted successfully");
-            statusElem.innerText = "Thank you for your feedback!";
-            statusElem.style.color = "green";
-            feedbackForm.reset();
-          })
-          .catch((error) => {
-            console.error("Error submitting feedback:", error);
-            statusElem.innerText = "Something went wrong. Please try again.";
-            statusElem.style.color = "red";
-          });
+        });
+    });
+
+    function displayFeedback(feedbacks) {
+      const feedbackItems = document.getElementById("feedback-items");
+      feedbackItems.innerHTML = "";
+
+      const sortedFeedbacks = Object.entries(feedbacks).sort(
+        (a, b) => new Date(b[1].timestamp) - new Date(a[1].timestamp)
+      );
+
+      sortedFeedbacks.forEach(([id, data]) => {
+        const div = document.createElement("div");
+        div.className = "feedback-item";
+        div.innerHTML = `
+          <strong>${data.name}</strong>
+          <span> (${new Date(data.timestamp).toLocaleString()})</span>
+          <p>${data.message}</p>
+          ${data.reply ? `<p class="admin-reply">Admin Reply: ${data.reply}</p>` : ``}
+        `;
+        feedbackItems.appendChild(div);
       });
-    </script>
-  </body>
+    }
+
+    feedbackRef.on("value", (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        displayFeedback(data);
+      } else {
+        document.getElementById("feedback-items").innerHTML = "<p>No feedback yet.</p>";
+      }
+    });
+  </script>
+</body>
 </html>
