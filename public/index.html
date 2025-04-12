@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sign Up & Login - Bridging the Gap</title>
   
-  <!-- Poppins Font & Font Awesome -->
+  <!-- Poppins Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
   
-  <!-- Lottie Player for Animations -->
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-  
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <style>
     /* Global Reset & Base Styles */
     * {
@@ -21,131 +22,164 @@
     }
     body {
       font-family: "Poppins", sans-serif;
-      background: linear-gradient(135deg, #8ec5fc, #e0c3fc);
+      background: url('https://res.cloudinary.com/ddkisbcrp/image/upload/f_auto,q_auto/v1/anime/aftuw166jigihk5ziykl') no-repeat center center fixed;
+      background-size: cover;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       overflow: hidden;
+      position: relative;
     }
-    /* Wrapper: Split Layout */
+    /* Dark overlay to improve text readability */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: -1;
+    }
+    /* Form Wrapper */
     .wrapper {
-      display: flex;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border-radius: 16px;
       box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
-      max-width: 900px;
+      max-width: 500px;
       width: 90%;
-      overflow: hidden;
+      padding: 40px;
       animation: fadeIn 0.7s ease-out forwards;
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
-    /* Left Panel: Cat & Bubbles */
-    .left-panel {
-      flex: 1.2;
-      position: relative;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      overflow: hidden;
-    }
-    .bubble {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.3;
-      animation: float 7s infinite ease-in-out;
-    }
-    .bubble1 { width: 100px; height: 100px; background: #ffffff; top: 10%; left: 20%; }
-    .bubble2 { width: 70px; height: 70px; background: #ffcc00; bottom: 20%; left: 10%; animation-delay: 2s; }
-    .bubble3 { width: 80px; height: 80px; background: #ffffff; top: 40%; right: 5%; animation-delay: 4s; }
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-30px); }
-      100% { transform: translateY(0px); }
-    }
-    .cat-container {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 200px;
-      height: 200px;
-      transform: translate(10%, 15%);
-      z-index: 2;
-    }
-    /* Right Panel: Form */
-    .right-panel {
-      flex: 1;
-      background: rgba(255, 255, 255, 0.85);
-      padding: 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: relative;
-    }
-    .right-panel h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #1e3c72;
-      font-size: 1.8rem;
-      font-weight: 700;
-    }
-    .form-group {
-      margin-bottom: 20px;
-      text-align: left;
-    }
-    label {
-      display: block;
-      margin-bottom: 8px;
-      color: #333;
+    /* Form Header */
+    .wrapper h1 {
+      color: white;
+      font-size: 2.2rem;
       font-weight: 600;
+      margin-bottom: 5px;
     }
-    input[type="email"],
-    input[type="password"] {
-      width: 100%;
-      padding: 12px 15px;
-      border: 2px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-      outline: none;
-      transition: border-color 0.3s;
-    }
-    input[type="email"]:focus,
-    input[type="password"]:focus {
-      border-color: #1e3c72;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: #1e3c72;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1.1rem;
-      font-weight: 600;
-      transition: background-color 0.3s;
-    }
-    button:hover {
-      background-color: #16325c;
+    .wrapper h1 span {
+      color: #4a90e2;
     }
     .toggle-form {
       display: block;
-      text-align: center;
-      margin-top: 15px;
-      color: #1e3c72;
-      font-weight: 600;
+      color: #4a90e2;
+      font-weight: 500;
+      margin-bottom: 30px;
       cursor: pointer;
       transition: color 0.3s;
     }
     .toggle-form:hover {
-      color: #16325c;
+      color: #357abd;
+    }
+    /* Form */
+    .form-group {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    .form-group input {
+      flex: 1;
+    }
+    label {
+      display: block;
+      color: white;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      font-size: 1rem;
+      color: white;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    input[type="text"]::placeholder,
+    input[type="email"]::placeholder,
+    input[type="password"]::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      border-color: #4a90e2;
+    }
+    .password-container {
+      position: relative;
+    }
+    .password-container .toggle-password {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      cursor: pointer;
+    }
+    /* Buttons */
+    .button-group {
+      display: flex;
+      justify-content: center; /* Center the button */
+      margin-top: 20px;
+    }
+    button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .primary-btn {
+      background: #4a90e2;
+      color: white;
+    }
+    .primary-btn.signup-btn {
+      width: 60%; /* Increased by 50% as per previous requirement */
+    }
+    .primary-btn.login-btn {
+      width: 100%; /* Updated to match Admin Login button */
+    }
+    .primary-btn:hover {
+      background: #357abd;
+      transform: translateY(-2px);
+    }
+    #admin-login-btn {
+      background: #a83232;
+      margin-top: 15px;
+      width: 100%;
+    }
+    #admin-login-btn:hover {
+      background: #8b2a2a;
+      transform: translateY(-2px);
+    }
+    /* Forgot Password */
+    #forgot-password {
+      display: block;
+      text-align: right;
+      color: #4a90e2;
+      font-size: 0.9rem;
+      margin: 5px 0 15px 0;
+      text-decoration: none;
     }
     #forgot-password:hover {
       text-decoration: underline;
-      color: #16325c;
+      color: #357abd;
     }
+    /* Status Message */
     #status-message {
       margin-top: 15px;
       text-align: center;
@@ -155,87 +189,88 @@
     .hidden {
       display: none;
     }
-    /* Responsive: Stacks on smaller screens */
+    /* Responsive */
     @media (max-width: 768px) {
       .wrapper {
-        flex-direction: column;
         max-width: 400px;
         width: 95%;
-      }
-      .left-panel {
-        display: none;
-      }
-      .right-panel {
-        flex: 1;
         padding: 20px;
+      }
+      .form-group {
+        flex-direction: column;
+        gap: 0;
+      }
+      .primary-btn.signup-btn {
+        width: 100%; /* Full width on smaller screens */
+      }
+      .primary-btn.login-btn {
+        width: 100%; /* Already full width */
       }
     }
   </style>
 </head>
 <body>
+  <!-- Form Wrapper -->
   <div class="wrapper">
-    <!-- Left Panel with cat animation and floating bubbles -->
-    <div class="left-panel">
-      <div class="bubble bubble1"></div>
-      <div class="bubble bubble2"></div>
-      <div class="bubble bubble3"></div>
-      <div class="cat-container">
-        <lottie-player
-          src="https://assets10.lottiefiles.com/packages/lf20_3vbOcw.json"
-          background="transparent"
-          speed="1"
-          loop
-          autoplay
-        ></lottie-player>
-      </div>
-    </div>
-    <!-- Right Panel: Sign-Up/Login Form -->
-    <div class="right-panel">
-      <!-- Sign-Up Section -->
-      <div id="signup-section">
-        <h2>Sign Up</h2>
-        <form id="signup-form">
-          <div class="form-group">
-            <label for="signup-email">Email</label>
-            <input type="email" id="signup-email" name="email" required placeholder="Your email" />
+    <!-- Sign-Up Section -->
+    <div id="signup-section">
+      <h1>Create new account<span>.</span></h1>
+      <span id="toggle-to-login" class="toggle-form">Already a member? Log in</span>
+      <form id="signup-form">
+        <div class="form-group">
+          <div>
+            <label for="signup-firstname">First name</label>
+            <input type="text" id="signup-firstname" name="firstname" required placeholder="First name" />
           </div>
-          <div class="form-group">
-            <label for="signup-password">Password</label>
+          <div>
+            <label for="signup-lastname">Last name</label>
+            <input type="text" id="signup-lastname" name="lastname" required placeholder="Last name" />
+          </div>
+        </div>
+        <div>
+          <label for="signup-email">Email</label>
+          <input type="email" id="signup-email" name="email" required placeholder="Your email" />
+        </div>
+        <div>
+          <label for="signup-password">Password</label>
+          <div class="password-container">
             <input type="password" id="signup-password" name="password" required placeholder="Choose a password" />
+            <i class="fas fa-eye toggle-password" id="toggle-signup-password"></i>
           </div>
-          <button type="submit">Sign Up</button>
-        </form>
-        <span id="toggle-to-login" class="toggle-form">Already have an account? Login</span>
-      </div>
-      <!-- Login Section -->
-      <div id="login-section" class="hidden">
-        <h2>Login</h2>
-        <form id="login-form">
-          <div class="form-group">
-            <label for="login-email">Email</label>
-            <input type="email" id="login-email" name="email" required placeholder="Your email" />
-          </div>
-          <div class="form-group">
-            <label for="login-password">Password</label>
-            <input type="password" id="login-password" name="password" required placeholder="Your password" />
-            <p style="text-align:right; margin: 5px 0 15px 0;">
-              <a href="#" id="forgot-password" style="color:#1e3c72; font-size:0.9rem; text-decoration:underline;">Forgot Password?</a>
-            </p>
-          </div>
-          <button type="submit">Login</button>
-        </form>
-        <span id="toggle-to-signup" class="toggle-form">No account? Sign Up</span>
-        <!-- Admin Login Option --> 
-        <button id="admin-login-btn" style="margin-top:15px; background-color:#a83232;">Admin Login</button>
-      </div>
-      <div id="status-message"></div>
+        </div>
+        <div class="button-group">
+          <button type="submit" class="primary-btn signup-btn">Create account</button>
+        </div>
+      </form>
     </div>
+<!-- Login Section -->
+<div id="login-section" class="hidden">
+  <h1>LOGIN<span>.</span></h1>
+  <span id="toggle-to-signup" class="toggle-form">No account? Sign Up</span>
+  <form id="login-form">
+    <div>
+      <label for="login-email">Email</label>
+      <input type="email" id="login-email" name="email" required placeholder="Your email" />
+    </div>
+    <div>
+      <label for="login-password">Password</label>
+      <div class="password-container">
+        <input type="password" id="login-password" name="password" required placeholder="Your password" />
+        <i class="fas fa-eye toggle-password" id="toggle-login-password"></i>
+      </div>
+      <a href="#" id="forgot-password">Forgot Password?</a>
+    </div>
+    <div class="button-group">
+      <button type="submit" class="primary-btn login-btn">Login</button>
+    </div>
+  </form>
+  <button id="admin-login-btn">Admin Login</button>
+</div>
+
+<div id="status-message"></div>
+
   </div>
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script>
     // Firebase configuration
     const firebaseConfig = {
@@ -274,12 +309,34 @@
       document.getElementById('status-message').innerText = '';
     });
 
+    // Password Visibility Toggle
+    const toggleSignupPassword = document.getElementById('toggle-signup-password');
+    const signupPassword = document.getElementById('signup-password');
+    const toggleLoginPassword = document.getElementById('toggle-login-password');
+    const loginPassword = document.getElementById('login-password');
+
+    toggleSignupPassword.addEventListener('click', () => {
+      const type = signupPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+      signupPassword.setAttribute('type', type);
+      toggleSignupPassword.classList.toggle('fa-eye');
+      toggleSignupPassword.classList.toggle('fa-eye-slash');
+    });
+
+    toggleLoginPassword.addEventListener('click', () => {
+      const type = loginPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+      loginPassword.setAttribute('type', type);
+      toggleLoginPassword.classList.toggle('fa-eye');
+      toggleLoginPassword.classList.toggle('fa-eye-slash');
+    });
+
     // Sign-Up Form Submission with Auto-Reload Upon Email Verification
     document.getElementById('signup-form').addEventListener('submit', function(event) {
       event.preventDefault();
       const email = document.getElementById('signup-email').value;
       const password = document.getElementById('signup-password').value;
-  
+      const firstname = document.getElementById('signup-firstname').value;
+      const lastname = document.getElementById('signup-lastname').value;
+
       auth.createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
           const user = userCredential.user;
@@ -288,13 +345,19 @@
             document.getElementById('status-message').innerText =
               `Account created! Please verify your email (${user.email}). We will log you in automatically once verified.`;
           });
+          // Store additional user data in Firestore
+          db.collection('users').doc(user.uid).set({
+            firstname: firstname,
+            lastname: lastname,
+            email: user.email,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
           // Check verification every 3 seconds
           const verificationInterval = setInterval(() => {
             user.reload().then(() => {
               if (user.emailVerified) {
                 clearInterval(verificationInterval);
                 document.getElementById('status-message').innerText = 'Email verified! Logging you in...';
-                // Redirect based on login type after additional delay
                 setTimeout(() => {
                   if (adminLoginAttempted) {
                     window.location.replace("admin-dashboard.html");
@@ -310,14 +373,14 @@
           document.getElementById('status-message').innerText = `Sign-up failed: ${error.message}`;
         });
     });
-  
+
     // Login Form Submission for Regular Users
     document.getElementById('login-form').addEventListener('submit', function(event) {
       event.preventDefault();
-      adminLoginAttempted = false; // reset admin flag
+      adminLoginAttempted = false;
       const email = document.getElementById('login-email').value;
       const password = document.getElementById('login-password').value;
-  
+
       auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
           const user = userCredential.user;
@@ -339,18 +402,18 @@
           document.getElementById('status-message').innerText = `Login failed: ${error.message}`;
         });
     });
-  
+
     // Admin Login Submission
     document.getElementById('admin-login-btn').addEventListener('click', function() {
       adminLoginAttempted = true;
       const email = document.getElementById('login-email').value;
       const password = document.getElementById('login-password').value;
-  
+
       if (!email || !password) {
         document.getElementById('status-message').innerText = "Please enter email and password for admin login.";
         return;
       }
-  
+
       auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
           const user = userCredential.user;
@@ -378,17 +441,17 @@
           document.getElementById('status-message').innerText = `Admin login failed: ${error.message}`;
         });
     });
-  
+
     // Forgot Password Link
     document.getElementById('forgot-password').addEventListener('click', function (e) {
       e.preventDefault();
       const email = document.getElementById('login-email').value;
-    
+
       if (!email) {
         document.getElementById('status-message').innerText = "Please enter your email above to reset your password.";
         return;
       }
-    
+
       auth.sendPasswordResetEmail(email)
         .then(() => {
           document.getElementById('status-message').innerText = `Password reset email sent to ${email}. Check your inbox.`;
@@ -398,14 +461,14 @@
           document.getElementById('status-message').innerText = error.message;
         });
     });
-  
+
     // Auto-redirect if user is already logged in & verified (if not an admin attempt)
     auth.onAuthStateChanged((user) => {
       if (user && user.emailVerified && !adminLoginAttempted) {
         window.location.replace("dashboard.html");
       }
     });
-  
+
     // Handle browser back navigation to ensure redirection to index.html
     window.onpopstate = function() {
       window.location.replace("index.html");

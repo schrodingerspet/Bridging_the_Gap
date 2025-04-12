@@ -13,12 +13,27 @@
       }
       body {
         font-family: 'Segoe UI', sans-serif;
-        background-color: #f0f4f8;
+        background: url('https://res.cloudinary.com/ddkisbcrp/image/upload/f_auto,q_auto/v1/anime/p5dzr3hdohyern5jxoah') no-repeat center center fixed;
+        background-size: cover;
         color: #333;
         line-height: 1.6;
+        position: relative;
+      }
+      /* Add a dark overlay to tone down the background */
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4); /* Dark overlay to reduce brightness */
+        z-index: -1;
       }
       header {
-        background: linear-gradient(to right, #2c3e50, #4b6cb7);
+        background: rgba(255, 255, 255, 0.5); /* More transparent for frosted glass effect */
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         color: white;
         padding: 30px 20px;
         text-align: center;
@@ -38,14 +53,17 @@
       .scheme-card {
         display: flex;
         flex-direction: row;
-        background: white;
+        background: rgba(255, 255, 255, 0.6); /* Slightly more opaque than header for readability */
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         border-radius: 12px;
         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
         overflow: hidden;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: fadeIn 0.5s ease; /* Added fadeIn animation */
       }
       .scheme-card:hover {
-        transform: scale(1.01);
+        transform: scale(1.01) translateY(-2px); /* Enhanced hover effect */
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
       }
       .scheme-content {
@@ -104,6 +122,11 @@
       .active {
         background-color: #2ecc71;
         color: white;
+      }
+      /* Fade-in Animation */
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
       }
       @media (max-width: 768px) {
         .scheme-card {
