@@ -1,310 +1,722 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Maharashtra Other Schemes</title>
-    <style>
-      /* Reset & Basic Styles */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maharashtra Other Schemes</title>
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://res.cloudinary.com/ddkisbcrp/image/upload/f_auto,q_auto/v1/anime/unxa6jos9nw741ri8bzg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Dark Overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: -1;
+    }
+
+    /* Back to Dashboard Link */
+    .back-to-dashboard {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 3000;
+      padding: 0.5rem 1rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .back-to-dashboard:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.03);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 6rem 2rem;
+      text-align: center;
+      animation: fadeIn 1s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 50vh;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 1rem;
+      margin-left: 14rem;
+      max-width: 800px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-bottom: 2rem;
+      margin-left: 14rem;
+      max-width: 600px;
+    }
+
+    .hero a {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      margin-left: 14rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .hero a:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.03);
+    }
+
+    /* Side Navigation (Quick Links) */
+    .side-nav {
+      position: fixed;
+      top: 0rem;
+      left: 0px;
+      width: 250px;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 2rem;
+      z-index: 2000; /* Higher than header */
+      animation: fadeIn 1s ease;
+      overflow-y: auto;
+    }
+
+    .side-nav h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      color: #fff;
+      margin-bottom: 1.5rem;
+    }
+
+    .side-nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .side-nav li {
+      margin-bottom: 1rem;
+    }
+
+    .side-nav a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 1rem;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .side-nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1px;
+      background: #fff;
+      bottom: -2px;
+      left: 0;
+      transition: width 0.3s ease;
+    }
+
+    .side-nav a:hover {
+      color: #fff;
+    }
+
+    .side-nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Floating Icons */
+    .icons-right {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 250px;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .icon {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      opacity: 0.7;
+      animation: float 15s infinite ease-in-out;
+      border-radius: 10px;
+      transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .icon:hover {
+      transform: scale(1.1);
+      opacity: 1;
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    }
+
+    .icons-right .icon:nth-child(1) {
+      width: 70px;
+      height: 70px;
+      top: 20%;
+      right: 30%;
+      animation-duration: 14s;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+
+    .icons-right .icon:nth-child(2) {
+      width: 80px;
+      height: 80px;
+      top: 50%;
+      right: 20%;
+      animation-duration: 16s;
+      animation-delay: 3s;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+
+    .icons-right .icon:nth-child(3) {
+      width: 65px;
+      height: 65px;
+      top: 80%;
+      right: 40%;
+      animation-duration: 20s;
+      animation-delay: 5s;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+
+    /* Header */
+    header {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: padding 0.3s ease, background 0.3s ease;
+    }
+
+    header.shrink {
+      padding: 1rem 2rem;
+      background: rgba(0, 0, 0, 0.9);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: #fff;
+      margin-left: 13rem;
+    }
+
+    /* Schemes Container */
+    .schemes-container {
+      margin: 4rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      position: relative;
+      z-index: 1;
+      margin-left: 500px; /* Align with the right edge of the sidebar */
+      margin-right: 250px; /* Align with the left edge of the icons-right */
+      padding: 0; /* Remove padding to ensure cards stretch fully */
+    }
+
+    /* Scheme Card */
+    .scheme-card {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      width: 100%;
+    }
+
+    .scheme-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scheme-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .scheme-content {
+      padding: 2rem;
+    }
+
+    .scheme-content h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+
+    .scheme-content p {
+      margin-bottom: 1rem;
+      color: #ddd;
+      font-size: 1rem;
+    }
+
+    .scheme-content strong {
+      display: block;
+      margin: 1rem 0 0.5rem;
+      font-weight: 500;
+      color: #ccc;
+    }
+
+    .scheme-content ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+      color: #ddd;
+    }
+
+    .scheme-content ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .scheme-content a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .scheme-content a:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.03);
+    }
+
+    .status-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      border: none;
+      cursor: default;
+      color: #fff;
+    }
+
+    .expired {
+      background: rgba(231, 76, 60, 0.8);
+    }
+
+    .active {
+      background: rgba(46, 204, 113, 0.8);
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+      padding: 1.5rem;
+      text-align: center;
+      animation: fadeIn 1s ease;
+      margin-left: 250px;
+      margin-right: 0;
+    }
+
+    footer p {
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-50px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .side-nav {
+        width: 200px;
+        padding: 1.5rem;
       }
-      body {
-        font-family: 'Segoe UI', sans-serif;
-        background: url('https://res.cloudinary.com/ddkisbcrp/image/upload/f_auto,q_auto/v1/anime/unxa6jos9nw741ri8bzg') no-repeat center center fixed;
-        background-size: cover;
-        color: #333;
-        line-height: 1.6;
-        position: relative;
-      }
-      /* Add a dark overlay to tone down the background */
-      body::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.4); /* Dark overlay to reduce brightness */
-        z-index: -1;
-      }
-      header {
-        background: rgba(255, 255, 255, 0.5); /* More transparent for frosted glass effect */
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        color: white;
-        padding: 30px 20px;
-        text-align: center;
-      }
-      header h1 {
-        font-size: 2.2rem;
-        font-weight: 600;
-      }
+
       .schemes-container {
-        max-width: 1100px;
-        margin: 30px auto;
-        padding: 0 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 25px;
+        margin-left: 200px;
+        margin-right: 200px;
       }
-      .scheme-card {
-        display: flex;
-        flex-direction: row;
-        background: rgba(255, 255, 255, 0.6); /* Slightly more opaque than header for readability */
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border-radius: 12px;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-        overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        animation: fadeIn 0.5s ease; /* Added fadeIn animation */
+
+      .icons-right {
+        width: 200px;
       }
-      .scheme-card:hover {
-        transform: scale(1.01) translateY(-2px); /* Enhanced hover effect */
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+      header h1 {
+        margin-left: 0;
       }
+
+      footer {
+        margin-left: 200px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .schemes-container {
+        margin: 2rem 1rem;
+      }
+
       .scheme-content {
-        padding: 20px 25px;
-        flex: 1;
+        padding: 1.5rem;
       }
+
       .scheme-content h2 {
-        color: #2c3e50;
-        font-size: 1.4rem;
-        margin-bottom: 12px;
+        font-size: 1.5rem;
       }
-      .scheme-content p {
-        margin-bottom: 10px;
+
+      .hero {
+        padding: 4rem 1rem;
+        min-height: 40vh;
       }
-      .scheme-content strong {
-        display: block;
-        margin: 15px 0 5px;
-        font-weight: 600;
-        color: #444;
+
+      .hero h1 {
+        font-size: 2.5rem;
       }
-      .scheme-content ul {
-        padding-left: 20px;
-        margin-bottom: 10px;
+
+      .hero p {
+        font-size: 1rem;
       }
-      .scheme-content ul li {
-        margin-bottom: 6px;
+
+      .side-nav {
+        width: 200px;
       }
-      .scheme-content a {
-        display: inline-block;
-        margin-top: 10px;
-        padding: 10px 15px;
-        background: #2c3e50;
-        color: white;
-        text-decoration: none;
-        border-radius: 6px;
-        font-size: 0.95rem;
-        transition: background 0.3s ease;
+
+      .icons-right {
+        width: 150px;
       }
-      .scheme-content a:hover {
-        background: #1a252f;
+
+      .icons-right .icon:nth-child(3) {
+        display: none;
       }
-      .status-btn {
-        display: inline-block;
-        margin-top: 10px;
-        padding: 8px 12px;
-        border-radius: 5px;
-        font-weight: bold;
+
+      footer {
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .scheme-content h2 {
+        font-size: 1.3rem;
+      }
+
+      .scheme-content p, .scheme-content ul li {
         font-size: 0.9rem;
-        border: none;
-        cursor: default;
       }
-      .expired {
-        background-color: #e74c3c;
-        color: white;
+
+      .hero h1 {
+        font-size: 2rem;
       }
-      .active {
-        background-color: #2ecc71;
-        color: white;
+
+      .hero p {
+        font-size: 0.9rem;
       }
-      /* Fade-in Animation */
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+
+      .side-nav {
+        width: 180px;
       }
-      @media (max-width: 768px) {
-        .scheme-card {
-          flex-direction: column;
-        }
+
+      .icons-right {
+        width: 100px;
       }
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1>Maharashtra Other Schemes</h1>
-    </header>
-    <div class="schemes-container">
-      <div class="scheme-card">
-        <div class="scheme-content">
-          <h2>Pradhan Mantri Awas Yojana (PMAY)</h2>
-          <p>PMAY aims to provide affordable housing to urban and rural poor households by offering subsidies and financial support for constructing or purchasing a house.</p>
-          <p><strong>Start Date:</strong> June 25, 2015</p>
-          <p><strong>End Date:</strong> December 31, 2024</p>
-          <strong>Eligibility:</strong>
-          <ul>
-            <li>Applicant must be an Indian citizen.</li>
-            <li>Income criteria vary for urban and rural areas.</li>
-            <li>Prioritized for first-time house buyers.</li>
-            <li>Resident of Maharashtra.</li>
-          </ul>
-          <a href="https://pmaymis.gov.in/" target="_blank">Official Details</a>
-        </div>
-      </div>
-      <div class="scheme-card">
-        <div class="scheme-content">
-          <h2>Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA)</h2>
-          <p>MGNREGA guarantees 100 days of wage employment per year to rural households, aiming to improve the livelihood of rural citizens by creating sustainable rural assets.</p>
-          <p><strong>Start Date:</strong> February 2, 2006</p>
-          <p><strong>End Date:</strong> Ongoing</p>
-          <strong>Eligibility:</strong>
-          <ul>
-            <li>Rural households in Maharashtra.</li>
-            <li>Available to all adult members.</li>
-            <li>No formal educational qualifications required.</li>
-          </ul>
-          <a href="https://nrega.nic.in/" target="_blank">Official Details</a>
-        </div>
-      </div>
-      <div class="scheme-card">
-        <div class="scheme-content">
-          <h2>Deen Dayal Upadhyay Grameen Kaushalya Yojana (DDU-GKY)</h2>
-          <p>DDU-GKY enhances the employability of rural youth through skill training and capacity building, helping them secure gainful employment.</p>
-          <p><strong>Start Date:</strong> September 25, 2014</p>
-          <p><strong>End Date:</strong> Ongoing</p>
-          <strong>Eligibility:</strong>
-          <ul>
-            <li>Rural youth aged between 15 and 35 years.</li>
-            <li>Basic educational qualifications as per the course requirements.</li>
-            <li>Primarily targeted at economically weaker sections.</li>
-          </ul>
-          <a href="https://ddugky.gov.in/" target="_blank">Official Details</a>
-        </div>
-      </div>
-      <div class="scheme-card">
-        <div class="scheme-content">
-          <h2>Pradhan Mantri Jan Dhan Yojana (PMJDY)</h2>
-          <p>PMJDY is a financial inclusion program providing affordable access to banking services and financial products, particularly for those from economically weaker sections.</p>
-          <p><strong>Start Date:</strong> August 28, 2014</p>
-          <p><strong>End Date:</strong> Ongoing</p>
-          <strong>Eligibility:</strong>
-          <ul>
-            <li>Open to all Indian citizens.</li>
-            <li>Focus on enrolling those without existing bank accounts.</li>
-            <li>Emphasis on rural and urban poor.</li>
-          </ul>
-          <a href="https://pmjdy.gov.in/" target="_blank">Official Details</a>
-        </div>
-      </div>
-      <div class="scheme-card">
-        <div class="scheme-content">
-          <h2>Pradhan Mantri Mudra Yojana (PMMY)</h2>
-          <p>PMMY provides loans to micro and small enterprises to support income-generating activities, thereby empowering small business owners and entrepreneurs.</p>
-          <p><strong>Start Date:</strong> April 8, 2015</p>
-          <p><strong>End Date:</strong> Ongoing</p>
-          <strong>Eligibility:</strong>
-          <ul>
-            <li>Micro and small enterprises in Maharashtra.</li>
-            <li>Must have a viable business plan.</li>
-            <li>Applicant should possess a valid Aadhaar and bank account.</li>
-          </ul>
-          <a href="https://www.mudra.org.in/" target="_blank">Official Details</a>
-        </div>
-      </div>
-      <div class="scheme-card">
-        <div class="scheme-content">
-          <h2>Maharashtra State Skill Development Schemes</h2>
-          <p>These schemes aim to enhance employability by providing vocational training and skill development programs tailored to local market needs.</p>
-          <p><strong>Start Date:</strong> July 1, 2017</p>
-          <p><strong>End Date:</strong> Ongoing</p>
-          <strong>Eligibility:</strong>
-          <ul>
-            <li>Residents of Maharashtra, especially youth.</li>
-            <li>Applicants should have basic educational qualifications.</li>
-            <li>Must meet the specific requirements of the training program.</li>
-          </ul>
-          <a href="https://msds.maharashtra.gov.in/" target="_blank">Official Details</a>
-        </div>
-      </div>
-      <div class="scheme-card">
-        <div class="scheme-content">
-          <h2>Swachh Bharat Abhiyan - Maharashtra</h2>
-          <p>An initiative aimed at ensuring clean and healthy surroundings, this scheme focuses on improving sanitation, waste management, and overall public health.</p>
-          <p><strong>Start Date:</strong> October 2, 2014</p>
-          <p><strong>End Date:</strong> Ongoing</p>
-          <strong>Eligibility:</strong>
-          <ul>
-            <li>Open to all residents participating in community cleanliness drives.</li>
-            <li>Focus on schools, communities, and local bodies.</li>
-            <li>Implementation through state government bodies and local administrations.</li>
-          </ul>
-          <a href="https://swachhbharat.mygov.in/" target="_blank">Official Details</a>
-        </div>
+
+      .icons-right .icon:nth-child(2) {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Back to Dashboard Link -->
+  <a href="dashboard.html" class="back-to-dashboard">← Back to Dashboard</a>
+
+  <!-- Side Navigation -->
+  <nav class="side-nav">
+    <h3>Quick Links</h3>
+    <ul>
+      <li><a href="#pmay">PMAY</a></li>
+      <li><a href="#mgnrega">MGNREGA</a></li>
+      <li><a href="#ddugky">DDU-GKY</a></li>
+      <li><a href="#pmjdy">PMJDY</a></li>
+      <li><a href="#pmmy">PMMY</a></li>
+      <li><a href="#mssds">MSSDS</a></li>
+      <li><a href="#swachh">Swachh Bharat</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <h1>Maharashtra Other Schemes</h1>
+    <p>Discover various government schemes aimed at improving the lives of citizens in Maharashtra.</p>
+    <a href="#schemes">Explore Schemes</a>
+  </div>
+
+  <!-- Floating Icons -->
+  <div class="icons-right">
+    <div class="icon"></div>
+    <div class="icon"></div>
+    <div class="icon"></div>
+  </div>
+
+  <!-- Header -->
+  <header id="main-header">
+    <h1>Maharashtra Other Schemes</h1>
+  </header>
+
+  <!-- Schemes Container -->
+  <div class="schemes-container" id="schemes">
+    <div class="scheme-card" id="pmay">
+      <div class="scheme-content">
+        <h2>Pradhan Mantri Awas Yojana (PMAY)</h2>
+        <p>PMAY aims to provide affordable housing to urban and rural poor households by offering subsidies and financial support for constructing or purchasing a house.</p>
+        <strong>Start Date:</strong> June 25, 2015<br />
+        <strong>End Date:</strong> December 31, 2024<br />
+        <strong>Eligibility:</strong>
+        <ul>
+          <li>Applicant must be an Indian citizen.</li>
+          <li>Income criteria vary for urban and rural areas.</li>
+          <li>Prioritized for first-time house buyers.</li>
+          <li>Resident of Maharashtra.</li>
+        </ul>
+        <a href="https://pmaymis.gov.in/" target="_blank">Official Details</a>
+        <button class="status-btn">Checking...</button>
       </div>
     </div>
-    <script>
-      const cards = document.querySelectorAll('.scheme-card');
-    
-      cards.forEach(card => {
-        let btn = card.querySelector('.status-btn');
-    
-        // If button not found, create one
-        if (!btn) {
-          btn = document.createElement('button');
-          btn.classList.add('status-btn');
-          card.querySelector('.scheme-content').appendChild(btn);
-        }
-    
-        const allStrongTags = card.querySelectorAll('strong');
-        let endDateText = '';
-    
-        allStrongTags.forEach(strong => {
-          const text = strong.textContent.trim().toLowerCase();
-          if (text.includes('end date')) {
-            // Try to find text node or sibling span
-            const next = strong.nextSibling;
-    
-            if (next && next.nodeType === Node.TEXT_NODE) {
-              endDateText = next.textContent.trim();
-            }
-    
-            const span = strong.nextElementSibling;
-            if (span && span.classList.contains('end')) {
-              endDateText = span.textContent.trim();
-            }
-          }
-        });
-    
-        const today = new Date();
-    
-        // Clear previous status
-        btn.classList.remove('active', 'expired');
-    
-        if (endDateText.toLowerCase() === 'ongoing') {
-          btn.textContent = 'Active';
-          btn.classList.add('active');
-        } else {
-          const parsedDate = new Date(endDateText);
-    
-          if (!isNaN(parsedDate)) {
-            if (parsedDate < today) {
-              btn.textContent = 'Expired';
-              btn.classList.add('expired');
-            } else {
-              btn.textContent = 'Active';
-              btn.classList.add('active');
-            }
-          } else {
-            btn.textContent = 'Invalid Date';
-            btn.classList.add('expired');
+    <div class="scheme-card" id="mgnrega">
+      <div class="scheme-content">
+        <h2>Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA)</h2>
+        <p>MGNREGA guarantees 100 days of wage employment per year to rural households, aiming to improve the livelihood of rural citizens by creating sustainable rural assets.</p>
+        <strong>Start Date:</strong> February 2, 2006<br />
+        <strong>End Date:</strong> Ongoing<br />
+        <strong>Eligibility:</strong>
+        <ul>
+          <li>Rural households in Maharashtra.</li>
+          <li>Available to all adult members.</li>
+          <li>No formal educational qualifications required.</li>
+        </ul>
+        <a href="https://nrega.nic.in/" target="_blank">Official Details</a>
+        <button class="status-btn">Checking...</button>
+      </div>
+    </div>
+    <div class="scheme-card" id="ddugky">
+      <div class="scheme-content">
+        <h2>Deen Dayal Upadhyay Grameen Kaushalya Yojana (DDU-GKY)</h2>
+        <p>DDU-GKY enhances the employability of rural youth through skill training and capacity building, helping them secure gainful employment.</p>
+        <strong>Start Date:</strong> September 25, 2014<br />
+        <strong>End Date:</strong> Ongoing<br />
+        <strong>Eligibility:</strong>
+        <ul>
+          <li>Rural youth aged between 15 and 35 years.</li>
+          <li>Basic educational qualifications as per the course requirements.</li>
+          <li>Primarily targeted at economically weaker sections.</li>
+        </ul>
+        <a href="https://ddugky.gov.in/" target="_blank">Official Details</a>
+        <button class="status-btn">Checking...</button>
+      </div>
+    </div>
+    <div class="scheme-card" id="pmjdy">
+      <div class="scheme-content">
+        <h2>Pradhan Mantri Jan Dhan Yojana (PMJDY)</h2>
+        <p>PMJDY is a financial inclusion program providing affordable access to banking services and financial products, particularly for those from economically weaker sections.</p>
+        <strong>Start Date:</strong> August 28, 2014<br />
+        <strong>End Date:</strong> Ongoing<br />
+        <strong>Eligibility:</strong>
+        <ul>
+          <li>Open to all Indian citizens.</li>
+          <li>Focus on enrolling those without existing bank accounts.</li>
+          <li>Emphasis on rural and urban poor.</li>
+        </ul>
+        <a href="https://pmjdy.gov.in/" target="_blank">Official Details</a>
+        <button class="status-btn">Checking...</button>
+      </div>
+    </div>
+    <div class="scheme-card" id="pmmy">
+      <div class="scheme-content">
+        <h2>Pradhan Mantri Mudra Yojana (PMMY)</h2>
+        <p>PMMY provides loans to micro and small enterprises to support income-generating activities, thereby empowering small business owners and entrepreneurs.</p>
+        <strong>Start Date:</strong> April 8, 2015<br />
+        <strong>End Date:</strong> Ongoing<br />
+        <strong>Eligibility:</strong>
+        <ul>
+          <li>Micro and small enterprises in Maharashtra.</li>
+          <li>Must have a viable business plan.</li>
+          <li>Applicant should possess a valid Aadhaar and bank account.</li>
+        </ul>
+        <a href="https://www.mudra.org.in/" target="_blank">Official Details</a>
+        <button class="status-btn">Checking...</button>
+      </div>
+    </div>
+    <div class="scheme-card" id="mssds">
+      <div class="scheme-content">
+        <h2>Maharashtra State Skill Development Schemes</h2>
+        <p>These schemes aim to enhance employability by providing vocational training and skill development programs tailored to local market needs.</p>
+        <strong>Start Date:</strong> July 1, 2017<br />
+        <strong>End Date:</strong> Ongoing<br />
+        <strong>Eligibility:</strong>
+        <ul>
+          <li>Residents of Maharashtra, especially youth.</li>
+          <li>Applicants should have basic educational qualifications.</li>
+          <li>Must meet the specific requirements of the training program.</li>
+        </ul>
+        <a href="https://msds.maharashtra.gov.in/" target="_blank">Official Details</a>
+        <button class="status-btn">Checking...</button>
+      </div>
+    </div>
+    <div class="scheme-card" id="swachh">
+      <div class="scheme-content">
+        <h2>Swachh Bharat Abhiyan - Maharashtra</h2>
+        <p>An initiative aimed at ensuring clean and healthy surroundings, this scheme focuses on improving sanitation, waste management, and overall public health.</p>
+        <strong>Start Date:</strong> October 2, 2014<br />
+        <strong>End Date:</strong> Ongoing<br />
+        <strong>Eligibility:</strong>
+        <ul>
+          <li>Open to all residents participating in community cleanliness drives.</li>
+          <li>Focus on schools, communities, and local bodies.</li>
+          <li>Implementation through state government bodies and local administrations.</li>
+        </ul>
+        <a href="https://swachhbharat.mygov.in/" target="_blank">Official Details</a>
+        <button class="status-btn">Checking...</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Maharashtra Other Schemes</p>
+  </footer>
+
+  <script>
+    // Status Button Logic
+    const cards = document.querySelectorAll('.scheme-card');
+
+    cards.forEach(card => {
+      let btn = card.querySelector('.status-btn');
+      if (!btn) {
+        btn = document.createElement('button');
+        btn.classList.add('status-btn');
+        card.querySelector('.scheme-content').appendChild(btn);
+      }
+
+      const allStrongTags = card.querySelectorAll('strong');
+      let endDateText = '';
+
+      allStrongTags.forEach(strong => {
+        const text = strong.textContent.trim().toLowerCase();
+        if (text.includes('end date')) {
+          const next = strong.nextSibling;
+          if (next && next.nodeType === Node.TEXT_NODE) {
+            endDateText = next.textContent.trim();
           }
         }
       });
-    </script>
-  </body>
+
+      const today = new Date();
+      btn.classList.remove('active', 'expired');
+
+      if (endDateText.toLowerCase() === 'ongoing') {
+        btn.textContent = 'Active';
+        btn.classList.add('active');
+      } else {
+        const parsedDate = new Date(endDateText);
+        if (!isNaN(parsedDate)) {
+          if (parsedDate < today) {
+            btn.textContent = 'Expired';
+            btn.classList.add('expired');
+          } else {
+            btn.textContent = 'Active';
+            btn.classList.add('active');
+          }
+        } else {
+          btn.textContent = 'Invalid Date';
+          btn.classList.add('expired');
+        }
+      }
+    });
+
+    // Animations and Header Shrink
+    document.addEventListener("DOMContentLoaded", () => {
+      const observerOptions = {
+        threshold: 0.2,
+        rootMargin: "0px 0px -50px 0px"
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".scheme-card").forEach(card => {
+        observer.observe(card);
+      });
+
+      const header = document.getElementById("main-header");
+      const shrinkOn = 50;
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > shrinkOn) {
+          header.classList.add("shrink");
+        } else {
+          header.classList.remove("shrink");
+        }
+      });
+    });
+  </script>
+</body>
 </html>
