@@ -2,13 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bridging the Gap - Admin Dashboard</title>
   <!-- Poppins Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <!-- Font Awesome for Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <style>
     /* Base Reset & Box Sizing */
     * {
@@ -16,20 +15,18 @@
       padding: 0;
       box-sizing: border-box;
     }
-
-    /* Body & Typography */
+    /* Body & Background */
     body {
       font-family: "Poppins", sans-serif;
       background: url('https://res.cloudinary.com/ddkisbcrp/image/upload/f_auto,q_auto/v1/anime/u97ih80jsrotwcdexh5w') no-repeat center center fixed;
       background-size: cover;
-      color: #333; /* Dark color for contrast */
+      color: #fff;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       position: relative;
     }
-
-    /* Add a dark overlay to tone down the background */
+    /* Dark overlay for a sleek look */
     body::before {
       content: '';
       position: fixed;
@@ -37,65 +34,50 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.4); /* Dark overlay to reduce brightness */
+      background: rgba(0, 0, 0, 0.8);
       z-index: -1;
     }
-
-    /* Header */
+    /* Header Styling */
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 1rem 3rem;
-      background: rgba(255, 255, 255, 0.5); /* More transparent for Apple-like effect */
+      background: rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
       position: sticky;
       top: 0;
       z-index: 1000;
     }
-
     .logo-container {
       display: flex;
       align-items: center;
     }
-
-    .header-image {
-      height: 50px;
-      width: auto;
-      margin-right: 10px;
-    }
-
     .logo {
       font-size: 1.8rem;
       font-weight: 700;
-      color: #333;
-      /* Removed text-shadow */
+      color: #fff;
       transition: transform 0.3s ease;
     }
     .logo:hover {
       transform: scale(1.05);
     }
-
     nav {
       display: flex;
       gap: 1.5rem;
       align-items: center;
     }
-
     nav a {
       text-decoration: none;
       font-size: 1rem;
       font-weight: 500;
-      color: #333;
-      /* Removed text-shadow */
+      color: #fff;
       transition: color 0.3s ease;
     }
     nav a:hover {
       color: #6b48ff;
     }
-
     /* Modern Logout Button */
     #logoutBtn {
       background: linear-gradient(to right, #6b48ff, #8f94fb);
@@ -112,26 +94,22 @@
       transform: scale(1.03);
       background: linear-gradient(to right, #8f94fb, #6b48ff);
     }
-
     /* Main Container */
     .container {
       width: 95%;
       max-width: 1200px;
       margin: 2rem auto;
-      background: rgba(255, 255, 255, 0.5); /* More transparent for Apple-like effect */
+      background: rgba(0, 0, 0, 0.75);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
       padding: 2rem;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
     .status {
       font-size: 1.2rem;
       margin-bottom: 1rem;
-      color: #2c3e50;
-      /* Removed text-shadow */
+      color: #fff;
     }
-
     /* Feedback Management Section */
     #feedback-management {
       margin-top: 30px;
@@ -140,43 +118,37 @@
       margin-bottom: 20px;
       font-size: 1.7rem;
       color: #6b48ff;
-      /* Removed text-shadow */
       text-align: center;
       font-weight: 700;
     }
-
     .feedback-item {
-      border: 1px solid rgba(221, 221, 221, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 8px;
       padding: 15px;
       margin-bottom: 15px;
-      background: rgba(255, 255, 255, 0.6); /* Slightly more opaque than container for readability */
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
       transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
       position: relative;
       animation: fadeIn 0.5s ease;
     }
     .feedback-item:hover {
-      background: rgba(249, 249, 249, 0.65);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      background: rgba(0, 0, 0, 0.65);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
       transform: translateY(-2px);
     }
     .feedback-item strong {
       font-size: 1rem;
-      color: #2c3e50;
-      /* Removed text-shadow */
+      color: #fff;
     }
     .feedback-item span {
       font-size: 0.9rem;
-      color: #777;
-      /* Removed text-shadow */
+      color: #ddd;
     }
     .feedback-item p {
       margin: 10px 0;
       font-size: 0.95rem;
-      color: #333;
-      /* Removed text-shadow */
+      color: #ccc;
     }
     .feedback-reply {
       margin-top: 10px;
@@ -188,17 +160,15 @@
       border: 1px solid rgba(204, 204, 204, 0.5);
       border-radius: 6px;
       resize: vertical;
-      background: rgba(255, 255, 255, 0.7); /* Slightly more opaque for input readability */
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-      color: #333;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
       transition: border 0.3s ease;
     }
     .feedback-reply textarea:focus {
       border-color: #6b48ff;
     }
     .feedback-reply textarea::placeholder {
-      color: #777;
+      color: #bbb;
     }
     .feedback-reply button {
       margin-top: 8px;
@@ -215,13 +185,23 @@
       transform: scale(1.03);
       background: #5a3de6;
     }
-
-    /* Status Badges */
+    .delete-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #dc3545;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+    .delete-icon:hover {
+      color: #ff4d4d;
+    }
     .feedback-item::before {
       content: '';
       position: absolute;
       top: 10px;
-      right: 10px;
+      right: 40px;
       width: 10px;
       height: 10px;
       border-radius: 50%;
@@ -232,22 +212,11 @@
     .feedback-item.unreplied::before {
       background: #dc3545;
     }
-
-    /* Loading Spinner */
-    .loading {
-      text-align: center;
-      font-size: 1.2rem;
-      color: #6b48ff;
-      /* Removed text-shadow */
-    }
-
-    /* Fade-in Animation */
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
-
-    /* Responsive for mobile */
+    /* Responsive Design */
     @media (max-width: 600px) {
       header {
         flex-direction: column;
@@ -267,7 +236,6 @@
   <!-- Header Section -->
   <header>
     <div class="logo-container">
-      <!--<img src="https://res.cloudinary.com/ddkisbcrp/image/upload/f_auto,q_auto/v1/anime/mmzeuejtsilhwawksn9e" alt="Decorative GIF" class="header-image">-->
       <div class="logo">Bridging the Gap</div>
     </div>
     <nav>
@@ -310,7 +278,7 @@
     const db = firebase.firestore();
     const feedbackRef = firebase.database().ref("feedback");
 
-    // Authentication state monitoring and UI updates
+    // Authentication state monitoring
     auth.onAuthStateChanged(user => {
       const statusElem = document.getElementById("user-status");
       if (user && user.emailVerified) {
@@ -340,7 +308,7 @@
       };
     }
 
-    // Display feedback items with admin reply option
+    // Display feedback items with admin reply and delete options
     function displayAdminFeedback(feedbacks) {
       const feedbackListElem = document.getElementById("admin-feedback-list");
       feedbackListElem.innerHTML = "";
@@ -353,21 +321,23 @@
         const div = document.createElement("div");
         div.className = `feedback-item ${data.reply ? 'replied' : 'unreplied'}`;
         div.innerHTML = `
+          <i class="fas fa-trash delete-icon" onclick="deleteFeedback('${id}')"></i>
           <strong>${data.name}</strong> 
           <span>(${new Date(data.timestamp).toLocaleString()})</span>
           <p>${data.message}</p>
           ${data.reply 
-            ? `<p style="color: #28a745; font-weight: bold;">Admin Reply: ${data.reply}</p>` 
+            ? `<p class="admin-reply" style="color: #28a745; font-weight: bold;">Admin Reply: ${data.reply}</p>` 
             : `<div class="feedback-reply">
                  <textarea id="reply-${id}" placeholder="Type your reply here"></textarea>
                  <button onclick="sendAdminReply('${id}')">Send Reply</button>
-               </div>`}
+               </div>`
+          }
         `;
         feedbackListElem.appendChild(div);
       });
     }
 
-    // Function to send admin reply
+    // Send admin reply function
     function sendAdminReply(feedbackId) {
       const replyTextArea = document.getElementById("reply-" + feedbackId);
       const reply = replyTextArea.value.trim();
@@ -385,13 +355,39 @@
         });
     }
 
-    // Listen for changes in feedback in real time
+    // Delete feedback function
+    function deleteFeedback(feedbackId) {
+      if (confirm("Are you sure you want to delete this feedback?")) {
+        feedbackRef.child(feedbackId).remove()
+          .then(() => {
+            alert("Feedback deleted successfully.");
+          })
+          .catch((error) => {
+            console.error("Error deleting feedback:", error);
+            alert("Error deleting feedback. Please try again.");
+          });
+      }
+    }
+
+    // Real-time feedback updates
     feedbackRef.on("value", (snapshot) => {
       const data = snapshot.val();
       if (data) {
         displayAdminFeedback(data);
       } else {
-        document.getElementById("admin-feedback-list").innerHTML = "<p>No feedback yet.</p>";
+        document.getElementById("admin-feedback-list").innerHTML = "<p class=\"loading\">No feedback yet.</p>";
+      }
+    });
+  </script>
+
+  <!-- Prevent back button navigation (optional) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.history && window.history.pushState) {
+        window.history.pushState(null, null, window.location.href);
+        window.onpopstate = function() {
+          window.history.pushState(null, null, window.location.href);
+        };
       }
     });
   </script>

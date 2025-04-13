@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Maharashtra Student Scholarship Schemes</title>
+  <!-- Font Awesome for Hamburger Icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <style>
     /* Global Styles */
     * {
@@ -23,7 +25,7 @@
       position: relative;
     }
 
-    /* Dark Overlay */
+    /* Dark overlay */
     body::before {
       content: '';
       position: fixed;
@@ -38,7 +40,7 @@
     /* Back to Dashboard Link */
     .back-to-dashboard {
       position: fixed;
-      top: 1rem;
+      top: 0.5rem;
       left: 1rem;
       z-index: 3000;
       padding: 0.5rem 1rem;
@@ -47,7 +49,10 @@
       text-decoration: none;
       border-radius: 8px;
       font-size: 0.95rem;
-      transition: background 0.3s ease, transform 0.3s ease;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .back-to-dashboard:hover {
@@ -55,77 +60,83 @@
       transform: scale(1.03);
     }
 
-    /* Hero Section */
-    .hero {
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 6rem 2rem;
-      text-align: center;
-      animation: fadeIn 1s ease;
+    /* Arrow state when scrolled */
+    .back-to-dashboard.arrow {
+      padding: 0.5rem;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 50vh;
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 1rem;
-      margin-left: 13rem;
-      max-width: 800px;
-    }
-
-    .hero p {
       font-size: 1.2rem;
-      color: #ccc;
-      margin-bottom: 2rem;
-      margin-left: 13rem;
-      max-width: 600px;
+      top: 1.2rem;
     }
 
-    .hero a {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      margin-left: 13rem;
+    .back-to-dashboard.arrow::before {
+      content: '←';
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .back-to-dashboard.arrow span {
+      display: none;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      position: fixed;
+      top: 0.5rem;
+      right: 1rem;
+      z-index: 3000;
+      padding: 0.4rem;
       background: rgba(255, 255, 255, 0.2);
       color: #fff;
-      text-decoration: none;
       border-radius: 8px;
-      font-size: 1rem;
-      transition: background 0.3s ease, transform 0.3s ease;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .hero a:hover {
+    .hamburger:hover {
       background: rgba(255, 255, 255, 0.3);
       transform: scale(1.03);
+    }
+
+    .hamburger.shrink {
+      top: 1.2rem;
     }
 
     /* Side Navigation (Quick Links) */
     .side-nav {
       position: fixed;
-      top: 0rem;
-      left: 0px;
-      width: 250px;
+      top: 0;
+      left: 0;
+      width: 80%;
+      max-width: 250px;
       height: 100%;
       background: rgba(0, 0, 0, 0.8);
       backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       padding: 2rem;
-      z-index: 2000; /* Higher than header */
-      animation: fadeIn 1s ease;
-      overflow-y: auto;
+      z-index: 2000;
+      transition: transform 0.3s ease;
+      transform: translateX(-100%);
+    }
+
+    .side-nav.open {
+      transform: translateX(0);
     }
 
     .side-nav h3 {
       font-size: 1.5rem;
       font-weight: 600;
-      margin-top: 2rem;
       color: #fff;
       margin-bottom: 1.5rem;
+      margin-top: 2rem;
     }
 
     .side-nav ul {
@@ -164,6 +175,51 @@
       width: 100%;
     }
 
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+      backdrop-filter: blur(12px);
+      padding: 6rem 2rem;
+      text-align: center;
+      animation: fadeIn 1s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 50vh;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 1rem;
+      max-width: 800px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+
+    .hero a {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .hero a:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.03);
+    }
+
     /* Floating Icons */
     .icons-right {
       position: fixed;
@@ -181,7 +237,6 @@
       height: 60px;
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       opacity: 0.7;
       animation: float 15s infinite ease-in-out;
       border-radius: 10px;
@@ -244,20 +299,18 @@
       font-size: 2.5rem;
       font-weight: 600;
       color: #fff;
-      margin-left: 15rem;
     }
 
     /* Schemes Container */
     .schemes-container {
-      margin: 4rem 0;
+      margin: 4rem auto;
+      max-width: 800px;
       display: flex;
       flex-direction: column;
       gap: 2rem;
+      padding: 0 2rem;
       position: relative;
       z-index: 1;
-      margin-left: 500px; /* Align with the right edge of the sidebar */
-      margin-right: 250px; /* Align with the left edge of the icons-right */
-      padding: 0; /* Remove padding to ensure cards stretch fully */
     }
 
     /* Scheme Card */
@@ -360,8 +413,7 @@
       padding: 1.5rem;
       text-align: center;
       animation: fadeIn 1s ease;
-      margin-left: 250px;
-      margin-right: 0;
+      width: 100%;
     }
 
     footer p {
@@ -383,40 +435,44 @@
 
     /* Responsive Design */
     @media (max-width: 1024px) {
-      .side-nav {
-        width: 200px;
-        padding: 1.5rem;
+      .hero {
+        padding: 5rem 1.5rem;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
       }
 
       .schemes-container {
-        margin-left: 200px;
-        margin-right: 200px;
-      }
-
-      .icons-right {
-        width: 200px;
-      }
-
-      header h1 {
-        margin-left: 0;
-      }
-
-      footer {
-        margin-left: 200px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .schemes-container {
-        margin: 2rem 1rem;
+        max-width: 700px;
       }
 
       .scheme-content {
         padding: 1.5rem;
       }
 
+      .icons-right {
+        width: 200px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .schemes-container {
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+
       .scheme-content h2 {
         font-size: 1.5rem;
+      }
+
+      .scheme-content p,
+      .scheme-content ul li {
+        font-size: 0.95rem;
       }
 
       .hero {
@@ -432,10 +488,6 @@
         font-size: 1rem;
       }
 
-      .side-nav {
-        width: 200px;
-      }
-
       .icons-right {
         width: 150px;
       }
@@ -444,18 +496,31 @@
         display: none;
       }
 
-      footer {
-        margin-left: 0;
+      .back-to-dashboard {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+      }
+
+      .back-to-dashboard.arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+        top: 1.2rem;
+      }
+
+      .hamburger {
+        top: 0.5rem;
+        right: 0.5rem;
+      }
+
+      .hamburger.shrink {
+        top: 3.2rem;
       }
     }
 
     @media (max-width: 480px) {
-      .scheme-content h2 {
-        font-size: 1.3rem;
-      }
-
-      .scheme-content p, .scheme-content ul li {
-        font-size: 0.9rem;
+      .hero {
+        padding: 3rem 1rem;
       }
 
       .hero h1 {
@@ -466,23 +531,100 @@
         font-size: 0.9rem;
       }
 
-      .side-nav {
-        width: 180px;
+      .hero a {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
       }
 
-      .icons-right {
-        width: 100px;
+      .schemes-container {
+        margin: 1.5rem auto;
       }
 
-      .icons-right .icon:nth-child(2) {
-        display: none;
+      .scheme-content {
+        padding: 1rem;
       }
+
+      .scheme-content h2 {
+        font-size: 1.3rem;
+      }
+
+      .scheme-content p,
+      .scheme-content ul li {
+        font-size: 0.9rem;
+      }
+
+      .scheme-content a,
+      .status-btn {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+      }
+
+      .back-to-dashboard {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+      }
+
+      .back-to-dashboard.arrow {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+        top: 3.2rem;
+      }
+
+      .hamburger {
+        font-size: 1rem;
+        padding: 0.4rem;
+      }
+
+      header h1 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 320px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero p {
+        font-size: 0.85rem;
+      }
+
+      .scheme-content h2 {
+        font-size: 1.2rem;
+      }
+
+      .scheme-content p,
+      .scheme-content ul li {
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.5);
     }
   </style>
 </head>
 <body>
   <!-- Back to Dashboard Link -->
-  <a href="dashboard.html" class="back-to-dashboard">← Back to Dashboard</a>
+  <a href="dashboard.html" class="back-to-dashboard"><span>← Back to Dashboard</span></a>
+
+  <!-- Hamburger Menu -->
+  <button class="hamburger"><i class="fas fa-bars"></i></button>
 
   <!-- Side Navigation -->
   <nav class="side-nav">
@@ -523,8 +665,8 @@
         <p>
           This scholarship helps Scheduled Caste students continue their post-matric education by covering tuition fees, maintenance, and other education-related expenses.
         </p>
-        <strong>Start Date:</strong> April 2001<br />
-        <strong>End Date:</strong> Ongoing<br />
+        <strong>Start Date:</strong> <span class="start">2001-04-01</span><br />
+        <strong>End Date:</strong> <span class="end">Ongoing</span><br />
         <strong>Eligibility:</strong>
         <ul>
           <li>Must be from the Scheduled Caste (SC) category</li>
@@ -542,8 +684,8 @@
         <p>
           This scheme offers financial assistance for Scheduled Tribe students to pursue education beyond matriculation, easing their path to higher studies.
         </p>
-        <strong>Start Date:</strong> April 2002<br />
-        <strong>End Date:</strong> Ongoing<br />
+        <strong>Start Date:</strong> <span class="start">2002-04-01</span><br />
+        <strong>End Date:</strong> <span class="end">Ongoing</span><br />
         <strong>Eligibility:</strong>
         <ul>
           <li>Must be from the Scheduled Tribe (ST) category</li>
@@ -561,8 +703,8 @@
         <p>
           This initiative reduces financial strain on OBC students by reimbursing tuition and examination fees, making higher education more accessible.
         </p>
-        <strong>Start Date:</strong> April 2005<br />
-        <strong>End Date:</strong> Ongoing<br />
+        <strong>Start Date:</strong> <span class="start">2005-04-01</span><br />
+        <strong>End Date:</strong> <span class="end">Ongoing</span><br />
         <strong>Eligibility:</strong>
         <ul>
           <li>Must be from the OBC category</li>
@@ -580,8 +722,8 @@
         <p>
           This scholarship rewards high-performing students with financial aid, supporting their undergraduate and postgraduate studies in Maharashtra.
         </p>
-        <strong>Start Date:</strong> July 2010<br />
-        <strong>End Date:</strong> Ongoing<br />
+        <strong>Start Date:</strong> <span class="start">2010-07-01</span><br />
+        <strong>End Date:</strong> <span class="end">Ongoing</span><br />
         <strong>Eligibility:</strong>
         <ul>
           <li>High academic performance as per set criteria</li>
@@ -599,8 +741,8 @@
         <p>
           Offered to graduate students who have secured at least 60% marks and are pursuing postgraduate education in Maharashtra.
         </p>
-        <strong>Start Date:</strong> August 2013<br />
-        <strong>End Date:</strong> Ongoing<br />
+        <strong>Start Date:</strong> <span class="start">2013-08-01</span><br />
+        <strong>End Date:</strong> <span class="end">Ongoing</span><br />
         <strong>Eligibility:</strong>
         <ul>
           <li>Minimum 60% marks in graduation</li>
@@ -624,6 +766,7 @@
 
     cards.forEach(card => {
       let btn = card.querySelector('.status-btn');
+
       if (!btn) {
         btn = document.createElement('button');
         btn.classList.add('status-btn');
@@ -639,6 +782,10 @@
           const next = strong.nextSibling;
           if (next && next.nodeType === Node.TEXT_NODE) {
             endDateText = next.textContent.trim();
+          }
+          const span = strong.nextElementSibling;
+          if (span && span.classList.contains('end')) {
+            endDateText = span.textContent.trim();
           }
         }
       });
@@ -666,8 +813,28 @@
       }
     });
 
-    // Animations and Header Shrink
+    // Hamburger Toggle, Animations, Header Shrink, and Back Button Arrow
     document.addEventListener("DOMContentLoaded", () => {
+      const hamburger = document.querySelector(".hamburger");
+      const sideNav = document.querySelector(".side-nav");
+      const backButton = document.querySelector(".back-to-dashboard");
+
+      hamburger.addEventListener("click", () => {
+        sideNav.classList.toggle("open");
+      });
+
+      sideNav.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          sideNav.classList.remove("open");
+        });
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!sideNav.contains(e.target) && !hamburger.contains(e.target)) {
+          sideNav.classList.remove("open");
+        }
+      });
+
       const observerOptions = {
         threshold: 0.2,
         rootMargin: "0px 0px -50px 0px"
@@ -691,8 +858,12 @@
       window.addEventListener("scroll", () => {
         if (window.scrollY > shrinkOn) {
           header.classList.add("shrink");
+          hamburger.classList.add("shrink");
+          backButton.classList.add("arrow");
         } else {
           header.classList.remove("shrink");
+          hamburger.classList.remove("shrink");
+          backButton.classList.remove("arrow");
         }
       });
     });
