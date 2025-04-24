@@ -1,270 +1,872 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Maharashtra Student Scholarship Schemes</title>
-    <style>
-      /* Reset & Basic Styles */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maharashtra Student Scholarship Schemes</title>
+  <!-- Font Awesome for Hamburger Icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://res.cloudinary.com/ddkisbcrp/image/upload/f_auto,q_auto/v1/anime/p5dzr3hdohyern5jxoah') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Dark overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: -1;
+    }
+
+    /* Back to Dashboard Link */
+    .back-to-dashboard {
+      position: fixed;
+      top: 0.5rem;
+      left: 1rem;
+      z-index: 3000;
+      padding: 0.5rem 1rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .back-to-dashboard:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.03);
+    }
+
+    /* Arrow state when scrolled */
+    .back-to-dashboard.arrow {
+      padding: 0.5rem;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      top: 1.2rem;
+    }
+
+    .back-to-dashboard.arrow::before {
+      content: '←';
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .back-to-dashboard.arrow span {
+      display: none;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      position: fixed;
+      top: 0.5rem;
+      right: 1rem;
+      z-index: 3000;
+      padding: 0.4rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hamburger:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.03);
+    }
+
+    .hamburger.shrink {
+      top: 1.2rem;
+    }
+
+    /* Side Navigation (Quick Links) */
+    .side-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 80%;
+      max-width: 250px;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+      padding: 2rem;
+      z-index: 2000;
+      transition: transform 0.3s ease;
+      transform: translateX(-100%);
+    }
+
+    .side-nav.open {
+      transform: translateX(0);
+    }
+
+    .side-nav h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .side-nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .side-nav li {
+      margin-bottom: 1rem;
+    }
+
+    .side-nav a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 1rem;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .side-nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1px;
+      background: #fff;
+      bottom: -2px;
+      left: 0;
+      transition: width 0.3s ease;
+    }
+
+    .side-nav a:hover {
+      color: #fff;
+    }
+
+    .side-nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+      backdrop-filter: blur(12px);
+      padding: 6rem 2rem;
+      text-align: center;
+      animation: fadeIn 1s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 50vh;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 1rem;
+      max-width: 800px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+
+    .hero a {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .hero a:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.03);
+    }
+
+    /* Floating Icons */
+    .icons-right {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 250px;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .icon {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      opacity: 0.7;
+      animation: float 15s infinite ease-in-out;
+      border-radius: 10px;
+      transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .icon:hover {
+      transform: scale(1.1);
+      opacity: 1;
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    }
+
+    .icons-right .icon:nth-child(1) {
+      width: 70px;
+      height: 70px;
+      top: 20%;
+      right: 30%;
+      animation-duration: 14s;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+
+    .icons-right .icon:nth-child(2) {
+      width: 80px;
+      height: 80px;
+      top: 50%;
+      right: 20%;
+      animation-duration: 16s;
+      animation-delay: 3s;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+
+    .icons-right .icon:nth-child(3) {
+      width: 65px;
+      height: 65px;
+      top: 80%;
+      right: 40%;
+      animation-duration: 20s;
+      animation-delay: 5s;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+
+    /* Header */
+    header {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: padding 0.3s ease, background 0.3s ease;
+    }
+
+    header.shrink {
+      padding: 1rem 2rem;
+      background: rgba(0, 0, 0, 0.9);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    /* Schemes Container */
+    .schemes-container {
+      margin: 4rem auto;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Scheme Card */
+    .scheme-card {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      width: 100%;
+    }
+
+    .scheme-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scheme-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .scheme-content {
+      padding: 2rem;
+    }
+
+    .scheme-content h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+
+    .scheme-content p {
+      margin-bottom: 1rem;
+      color: #ddd;
+      font-size: 1rem;
+    }
+
+    .scheme-content strong {
+      display: block;
+      margin: 1rem 0 0.5rem;
+      font-weight: 500;
+      color: #ccc;
+    }
+
+    .scheme-content ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+      color: #ddd;
+    }
+
+    .scheme-content ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .scheme-content a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .scheme-content a:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.03);
+    }
+
+    .status-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      border: none;
+      cursor: default;
+      color: #fff;
+    }
+
+    .expired {
+      background: rgba(231, 76, 60, 0.8);
+    }
+
+    .active {
+      background: rgba(46, 204, 113, 0.8);
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+      padding: 1.5rem;
+      text-align: center;
+      animation: fadeIn 1s ease;
+      width: 100%;
+    }
+
+    footer p {
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-50px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .hero {
+        padding: 5rem 1.5rem;
       }
-      body {
-        font-family: 'Segoe UI', sans-serif;
-        background-color: #f0f4f8;
-        color: #333;
-        line-height: 1.6;
+
+      .hero h1 {
+        font-size: 3rem;
       }
-      header {
-        background: linear-gradient(to right, #2c3e50, #4b6cb7);
-        color: white;
-        padding: 30px 20px;
-        text-align: center;
+
+      .hero p {
+        font-size: 1.1rem;
       }
-      header h1 {
-        font-size: 2.2rem;
-        font-weight: 600;
-      }
+
       .schemes-container {
-        max-width: 1100px;
-        margin: 30px auto;
-        padding: 0 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 25px;
+        max-width: 700px;
       }
-      .scheme-card {
-        display: flex;
-        flex-direction: row;
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-        overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      .scheme-card:hover {
-        transform: scale(1.01);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-      }
+
       .scheme-content {
-        padding: 20px 25px;
-        flex: 1;
+        padding: 1.5rem;
       }
+
+      .icons-right {
+        width: 200px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .schemes-container {
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+
       .scheme-content h2 {
-        color: #2c3e50;
-        font-size: 1.4rem;
-        margin-bottom: 12px;
+        font-size: 1.5rem;
       }
-      .scheme-content p {
-        margin-bottom: 10px;
-      }
-      .scheme-content strong {
-        display: block;
-        margin: 15px 0 5px;
-        font-weight: 600;
-        color: #444;
-      }
-      .scheme-content ul {
-        padding-left: 20px;
-        margin-bottom: 10px;
-      }
+
+      .scheme-content p,
       .scheme-content ul li {
-        margin-bottom: 6px;
-      }
-      .scheme-content a {
-        display: inline-block;
-        margin-top: 10px;
-        padding: 10px 15px;
-        background: #2c3e50;
-        color: white;
-        text-decoration: none;
-        border-radius: 6px;
         font-size: 0.95rem;
-        transition: background 0.3s ease;
       }
-      .scheme-content a:hover {
-        background: #1a252f;
+
+      .hero {
+        padding: 4rem 1rem;
+        min-height: 40vh;
       }
-      .status-btn {
-        display: inline-block;
-        margin-top: 10px;
-        padding: 8px 12px;
-        border-radius: 5px;
-        font-weight: bold;
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .icons-right {
+        width: 150px;
+      }
+
+      .icons-right .icon:nth-child(3) {
+        display: none;
+      }
+
+      .back-to-dashboard {
         font-size: 0.9rem;
-        border: none;
-        cursor: default;
+        padding: 0.4rem 0.8rem;
       }
-      .expired {
-        background-color: #e74c3c;
-        color: white;
+
+      .back-to-dashboard.arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+        top: 1.2rem;
       }
-      .active {
-        background-color: #2ecc71;
-        color: white;
+
+      .hamburger {
+        top: 0.5rem;
+        right: 0.5rem;
       }
-      @media (max-width: 768px) {
-        .scheme-card {
-          flex-direction: column;
-        }
+
+      .hamburger.shrink {
+        top: 3.2rem;
       }
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1>Maharashtra Student Scholarship Schemes</h1>
-    </header>
-    <div class="schemes-container">
-      <div class="scheme-card">
-        <div class="scheme-content">
-          <h2>Govt. of India Post-Matric Scholarship for SC Students, Maharashtra</h2>
-          <p>
-            This scholarship helps Scheduled Caste students continue their post-matric education by covering tuition fees, maintenance, and other education-related expenses.
-          </p>
-          <strong>Start Date:</strong> April 2001<br />
-          <strong>End Date:</strong> Ongoing<br />
-          <strong>Eligibility:</strong>
-          <ul>
-            <li>Must be from the Scheduled Caste (SC) category</li>
-            <li>Passed Class 10</li>
-            <li>Family income not exceeding ₹2.5 lakh annually</li>
-            <li>Resident of Maharashtra</li>
-          </ul>
-          <a href="https://mahadbt.maharashtra.gov.in/scholarship-scheme/sc-post-matric" target="_blank">Official Details</a>
-        </div>
-      </div>
-      <div class="scheme-card">
-        <div class="scheme-content">
-          <h2>Post Matric Scholarship for ST Students, Maharashtra</h2>
-          <p>
-            This scheme offers financial assistance for Scheduled Tribe students to pursue education beyond matriculation, easing their path to higher studies.
-          </p>
-          <strong>Start Date:</strong> April 2002<br />
-          <strong>End Date:</strong> Ongoing<br />
-          <strong>Eligibility:</strong>
-          <ul>
-            <li>Must be from the Scheduled Tribe (ST) category</li>
-            <li>Passed previous exams</li>
-            <li>Family income not exceeding ₹2.5 lakh annually</li>
-            <li>Resident of Maharashtra</li>
-          </ul>
-          <a href="https://mahadbt.maharashtra.gov.in/scholarship-scheme/st-post-matric" target="_blank">Official Details</a>
-        </div>
-      </div>
-      <div class="scheme-card">
-        <div class="scheme-content">
-          <h2>Tuition Fee Reimbursement for OBC Students, Maharashtra</h2>
-          <p>
-            This initiative reduces financial strain on OBC students by reimbursing tuition and examination fees, making higher education more accessible.
-          </p>
-          <strong>Start Date:</strong> April 2005<br />
-          <strong>End Date:</strong> Ongoing<br />
-          <strong>Eligibility:</strong>
-          <ul>
-            <li>Must be from the OBC category</li>
-            <li>Family income below the prescribed threshold</li>
-            <li>Enrolled in a post-matriculation institution</li>
-            <li>Resident of Maharashtra</li>
-          </ul>
-          <a href="https://mahadbt.maharashtra.gov.in/scholarship-scheme/obc-tuition-reimbursement" target="_blank">Official Details</a>
-        </div>
-      </div>
-      <div class="scheme-card">
-        <div class="scheme-content">
-          <h2>Merit-Based Scholarship for Higher Education, Maharashtra</h2>
-          <p>
-            This scholarship rewards high-performing students with financial aid, supporting their undergraduate and postgraduate studies in Maharashtra.
-          </p>
-          <strong>Start Date:</strong> July 2010<br />
-          <strong>End Date:</strong> Ongoing<br />
-          <strong>Eligibility:</strong>
-          <ul>
-            <li>High academic performance as per set criteria</li>
-            <li>Enrolled in a recognized higher education institution</li>
-            <li>Resident of Maharashtra</li>
-            <li>Meets additional performance requirements as defined by the scheme</li>
-          </ul>
-          <a href="https://mahadbt.maharashtra.gov.in/scholarship-scheme/merit-based" target="_blank">Official Details</a>
-        </div>
-      </div>
-      <div class="scheme-card">
-        <div class="scheme-content">
-          <h2>Eklavya Scholarship, Maharashtra</h2>
-          <p>
-            Offered to graduate students who have secured at least 60% marks and are pursuing postgraduate education in Maharashtra.
-          </p>
-          <strong>Start Date:</strong> August 2013<br />
-          <strong>End Date:</strong> Ongoing<br />
-          <strong>Eligibility:</strong>
-          <ul>
-            <li>Minimum 60% marks in graduation</li>
-            <li>Enrolled in a post-graduate course</li>
-            <li>Resident of Maharashtra</li>
-          </ul>
-          <a href="https://mahadbt.maharashtra.gov.in/scholarship-scheme/eklavya" target="_blank">Official Details</a>
-        </div>
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 3rem 1rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 0.9rem;
+      }
+
+      .hero a {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+      }
+
+      .schemes-container {
+        margin: 1.5rem auto;
+      }
+
+      .scheme-content {
+        padding: 1rem;
+      }
+
+      .scheme-content h2 {
+        font-size: 1.3rem;
+      }
+
+      .scheme-content p,
+      .scheme-content ul li {
+        font-size: 0.9rem;
+      }
+
+      .scheme-content a,
+      .status-btn {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+      }
+
+      .back-to-dashboard {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+      }
+
+      .back-to-dashboard.arrow {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+        top: 3.2rem;
+      }
+
+      .hamburger {
+        font-size: 1rem;
+        padding: 0.4rem;
+      }
+
+      header h1 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 320px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero p {
+        font-size: 0.85rem;
+      }
+
+      .scheme-content h2 {
+        font-size: 1.2rem;
+      }
+
+      .scheme-content p,
+      .scheme-content ul li {
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <!-- Back to Dashboard Link -->
+  <a href="dashboard.html" class="back-to-dashboard"><span>← Back to Dashboard</span></a>
+
+  <!-- Hamburger Menu -->
+  <button class="hamburger"><i class="fas fa-bars"></i></button>
+
+  <!-- Side Navigation -->
+  <nav class="side-nav">
+    <h3>Quick Links</h3>
+    <ul>
+      <li><a href="#sc-post-matric">SC Post-Matric</a></li>
+      <li><a href="#st-post-matric">ST Post-Matric</a></li>
+      <li><a href="#obc-reimbursement">OBC Reimbursement</a></li>
+      <li><a href="#merit-based">Merit-Based</a></li>
+      <li><a href="#eklavya">Eklavya</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <h1>Maharashtra Student Scholarship Schemes</h1>
+    <p>Discover scholarships supporting students in Maharashtra for higher education and academic excellence.</p>
+    <a href="#schemes">Explore Scholarships</a>
+  </div>
+
+  <!-- Floating Icons -->
+  <div class="icons-right">
+    <div class="icon"></div>
+    <div class="icon"></div>
+    <div class="icon"></div>
+  </div>
+
+  <!-- Header -->
+  <header id="main-header">
+    <h1>Maharashtra Student Scholarship Schemes</h1>
+  </header>
+
+  <!-- Schemes Container -->
+  <div class="schemes-container" id="schemes">
+    <div class="scheme-card" id="sc-post-matric">
+      <div class="scheme-content">
+        <h2>Govt. of India Post-Matric Scholarship for SC Students, Maharashtra</h2>
+        <p>
+          This scholarship helps Scheduled Caste students continue their post-matric education by covering tuition fees, maintenance, and other education-related expenses.
+        </p>
+        <strong>Start Date:</strong> <span class="start">2001-04-01</span><br />
+        <strong>End Date:</strong> <span class="end">Ongoing</span><br />
+        <strong>Eligibility:</strong>
+        <ul>
+          <li>Must be from the Scheduled Caste (SC) category</li>
+          <li>Passed Class 10</li>
+          <li>Family income not exceeding ₹2.5 lakh annually</li>
+          <li>Resident of Maharashtra</li>
+        </ul>
+        <a href="https://mahadbt.maharashtra.gov.in/scholarship-scheme/sc-post-matric" target="_blank">Official Details</a>
+        <button class="status-btn">Checking...</button>
       </div>
     </div>
-    <script>
-      const cards = document.querySelectorAll('.scheme-card');
-    
-      cards.forEach(card => {
-        let btn = card.querySelector('.status-btn');
-    
-        // If button not found, create one
-        if (!btn) {
-          btn = document.createElement('button');
-          btn.classList.add('status-btn');
-          card.querySelector('.scheme-content').appendChild(btn);
-        }
-    
-        const allStrongTags = card.querySelectorAll('strong');
-        let endDateText = '';
-    
-        allStrongTags.forEach(strong => {
-          const text = strong.textContent.trim().toLowerCase();
-          if (text.includes('end date')) {
-            // Try to find text node or sibling span
-            const next = strong.nextSibling;
-    
-            if (next && next.nodeType === Node.TEXT_NODE) {
-              endDateText = next.textContent.trim();
-            }
-    
-            const span = strong.nextElementSibling;
-            if (span && span.classList.contains('end')) {
-              endDateText = span.textContent.trim();
-            }
+    <div class="scheme-card" id="st-post-matric">
+      <div class="scheme-content">
+        <h2>Post Matric Scholarship for ST Students, Maharashtra</h2>
+        <p>
+          This scheme offers financial assistance for Scheduled Tribe students to pursue education beyond matriculation, easing their path to higher studies.
+        </p>
+        <strong>Start Date:</strong> <span class="start">2002-04-01</span><br />
+        <strong>End Date:</strong> <span class="end">Ongoing</span><br />
+        <strong>Eligibility:</strong>
+        <ul>
+          <li>Must be from the Scheduled Tribe (ST) category</li>
+          <li>Passed previous exams</li>
+          <li>Family income not exceeding ₹2.5 lakh annually</li>
+          <li>Resident of Maharashtra</li>
+        </ul>
+        <a href="https://mahadbt.maharashtra.gov.in/scholarship-scheme/st-post-matric" target="_blank">Official Details</a>
+        <button class="status-btn">Checking...</button>
+      </div>
+    </div>
+    <div class="scheme-card" id="obc-reimbursement">
+      <div class="scheme-content">
+        <h2>Tuition Fee Reimbursement for OBC Students, Maharashtra</h2>
+        <p>
+          This initiative reduces financial strain on OBC students by reimbursing tuition and examination fees, making higher education more accessible.
+        </p>
+        <strong>Start Date:</strong> <span class="start">2005-04-01</span><br />
+        <strong>End Date:</strong> <span class="end">Ongoing</span><br />
+        <strong>Eligibility:</strong>
+        <ul>
+          <li>Must be from the OBC category</li>
+          <li>Family income below the prescribed threshold</li>
+          <li>Enrolled in a post-matriculation institution</li>
+          <li>Resident of Maharashtra</li>
+        </ul>
+        <a href="https://mahadbt.maharashtra.gov.in/scholarship-scheme/obc-tuition-reimbursement" target="_blank">Official Details</a>
+        <button class="status-btn">Checking...</button>
+      </div>
+    </div>
+    <div class="scheme-card" id="merit-based">
+      <div class="scheme-content">
+        <h2>Merit-Based Scholarship for Higher Education, Maharashtra</h2>
+        <p>
+          This scholarship rewards high-performing students with financial aid, supporting their undergraduate and postgraduate studies in Maharashtra.
+        </p>
+        <strong>Start Date:</strong> <span class="start">2010-07-01</span><br />
+        <strong>End Date:</strong> <span class="end">Ongoing</span><br />
+        <strong>Eligibility:</strong>
+        <ul>
+          <li>High academic performance as per set criteria</li>
+          <li>Enrolled in a recognized higher education institution</li>
+          <li>Resident of Maharashtra</li>
+          <li>Meets additional performance requirements as defined by the scheme</li>
+        </ul>
+        <a href="https://mahadbt.maharashtra.gov.in/scholarship-scheme/merit-based" target="_blank">Official Details</a>
+        <button class="status-btn">Checking...</button>
+      </div>
+    </div>
+    <div class="scheme-card" id="eklavya">
+      <div class="scheme-content">
+        <h2>Eklavya Scholarship, Maharashtra</h2>
+        <p>
+          Offered to graduate students who have secured at least 60% marks and are pursuing postgraduate education in Maharashtra.
+        </p>
+        <strong>Start Date:</strong> <span class="start">2013-08-01</span><br />
+        <strong>End Date:</strong> <span class="end">Ongoing</span><br />
+        <strong>Eligibility:</strong>
+        <ul>
+          <li>Minimum 60% marks in graduation</li>
+          <li>Enrolled in a post-graduate course</li>
+          <li>Resident of Maharashtra</li>
+        </ul>
+        <a href="https://mahadbt.maharashtra.gov.in/scholarship-scheme/eklavya" target="_blank">Official Details</a>
+        <button class="status-btn">Checking...</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Maharashtra Student Scholarship Schemes</p>
+  </footer>
+
+  <script>
+    // Status Button Logic
+    const cards = document.querySelectorAll('.scheme-card');
+
+    cards.forEach(card => {
+      let btn = card.querySelector('.status-btn');
+
+      if (!btn) {
+        btn = document.createElement('button');
+        btn.classList.add('status-btn');
+        card.querySelector('.scheme-content').appendChild(btn);
+      }
+
+      const allStrongTags = card.querySelectorAll('strong');
+      let endDateText = '';
+
+      allStrongTags.forEach(strong => {
+        const text = strong.textContent.trim().toLowerCase();
+        if (text.includes('end date')) {
+          const next = strong.nextSibling;
+          if (next && next.nodeType === Node.TEXT_NODE) {
+            endDateText = next.textContent.trim();
           }
-        });
-    
-        const today = new Date();
-    
-        // Clear previous status
-        btn.classList.remove('active', 'expired');
-    
-        if (endDateText.toLowerCase() === 'ongoing') {
-          btn.textContent = 'Active';
-          btn.classList.add('active');
-        } else {
-          const parsedDate = new Date(endDateText);
-    
-          if (!isNaN(parsedDate)) {
-            if (parsedDate < today) {
-              btn.textContent = 'Expired';
-              btn.classList.add('expired');
-            } else {
-              btn.textContent = 'Active';
-              btn.classList.add('active');
-            }
-          } else {
-            btn.textContent = 'Invalid Date';
-            btn.classList.add('expired');
+          const span = strong.nextElementSibling;
+          if (span && span.classList.contains('end')) {
+            endDateText = span.textContent.trim();
           }
         }
       });
-    </script>
-  </body>
+
+      const today = new Date();
+      btn.classList.remove('active', 'expired');
+
+      if (endDateText.toLowerCase() === 'ongoing') {
+        btn.textContent = 'Active';
+        btn.classList.add('active');
+      } else {
+        const parsedDate = new Date(endDateText);
+        if (!isNaN(parsedDate)) {
+          if (parsedDate < today) {
+            btn.textContent = 'Expired';
+            btn.classList.add('expired');
+          } else {
+            btn.textContent = 'Active';
+            btn.classList.add('active');
+          }
+        } else {
+          btn.textContent = 'Invalid Date';
+          btn.classList.add('expired');
+        }
+      }
+    });
+
+    // Hamburger Toggle, Animations, Header Shrink, and Back Button Arrow
+    document.addEventListener("DOMContentLoaded", () => {
+      const hamburger = document.querySelector(".hamburger");
+      const sideNav = document.querySelector(".side-nav");
+      const backButton = document.querySelector(".back-to-dashboard");
+
+      hamburger.addEventListener("click", () => {
+        sideNav.classList.toggle("open");
+      });
+
+      sideNav.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          sideNav.classList.remove("open");
+        });
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!sideNav.contains(e.target) && !hamburger.contains(e.target)) {
+          sideNav.classList.remove("open");
+        }
+      });
+
+      const observerOptions = {
+        threshold: 0.2,
+        rootMargin: "0px 0px -50px 0px"
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".scheme-card").forEach(card => {
+        observer.observe(card);
+      });
+
+      const header = document.getElementById("main-header");
+      const shrinkOn = 50;
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > shrinkOn) {
+          header.classList.add("shrink");
+          hamburger.classList.add("shrink");
+          backButton.classList.add("arrow");
+        } else {
+          header.classList.remove("shrink");
+          hamburger.classList.remove("shrink");
+          backButton.classList.remove("arrow");
+        }
+      });
+    });
+  </script>
+</body>
 </html>
