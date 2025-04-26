@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Schemes - Admin</title>
+  <!-- Poppins Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Poppins", sans-serif;
+      background: url('https://res.cloudinary.com/ddkisbcrp/image/upload/f_auto,q_auto/v1/anime/u97ih80jsrotwcdexh5w') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: -1;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+      transition: transform 0.3s ease;
+    }
+    .logo:hover {
+      transform: scale(1.05);
+    }
+    nav {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    nav a {
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #fff;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #6b48ff;
+    }
+    #logoutBtn {
+      background: linear-gradient(to right, #6b48ff, #8f94fb);
+      color: #fff;
+      border: none;
+      border-radius: 24px;
+      padding: 8px 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    #logoutBtn:hover {
+      transform: scale(1.03);
+      background: linear-gradient(to right, #8f94fb, #6b48ff);
+    }
+    .container {
+      width: 95%;
+      max-width: 1200px;
+      margin: 2rem auto;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .status {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+    h2 {
+      margin-bottom: 20px;
+      font-size: 1.7rem;
+      color: #6b48ff;
+      text-align: center;
+      font-weight: 700;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    label {
+      font-weight: 500;
+      color: #fff;
+    }
+    input, textarea, select {
+      padding: 8px;
+      font-size: 0.9rem;
+      border: 1px solid rgba(204, 204, 204, 0.5);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+    textarea {
+      resize: vertical;
+    }
+    button {
+      padding: 8px 12px;
+      background: #6b48ff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    button:hover {
+      background: #5a3de6;
+      transform: scale(1.03);
+    }
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+      nav {
+        padding-bottom: 0.5rem;
+      }
+      #logoutBtn {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <div class="logo">Bridging the Gap</div>
+    </div>
+    <nav>
+      <a href="admin-dashboard.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+      <button id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="status" id="user-status">Loading user information...</div>
+    <h2>Add New Scheme</h2>
+    <form id="add-scheme-form">
+      <label for="category">Category:</label>
+      <select id="category" required>
+        <option value="farmers">Farmers</option>
+        <option value="students">Students</option>
+        <option value="health">Health</option>
+        <option value="sports">Sports</option>
+        <option value="other">Other</option>
+      </select>
+      <label for="name">Scheme Name:</label>
+      <input type="text" id="name" required>
+      <label for="description">Description:</label>
+      <textarea id="description" required></textarea>
+      <label for="eligibility">Eligibility (one per line):</label>
+      <textarea id="eligibility" required></textarea>
+      <p style="font-size: 0.8rem; color: #ccc;">Enter one eligibility criterion per line.</p>
+      <label for="startDate">Start Date:</label>
+      <input type="date" id="startDate" required>
+      <label for="endDate">End Date:</label>
+      <input type="date" id="endDate">
+      <label for="ongoing">Ongoing (no end date)</label>
+      <input type="checkbox" id="ongoing">
+      <label for="officialLink">Official Link:</label>
+      <input type="url" id="officialLink" required>
+      <button type="submit">Add Scheme</button>
+    </form>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyD9Y_saGbwRdVsJr_zyFjwAayY8dkBUrXg",
+      authDomain: "bridging-the-gap-af65a.firebaseapp.com",
+      projectId: "bridging-the-gap-af65a",
+      storageBucket: "bridging-the-gap-af65a.firebasestorage.app",
+      messagingSenderId: "608387568756",
+      appId: "1:608387568756:web:a563a78ea0e6e61d3dad21",
+      measurementId: "G-9V1P6M82KD",
+      databaseURL: "https://bridging-the-gap-af65a-default-rtdb.firebaseio.com"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    auth.onAuthStateChanged(user => {
+      const statusElem = document.getElementById("user-status");
+      if (user && user.emailVerified) {
+        db.collection('admins').doc(user.uid).get()
+          .then(doc => {
+            if (doc.exists && doc.data().role === 'admin') {
+              statusElem.innerText = `Logged in as: ${user.email}`;
+            } else {
+              statusElem.innerText = "Access denied. Redirecting to login...";
+              setTimeout(() => {
+                auth.signOut();
+                window.location.href = "index.html";
+              }, 2000);
+            }
+          })
+          .catch(error => {
+            console.error("Error checking admin status:", error);
+            statusElem.innerText = "Error verifying admin status. Redirecting...";
+            setTimeout(() => {
+              auth.signOut();
+              window.location.href = "index.html";
+            }, 2000);
+          });
+      } else {
+        statusElem.innerText = "Not logged in. Redirecting to login...";
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 2000);
+      }
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      auth.signOut().then(() => {
+        window.location.href = "index.html";
+      }).catch(error => {
+        console.error("Logout error:", error);
+      });
+    });
+
+    const ongoingCheckbox = document.getElementById("ongoing");
+    const endDateInput = document.getElementById("endDate");
+
+    ongoingCheckbox.addEventListener("change", () => {
+      if (ongoingCheckbox.checked) {
+        endDateInput.disabled = true;
+        endDateInput.value = "";
+      } else {
+        endDateInput.disabled = false;
+      }
+    });
+
+    document.getElementById("add-scheme-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      
+      const category = document.getElementById("category").value;
+      const name = document.getElementById("name").value;
+      const description = document.getElementById("description").value;
+      const eligibility = document.getElementById("eligibility").value.split('\n').map(line => line.trim()).filter(line => line !== '');
+      const startDate = document.getElementById("startDate").value;
+      const endDate = ongoingCheckbox.checked ? null : document.getElementById("endDate").value;
+      const officialLink = document.getElementById("officialLink").value;
+
+      const startTimestamp = startDate ? firebase.firestore.Timestamp.fromDate(new Date(startDate)) : null;
+      const endTimestamp = endDate ? firebase.firestore.Timestamp.fromDate(new Date(endDate)) : null;
+
+      db.collection("schemes").add({
+        category: category,
+        name: name,
+        description: description,
+        eligibility: eligibility,
+        startDate: startTimestamp,
+        endDate: endTimestamp,
+        officialLink: officialLink
+      }).then(() => {
+        alert("Scheme added successfully!");
+        document.getElementById("add-scheme-form").reset();
+      }).catch((error) => {
+        console.error("Error adding scheme:", error);
+        alert("Error adding scheme: " + error.message);
+      });
+    });
+  </script>
+</body>
+</html>
