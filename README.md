@@ -4,7 +4,13 @@
 </div>
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=45&pause=1000&color=0ea691&center=true&width=800&lines=Hello!+I'm+Aditya+Akolkar;Computer+Engineering+Student;Always+Coding+🚀" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira%20Code&size=40&pause=1000&color=0ea691&center=true&width=800&lines=Hello!%20I%27m%20Aditya%20Akolkar;Computer%20Engineering%20Student;Always%20Coding%20🚀" alt="Typing SVG" />
+</p>
+
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=schrodingerspet&style=for-the-badge&color=FF69B4" alt="Profile Views" />
+  &nbsp;
+  <img src="https://visitor-badge.laobi.icu/badge?page_id=schrodingerspet.anime_counter&label=Anime+Girls+Counter&theme=dark" alt="Anime Girl Counter" />
 </p>
 
 <p align="center">
