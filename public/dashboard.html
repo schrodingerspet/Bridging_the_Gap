@@ -1,271 +1,300 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <!-- Meta Tags -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A portal to explore government schemes for health, farmers, students, and more." />
-  <title>Bridging the Gap - Government Schemes Portal</title>
-  
-  <!-- Poppins Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-  <!-- Font Awesome for Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="dashboard.css" />
-  <!-- Inline styles for Support dropdown -->
-  <style>
-    /* Desktop Support Dropdown (on hover) */
-    .support-dropdown {
-      position: relative;
-    }
-    .support-dropdown-content {
-      display: none;
-      position: absolute;
-      background: rgba(0, 0, 0, 0.9); /* Dark, Apple-like background */
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      padding: 10px 15px;
-      border-radius: 8px;
-      top: 30px;
-      right: 0;
-      z-index: 10;
-      white-space: nowrap;
-    }
-    .support-dropdown:hover .support-dropdown-content {
-      display: block;
-    }
-    /* Mobile Support Dropdown - initial hidden state */
-    .support-dropdown-mobile .support-dropdown-content-mobile {
-      display: none;
-    }
-    .support-dropdown-mobile .support-dropdown-content-mobile.show {
-      display: block;
-      background: rgba(0, 0, 0, 0.9); /* Dark, Apple-like background */
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      padding: 10px 15px;
-      border-radius: 8px;
-      margin-top: 5px;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A portal to explore government schemes for health, farmers, students, and more." />
+    <title>Bridging the Gap - Government Schemes Portal</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="dashboard.css" />
 </head>
 <body>
-  <!-- Header Section -->
-  <header id="main-header">
-    <!-- Left Section (Logo + Search) -->
-    <div class="header-left">
-      <div class="logo">Bridging the Gap</div>
-      <div class="search-container">
-        <input type="text" id="search-input" placeholder="Search schemes (e.g., PM-KISAN)" />
-        <button class="btn btn-secondary" id="search-btn">Search Schemes</button>
-      </div>
+    <div class="background-shapes">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
     </div>
-    
-    <!-- Right: Desktop Navigation + Logout -->
-    <nav class="desktop-nav">
-      <!-- Desktop Support Dropdown -->
-      <div class="support-dropdown">
-        <a href="#">Support</a>
-        <div class="support-dropdown-content">
-          <p>Email: support@example.com</p>
-          <p>Contact: +91-98xxxxxx90</p>
+
+    <header id="main-header">
+        <div class="header-content">
+            <div class="header-left">
+                <div class="logo">Bridging the Gap</div>
+            </div>
+            
+            <div class="header-center">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Search schemes..." />
+                </div>
+            </div>
+
+            <div class="header-right">
+                <nav class="desktop-nav">
+                    <a href="#main">Schemes</a>
+                    <a href="#stories">Stories</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="feedback.html">Feedback</a>
+                </nav>
+                
+                <button class="btn" id="logout-btn">Logout</button>
+
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle light and dark theme">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+
+                <div class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
         </div>
-      </div>
-      <a href="feedback.html">Feedback</a>
-      <button class="btn btn-primary" id="logout-btn">Logout</button>
-    </nav>
-    
-    <!-- Mobile Hamburger & Menu -->
-    <div class="hamburger" id="hamburger">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-    </div>
-    <!-- Mobile Menu with clickable Support dropdown -->
+    </header>
+
     <div class="menu" id="menu">
-      <div class="support-dropdown-mobile">
-        <a href="#" id="mobile-support">Support</a>
-        <div class="support-dropdown-content-mobile">
-          <p>Email: support@example.com</p>
-          <p>Contact: +91-9699999990</p>
-        </div>
-      </div>
-      <a href="feedback.html">Feedback</a>
-      <button id="logout-btn-mobile">Logout</button>
+        <a href="#main">Schemes</a>
+        <a href="#stories">Stories</a>
+        <a href="#faq">FAQ</a>
+        <a href="feedback.html">Feedback</a>
+        <button id="logout-btn-mobile" class="btn">Logout</button>
     </div>
-  </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Empowering Citizens with Government Schemes</h1>
-      <p>Your gateway to schemes that empower every citizen.</p>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Empowering Citizens Through Accessible Schemes</h1>
+            <p>Your simplified gateway to government programs that build a better future.</p>
+        </div>
+    </section>
+
+    <div class="main-layout">
+        <main id="main" class="main-content">
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-content">
+                        <i class="fas fa-heart-pulse"></i>
+                        <h3>Health Schemes</h3>
+                        <p>Comprehensive healthcare programs like Ayushman Bharat.</p>
+                        <a href="health.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <i class="fas fa-tractor"></i>
+                        <h3>Farmers' Schemes</h3>
+                        <p>Support for farmers through initiatives like PM-KISAN.</p>
+                        <a href="farmer.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-content">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Students' Schemes</h3>
+                        <p>Scholarships and loans to fuel educational growth.</p>
+                        <a href="student.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <i class="fas fa-futbol"></i>
+                        <h3>Sports' Schemes</h3>
+                        <p>Support programs for aspiring athletes.</p>
+                        <a href="sports.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            
+                <div class="card">
+                    <div class="card-content">
+                        <i class="fas fa-ellipsis-h"></i>
+                        <h3>Other Schemes</h3>
+                        <p>Housing, employment, and welfare initiatives.</p>
+                        <a href="other.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="sidebar-content">
+            <section id="stories" class="info-widget">
+                <h2>Success Stories</h2>
+                <div class="testimonial-card">
+                    <p>"This portal helped me find the right healthcare scheme for my family. It was so easy!"</p>
+                    <h4>- Priya S.</h4>
+                </div>
+                <div class="testimonial-card">
+                    <p>"As a farmer, the PM-KISAN information here was invaluable and straightforward."</p>
+                    <h4>- Ramesh K.</h4>
+                </div>
+            </section>
+
+            <section id="faq" class="info-widget">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How do I check my eligibility?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div>
+                            <p>Each scheme has a "Learn More" page with detailed eligibility criteria and application links.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is this an official government site?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div>
+                            <p>No, this is an independent portal designed to simplify access to official government scheme information.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </aside>
     </div>
-  </section>
 
-  <!-- Main Content -->
-  <main id="main">
-    <div class="card-container">
-      <!-- Health Card -->
-      <div class="card">
-        <i class="fas fa-heartbeat"></i>
-        <div class="card-content">
-          <h3>Health Schemes</h3>
-          <p>Comprehensive healthcare programs like Ayushman Bharat.</p>
-          <a href="health.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </div>
-
-      <!-- Farmer Card -->
-      <div class="card">
-        <i class="fas fa-tractor"></i>
-        <div class="card-content">
-          <h3>Farmers' Schemes</h3>
-          <p>Support for farmers through initiatives like PM-KISAN.</p>
-          <a href="farmer.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </div>
-      
-      <!-- Student Card -->
-      <div class="card">
-        <i class="fas fa-graduation-cap"></i>
-        <div class="card-content">
-          <h3>Students' Schemes</h3>
-          <p>Scholarships and loans to fuel educational growth.</p>
-          <a href="student.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </div>
-
-      <!-- Sport Card -->
-      <div class="card">
-        <i class="fas fa-futbol"></i>
-        <div class="card-content">
-          <h3>Sports' Schemes</h3>
-          <p>Support programs for aspiring athletes.</p>
-          <a href="sports.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Bridging the Gap</div>
     
-      <!-- Other Card -->
-      <div class="card">
-        <i class="fas fa-ellipsis-h"></i>
-        <div class="card-content">
-          <h3>Other Schemes</h3>
-          <p>Housing, employment, and welfare initiatives.</p>
-          <a href="other.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            <div class="footer-developer">
+                <h3>Developer</h3>
+                <div class="footer-social-links">
+                    <a href="https://github.com/schrodingerspet" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://t.me/pawticlce_box" target="_blank" rel="noopener noreferrer" aria-label="Telegram Profile">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="https://www.instagram.com/_schrodingerspet_" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+    
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-envelope"></i> support@example.com</p>
+                <p><i class="fas fa-phone"></i> 1800-123-456</p>
+            </div>
         </div>
-      </div>
-    </div>
-  </main>
+        <div class="footer-bottom">
+            <p>© 2025 Bridging the Gap. All Rights Reserved.</p>
+        </div>
+    </footer>
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 Bridging the Gap</p>
-  </footer>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY", // IMPORTANT: Replace with your actual Firebase config
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-  <script>
-    // Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyD9Y_saGbwRdVsJr_zyFjwAayY8dkBUrXg",
-      authDomain: "bridging-the-gap-af65a.firebaseapp.com",
-      projectId: "bridging-the-gap-af65a",
-      storageBucket: "bridging-the-gap-af65a.firebasestorage.app",
-      messagingSenderId: "608387568756",
-      appId: "1:608387568756:web:a563a78ea0e6e61d3dad21",
-      measurementId: "G-9V1P6M82KD"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
+        document.addEventListener("DOMContentLoaded", () => {
+            // --- THEME TOGGLE ---
+            const themeToggle = document.getElementById('theme-toggle');
+            const htmlEl = document.documentElement;
 
-    document.addEventListener("DOMContentLoaded", () => {
-      // Logout functionality for desktop and mobile
-      const logoutButtons = document.querySelectorAll("#logout-btn, #logout-btn-mobile");
-      const logoutHandler = () => {
-        auth.signOut().then(() => {
-          window.location.href = "index.html";
-        }).catch((error) => {
-          console.error("Sign-out error:", error);
+            // Function to set the theme
+            const setTheme = (theme) => {
+                htmlEl.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+            };
+
+            // Load saved theme from localStorage or use system preference
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else {
+                setTheme(prefersDark ? 'dark' : 'light');
+            }
+
+            // Toggle theme on button click
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = htmlEl.getAttribute('data-theme');
+                setTheme(currentTheme === 'light' ? 'dark' : 'light');
+            });
+
+            // --- AUTH & LOGOUT ---
+            auth.onAuthStateChanged(user => {
+                if (!user || !user.emailVerified) {
+                    // window.location.href = "index.html"; // Uncomment to enforce login
+                }
+            });
+            const logoutButtons = document.querySelectorAll("#logout-btn, #logout-btn-mobile");
+            logoutButtons.forEach(btn => btn.addEventListener("click", () => auth.signOut()));
+
+            // --- LIVE SEARCH ---
+            const searchInput = document.getElementById("search-input");
+            const allCards = document.querySelectorAll(".card");
+            searchInput.addEventListener("input", () => {
+                const query = searchInput.value.trim().toLowerCase();
+                allCards.forEach(card => {
+                    const title = card.querySelector("h3").innerText.toLowerCase();
+                    const description = card.querySelector("p").innerText.toLowerCase();
+                    const isVisible = title.includes(query) || description.includes(query);
+                    card.style.display = isVisible ? "flex" : "none";
+                });
+            });
+
+            // --- CARD SCROLL ANIMATION ---
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        cardObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            allCards.forEach(card => cardObserver.observe(card));
+
+            // --- FAQ ACCORDION ---
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    const wasOpen = item.classList.contains('open');
+                    // Optional: Close all other FAQ items
+                    // faqItems.forEach(i => i.classList.remove('open'));
+                    if (!wasOpen) {
+                        item.classList.add('open');
+                    } else {
+                        item.classList.remove('open');
+                    }
+                });
+            });
+
+            // --- MOBILE MENU ---
+            const hamburger = document.getElementById("hamburger");
+            const menu = document.getElementById("menu");
+            hamburger.addEventListener("click", () => {
+                const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+                hamburger.classList.toggle("open");
+                menu.classList.toggle("show");
+                hamburger.setAttribute('aria-expanded', !isExpanded);
+            });
         });
-      };
-      logoutButtons.forEach(btn => btn.addEventListener("click", logoutHandler));
-
-      // Protect dashboard: redirect if user is not logged in or not verified
-      auth.onAuthStateChanged(user => {
-        if (!user || !user.emailVerified) {
-          window.location.href = "index.html";
-        }
-      });
-
-      // Hamburger menu functionality for mobile
-      const hamburger = document.getElementById("hamburger");
-      const menu = document.getElementById("menu");
-      hamburger.addEventListener("click", () => {
-        hamburger.classList.toggle("open");
-        menu.classList.toggle("show");
-      });
-
-      // Mobile Support dropdown functionality (toggle on click)
-      const mobileSupport = document.getElementById("mobile-support");
-      if(mobileSupport) {
-        mobileSupport.addEventListener("click", (e) => {
-          e.preventDefault();
-          const dropdown = document.querySelector(".support-dropdown-mobile .support-dropdown-content-mobile");
-          if (dropdown) {
-            dropdown.classList.toggle("show");
-          }
-        });
-      }
-
-      // Search functionality for cards
-      const searchBtn = document.getElementById("search-btn");
-      const searchInput = document.getElementById("search-input");
-      const cards = document.querySelectorAll(".card");
-      searchBtn.addEventListener("click", () => {
-        const query = searchInput.value.trim().toLowerCase();
-        cards.forEach(card => {
-          const title = card.querySelector(".card-content h3").innerText.toLowerCase();
-          card.style.display = (title.includes(query) || query === "") ? "block" : "none";
-        });
-      });
-
-      // Scroll animation for cards
-      const observerOptions = {
-        threshold: 0.2, // Trigger when 20% of the card is visible
-        rootMargin: "0px 0px -50px 0px"
-      };
-
-      const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target); // Stop observing once animated
-          }
-        });
-      }, observerOptions);
-
-      cards.forEach(card => {
-        observer.observe(card);
-      });
-    });
-
-    // Header Shrink on Scroll
-    document.addEventListener("DOMContentLoaded", () => {
-      const header = document.getElementById("main-header");
-      const shrinkOn = 50;
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > shrinkOn) {
-          header.classList.add("shrink");
-        } else {
-          header.classList.remove("shrink");
-        }
-      });
-    });
-  </script>
+    </script>
 </body>
 </html>
