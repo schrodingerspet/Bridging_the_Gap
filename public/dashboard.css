@@ -11,10 +11,10 @@
 }
 
 html[data-theme='light'] {
-  --c-text-primary: #1d1d1f; /* Apple's dark grey */
+  --c-text-primary: #1d1d1f; 
   --c-text-secondary: #515154;
-  --c-text-accent: #007aff; /* Apple's blue */
-  --c-bg-glass: rgba(242, 242, 247, 0.8); /* Light mode glass */
+  --c-text-accent: #007aff; 
+  --c-bg-glass: rgba(255, 255, 255, 0.7);
   --c-border-glass: rgba(60, 60, 67, 0.29);
   --c-bg-btn: #007aff;
   --c-text-btn: #ffffff;
@@ -23,10 +23,10 @@ html[data-theme='light'] {
 }
 
 html[data-theme='dark'] {
-  --c-text-primary: #f5f5f7; /* Apple's off-white */
+  --c-text-primary: #f5f5f7; 
   --c-text-secondary: #8e8e93;
-  --c-text-accent: #0a84ff; /* Apple's vibrant blue for dark mode */
-  --c-bg-glass: rgba(28, 28, 30, 0.75); /* Dark mode glass */
+  --c-text-accent: #0a84ff; 
+  --c-bg-glass: rgba(28, 28, 30, 0.75); 
   --c-border-glass: rgba(84, 84, 88, 0.65);
   --c-bg-btn: #0a84ff;
   --c-text-btn: #ffffff;
@@ -76,21 +76,19 @@ body {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  gap: 1cm; /* UPDATED */
+  gap: 1cm; 
 }
 .logo { font-size: 1.25rem; font-weight: 600; }
 .header-center {
   flex-grow: 1;
   display: flex;
   justify-content: center;
-  /* UPDATED: margin removed */
 }
 .header-right { display: flex; align-items: center; gap: 0.75rem; }
 
 .search-container {
   position: relative;
   width: 100%;
-  /* UPDATED: max-width removed */
 }
 .search-container i {
   position: absolute;
