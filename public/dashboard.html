@@ -199,28 +199,25 @@
     <script>
         // Firebase configuration
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY", // IMPORTANT: Replace with your actual Firebase config
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyD9Y_saGbwRdVsJr_zyFjwAayY8dkBUrXg", 
+            authDomain: "bridging-the-gap-af65a.firebaseapp.com",
+            projectId: "bridging-the-gap-af65a",
+            storageBucket: "bridging-the-gap-af65a.firebasestorage.app",
+            messagingSenderId: "608387568756",
+            appId: "1:608387568756:web:a563a78ea0e6e61d3dad21"
         };
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
 
         document.addEventListener("DOMContentLoaded", () => {
-            // --- THEME TOGGLE ---
             const themeToggle = document.getElementById('theme-toggle');
             const htmlEl = document.documentElement;
 
-            // Function to set the theme
             const setTheme = (theme) => {
                 htmlEl.setAttribute('data-theme', theme);
                 localStorage.setItem('theme', theme);
             };
 
-            // Load saved theme from localStorage or use system preference
             const savedTheme = localStorage.getItem('theme');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             
@@ -230,7 +227,6 @@
                 setTheme(prefersDark ? 'dark' : 'light');
             }
 
-            // Toggle theme on button click
             themeToggle.addEventListener('click', () => {
                 const currentTheme = htmlEl.getAttribute('data-theme');
                 setTheme(currentTheme === 'light' ? 'dark' : 'light');
@@ -258,7 +254,7 @@
                 });
             });
 
-            // --- CARD SCROLL ANIMATION ---
+            // --- ANIMATION ---
             const cardObserver = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
