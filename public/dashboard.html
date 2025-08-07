@@ -12,7 +12,7 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
-    <link rel="stylesheet" href="dashboard.css" />
+    <link rel="stylesheet" href="dashboard.css" /> 
 </head>
 <body>
     <div class="background-shapes">
@@ -169,12 +169,13 @@
             <div class="footer-logo">Bridging the Gap</div>
     
             <div class="footer-developer">
-                <h3>Developer</h3>
+                <h4 class="developer-name-prominent">𝚜𝚌𝚑𝚛𝚘𝚍𝚒𝚗𝚐𝚎𝚛𝚜𝚙𝚎𝚝</h4>
+                
                 <div class="footer-social-links">
                     <a href="https://github.com/schrodingerspet" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="https://t.me/pawticlce_box" target="_blank" rel="noopener noreferrer" aria-label="Telegram Profile">
+                    <a href="https://t.me/pawticle_box" target="_blank" rel="noopener noreferrer" aria-label="Telegram Profile">
                         <i class="fab fa-telegram"></i>
                     </a>
                     <a href="https://www.instagram.com/_schrodingerspet_" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile">
@@ -232,16 +233,28 @@
                 setTheme(currentTheme === 'light' ? 'dark' : 'light');
             });
 
-            // --- AUTH & LOGOUT ---
+            // --- AUTH CHECK & LOGOUT ---
             auth.onAuthStateChanged(user => {
                 if (!user || !user.emailVerified) {
-                    // window.location.href = "index.html"; // Uncomment to enforce login
+                    window.location.href = "index.html"; 
                 }
             });
-            const logoutButtons = document.querySelectorAll("#logout-btn, #logout-btn-mobile");
-            logoutButtons.forEach(btn => btn.addEventListener("click", () => auth.signOut()));
 
-            // --- LIVE SEARCH ---
+            const handleLogout = () => {
+                auth.signOut()
+                    .then(() => {
+                        console.log("User signed out successfully.");
+                        window.location.href = "index.html"; 
+                    })
+                    .catch((error) => {
+                        console.error("Logout Error:", error);
+                        alert("An error occurred during logout. Please try again.");
+                    });
+            };
+            
+            const logoutButtons = document.querySelectorAll("#logout-btn, #logout-btn-mobile");
+            logoutButtons.forEach(btn => btn.addEventListener("click", handleLogout));
+
             const searchInput = document.getElementById("search-input");
             const allCards = document.querySelectorAll(".card");
             searchInput.addEventListener("input", () => {
@@ -254,7 +267,6 @@
                 });
             });
 
-            // --- ANIMATION ---
             const cardObserver = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
@@ -265,19 +277,12 @@
             }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
             allCards.forEach(card => cardObserver.observe(card));
 
-            // --- FAQ ACCORDION ---
             const faqItems = document.querySelectorAll('.faq-item');
             faqItems.forEach(item => {
                 const question = item.querySelector('.faq-question');
                 question.addEventListener('click', () => {
                     const wasOpen = item.classList.contains('open');
-                    // Optional: Close all other FAQ items
-                    // faqItems.forEach(i => i.classList.remove('open'));
-                    if (!wasOpen) {
-                        item.classList.add('open');
-                    } else {
-                        item.classList.remove('open');
-                    }
+                    item.classList.toggle('open');
                 });
             });
 

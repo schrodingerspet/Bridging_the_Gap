@@ -1,871 +1,388 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Maharashtra Farmers Schemes</title>
-  <!-- Font Awesome for Hamburger Icon -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <style>
-    /* Global Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: url('https://res.cloudinary.com/ddkisbcrp/image/upload/f_auto,q_auto/v1/anime/bfvspaoqepxye0ddwdxt') no-repeat center center fixed;
-      background-size: cover;
-      color: #fff;
-      line-height: 1.6;
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    /* Dark overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      z-index: -1;
-    }
-
-    /* Back to Dashboard Link */
-    .back-to-dashboard {
-      position: fixed;
-      top: 0.5rem;
-      left: 1rem;
-      z-index: 3000;
-      padding: 0.5rem 1rem;
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .back-to-dashboard:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: scale(1.03);
-    }
-
-    /* Arrow state when scrolled */
-    .back-to-dashboard.arrow {
-      padding: 0.5rem;
-      background: rgba(255, 255, 255, 0.4);
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      top: 1.2rem;
-    }
-
-    .back-to-dashboard.arrow::before {
-      content: '←';
-      color: #fff;
-      font-weight: bold;
-    }
-
-    .back-to-dashboard.arrow span {
-      display: none;
-    }
-
-    /* Hamburger Menu */
-    .hamburger {
-      position: fixed;
-      top: 0.5rem;
-      right: 1rem;
-      z-index: 3000;
-      padding: 0.4rem;
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
-      border-radius: 8px;
-      font-size: 1.1rem;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hamburger:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: scale(1.03);
-    }
-
-    .hamburger.shrink {
-      top: 1.2rem;
-    }
-
-    /* Side Navigation (Quick Links) */
-    .side-nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 80%;
-      max-width: 250px;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(12px);
-      padding: 2rem;
-      z-index: 2000;
-      transition: transform 0.3s ease;
-      transform: translateX(-100%);
-    }
-
-    .side-nav.open {
-      transform: translateX(0);
-    }
-
-    .side-nav h3 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .side-nav ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .side-nav li {
-      margin-bottom: 1rem;
-    }
-
-    .side-nav a {
-      color: #ccc;
-      text-decoration: none;
-      font-size: 1rem;
-      position: relative;
-      transition: color 0.3s ease;
-    }
-
-    .side-nav a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 1px;
-      background: #fff;
-      bottom: -2px;
-      left: 0;
-      transition: width 0.3s ease;
-    }
-
-    .side-nav a:hover {
-      color: #fff;
-    }
-
-    .side-nav a:hover::after {
-      width: 100%;
-    }
-
-    /* Hero Section */
-    .hero {
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
-      backdrop-filter: blur(12px);
-      padding: 6rem 2rem;
-      text-align: center;
-      animation: fadeIn 1s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 50vh;
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 1rem;
-      max-width: 800px;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      color: #ccc;
-      margin-bottom: 2rem;
-      max-width: 600px;
-    }
-
-    .hero a {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: background 0.3s ease, transform 0.3s ease;
-    }
-
-    .hero a:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: scale(1.03);
-    }
-
-    /* Floating Icons */
-    .icons-right {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 250px;
-      height: 100%;
-      z-index: 0;
-      overflow: hidden;
-    }
-
-    .icon {
-      position: absolute;
-      width: 60px;
-      height: 60px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(12px);
-      opacity: 0.7;
-      animation: float 15s infinite ease-in-out;
-      border-radius: 10px;
-      transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .icon:hover {
-      transform: scale(1.1);
-      opacity: 1;
-      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
-    }
-
-    .icons-right .icon:nth-child(1) {
-      width: 70px;
-      height: 70px;
-      top: 20%;
-      right: 30%;
-      animation-duration: 14s;
-      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    }
-
-    .icons-right .icon:nth-child(2) {
-      width: 80px;
-      height: 80px;
-      top: 50%;
-      right: 20%;
-      animation-duration: 16s;
-      animation-delay: 3s;
-      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    }
-
-    .icons-right .icon:nth-child(3) {
-      width: 65px;
-      height: 65px;
-      top: 80%;
-      right: 40%;
-      animation-duration: 20s;
-      animation-delay: 5s;
-      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    }
-
-    /* Header */
-    header {
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(12px);
-      padding: 1.5rem 2rem;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      transition: padding 0.3s ease, background 0.3s ease;
-    }
-
-    header.shrink {
-      padding: 1rem 2rem;
-      background: rgba(0, 0, 0, 0.9);
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    /* Schemes Container */
-    .schemes-container {
-      margin: 4rem auto;
-      max-width: 800px;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      padding: 0 2rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Scheme Card */
-    .scheme-card {
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(12px);
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: transform 0.5s ease, opacity 0.5s ease;
-      width: 100%;
-    }
-
-    .scheme-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .scheme-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .scheme-content {
-      padding: 2rem;
-    }
-
-    .scheme-content h2 {
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 1rem;
-    }
-
-    .scheme-content p {
-      margin-bottom: 1rem;
-      color: #ddd;
-      font-size: 1rem;
-    }
-
-    .scheme-content strong {
-      display: block;
-      margin: 1rem 0 0.5rem;
-      font-weight: 500;
-      color: #ccc;
-    }
-
-    .scheme-content ul {
-      padding-left: 1.5rem;
-      margin-bottom: 1rem;
-      color: #ddd;
-    }
-
-    .scheme-content ul li {
-      margin-bottom: 0.5rem;
-    }
-
-    .scheme-content a {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.75rem 1.5rem;
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      transition: background 0.3s ease, transform 0.3s ease;
-    }
-
-    .scheme-content a:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: scale(1.03);
-    }
-
-    .status-btn {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      font-weight: 500;
-      font-size: 0.9rem;
-      border: none;
-      cursor: default;
-      color: #fff;
-    }
-
-    .expired {
-      background: rgba(231, 76, 60, 0.8);
-    }
-
-    .active {
-      background: rgba(46, 204, 113, 0.8);
-    }
-
-    /* Footer */
-    footer {
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(12px);
-      padding: 1.5rem;
-      text-align: center;
-      animation: fadeIn 1s ease;
-      width: 100%;
-    }
-
-    footer p {
-      font-size: 0.9rem;
-      color: #ccc;
-    }
-
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-50px); }
-      100% { transform: translateY(0); }
-    }
-
-    /* Responsive Design */
-    @media (max-width: 1024px) {
-      .hero {
-        padding: 5rem 1.5rem;
-      }
-
-      .hero h1 {
-        font-size: 3rem;
-      }
-
-      .hero p {
-        font-size: 1.1rem;
-      }
-
-      .schemes-container {
-        max-width: 700px;
-      }
-
-      .scheme-content {
-        padding: 1.5rem;
-      }
-
-      .icons-right {
-        width: 200px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .schemes-container {
-        margin: 2rem auto;
-        padding: 0 1rem;
-      }
-
-      .scheme-content h2 {
-        font-size: 1.5rem;
-      }
-
-      .scheme-content p,
-      .scheme-content ul li {
-        font-size: 0.95rem;
-      }
-
-      .hero {
-        padding: 4rem 1rem;
-        min-height: 40vh;
-      }
-
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-
-      .hero p {
-        font-size: 1rem;
-      }
-
-      .icons-right {
-        width: 150px;
-      }
-
-      .icons-right .icon:nth-child(3) {
-        display: none;
-      }
-
-      .back-to-dashboard {
-        font-size: 0.9rem;
-        padding: 0.4rem 0.8rem;
-      }
-
-      .back-to-dashboard.arrow {
-        width: 35px;
-        height: 35px;
-        font-size: 1rem;
-        top: 1.2rem;
-      }
-
-      .hamburger {
-        top: 0.5rem;
-        right: 0.5rem;
-      }
-
-      .hamburger.shrink {
-        top: 2.2rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero {
-        padding: 3rem 1rem;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .hero p {
-        font-size: 0.9rem;
-      }
-
-      .hero a {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.9rem;
-      }
-
-      .schemes-container {
-        margin: 1.5rem auto;
-      }
-
-      .scheme-content {
-        padding: 1rem;
-      }
-
-      .scheme-content h2 {
-        font-size: 1.3rem;
-      }
-
-      .scheme-content p,
-      .scheme-content ul li {
-        font-size: 0.9rem;
-      }
-
-      .scheme-content a,
-      .status-btn {
-        font-size: 0.85rem;
-        padding: 0.5rem 1rem;
-      }
-
-      .back-to-dashboard {
-        font-size: 0.85rem;
-        padding: 0.4rem 0.8rem;
-      }
-
-      .back-to-dashboard.arrow {
-        width: 30px;
-        height: 30px;
-        font-size: 0.9rem;
-        top: 2.2rem;
-      }
-
-      .hamburger {
-        font-size: 1rem;
-        padding: 0.4rem;
-      }
-
-      header h1 {
-        font-size: 2rem;
-      }
-    }
-
-    @media (max-width: 320px) {
-      .hero h1 {
-        font-size: 1.8rem;
-      }
-
-      .hero p {
-        font-size: 0.85rem;
-      }
-
-      .scheme-content h2 {
-        font-size: 1.2rem;
-      }
-
-      .scheme-content p,
-      .scheme-content ul li {
-        font-size: 0.85rem;
-      }
-    }
-
-    /* Scrollbar Styling */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 10px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(255, 255, 255, 0.5);
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Maharashtra Farmers Schemes - Bridging the Gap</title>
+
+    <script>
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        } else {
+          document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+        }
+      })();
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+        :root {
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --transition-smooth: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius-main: 18px;
+            --border-radius-small: 12px;
+            --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-strong: 0 8px 24px rgba(0, 0, 0, 0.15);
+            --backdrop-blur-value: 20px;
+            --c-status-active: #2ecc71;
+            --c-status-expired: #e74c3c;
+        }
+
+        html[data-theme='light'] {
+            --c-text-primary: #1d1d1f;
+            --c-text-secondary: #515154;
+            --c-text-accent: #007aff;
+            --c-bg-glass: rgba(255, 255, 255, 0.7);
+            --c-bg-glass-rgb: 255, 255, 255;
+            --c-border-glass: rgba(60, 60, 67, 0.29);
+            --c-bg-btn: #007aff;
+            --c-text-btn: #ffffff;
+            --c-bg-mobile-menu: rgba(249, 249, 250, 0.98);
+        }
+
+        html[data-theme='dark'] {
+            --c-text-primary: #f5f5f7;
+            --c-text-secondary: #8e8e93;
+            --c-text-accent: #0a84ff;
+            --c-bg-glass: rgba(28, 28, 30, 0.75);
+            --c-bg-glass-rgb: 28, 28, 30;
+            --c-border-glass: rgba(84, 84, 88, 0.65);
+            --c-bg-btn: #0a84ff;
+            --c-text-btn: #ffffff;
+            --c-bg-mobile-menu: rgba(28, 28, 30, 0.98);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background: url('https://res.cloudinary.com/ddkisbcrp/image/upload/f_auto,q_auto/v1/anime/bfvspaoqepxye0ddwdxt') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--c-text-primary);
+            line-height: 1.6;
+        }
+
+        .top-ui-container {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            right: 1rem;
+            z-index: 3000;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            pointer-events: none;
+        }
+
+        .top-ui-container > * { pointer-events: auto; }
+        .top-right-controls { display: flex; gap: 0.5rem; }
+
+        .ui-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 44px;
+            padding: 0 1rem;
+            background: var(--c-bg-glass);
+            color: var(--c-text-primary);
+            text-decoration: none;
+            border-radius: var(--border-radius-small);
+            border: 1px solid var(--c-border-glass);
+            backdrop-filter: blur(var(--backdrop-blur-value));
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all var(--transition-smooth);
+            cursor: pointer;
+        }
+        .ui-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+        .ui-btn.square {
+            width: 44px;
+            padding: 0;
+        }
+        .back-to-dashboard.arrow {
+            width: 44px;
+        }
+        .back-to-dashboard.arrow .text { display: none; }
+        .back-to-dashboard:not(.arrow) .arrow-icon { display: none; }
+        .top-ui-container.scrolled .ui-btn { top: 0.5rem; }
+
+        .side-nav {
+            position: fixed;
+            top: 0;
+            right: 0; 
+            width: 300px;
+            height: 100%;
+            background: var(--c-bg-mobile-menu);
+            backdrop-filter: blur(var(--backdrop-blur-value));
+            border-left: 1px solid var(--c-border-glass);
+            padding: 2rem;
+            z-index: 2000;
+            transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            transform: translateX(100%);
+        }
+        .side-nav.open { transform: translateX(0); }
+        .side-nav h3 { font-size: 1.5rem; font-weight: 700; color: var(--c-text-primary); margin-bottom: 1.5rem; margin-top: 4rem; }
+        .side-nav ul { list-style: none; padding: 0; }
+        .side-nav li { margin-bottom: 1rem; }
+        .side-nav a { color: var(--c-text-secondary); text-decoration: none; font-size: 1.1rem; font-weight: 500; transition: color 0.3s ease; }
+        .side-nav a:hover { color: var(--c-text-accent); }
+
+        .hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            margin: 2rem;
+            background: var(--c-bg-glass);
+            border: 1px solid var(--c-border-glass);
+            backdrop-filter: blur(var(--backdrop-blur-value));
+            border-radius: var(--border-radius-main);
+            box-shadow: var(--shadow-strong);
+            opacity: 0;
+            animation: fadeInUp 0.8s 0.2s ease-out forwards;
+        }
+        .hero h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; color: var(--c-text-primary); margin-bottom: 1rem; }
+        .hero p { font-size: clamp(1.1rem, 2.5vw, 1.3rem); color: var(--c-text-secondary); max-width: 680px; margin: 0 auto 2rem; }
+        .hero .explore-btn { display: inline-block; padding: 0.75rem 1.5rem; background: var(--c-bg-btn); color: var(--c-text-btn); text-decoration: none; border-radius: var(--border-radius-small); font-weight: 600; transition: all var(--transition-smooth); }
+        .hero .explore-btn:hover { transform: scale(1.05) translateY(-2px); }
+
+        header {
+            background: transparent;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: padding var(--transition-smooth), background-color var(--transition-smooth), border-color var(--transition-smooth), backdrop-filter var(--transition-smooth);
+            border-bottom: 1px solid transparent;
+        }
+        header.shrink {
+            padding: 1rem 2rem;
+            background: var(--c-bg-glass);
+            border-color: var(--c-border-glass);
+            backdrop-filter: blur(var(--backdrop-blur-value));
+            box-shadow: var(--shadow-soft);
+        }
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--c-text-primary);
+            transition: font-size var(--transition-smooth);
+        }
+        header.shrink h1 { font-size: 1.25rem; }
+
+        .schemes-container { margin: 4rem auto; max-width: 900px; display: grid; gap: 2rem; padding: 0 2rem; }
+        .scheme-card { background: var(--c-bg-glass); backdrop-filter: blur(var(--backdrop-blur-value)); border: 1px solid var(--c-border-glass); border-radius: var(--border-radius-main); box-shadow: var(--shadow-soft); opacity: 0; transform: translateY(30px); transition: transform 0.6s ease-out, opacity 0.6s ease-out, box-shadow var(--transition-smooth); }
+        .scheme-card.visible { opacity: 1; transform: translateY(0); }
+        .scheme-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-strong); }
+        .scheme-content { padding: 2rem; }
+        .scheme-content h2 { font-size: 1.8rem; font-weight: 600; color: var(--c-text-primary); margin-bottom: 1rem; }
+        .scheme-content p { margin-bottom: 1.5rem; color: var(--c-text-secondary); }
+        .scheme-content strong { font-weight: 600; color: var(--c-text-primary); }
+        .scheme-content ul { padding-left: 1.5rem; margin: 1rem 0; color: var(--c-text-secondary); }
+        .card-footer { margin-top: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+        .official-link { display: inline-block; padding: 0.75rem 1.5rem; background: var(--c-bg-btn); color: var(--c-text-btn); text-decoration: none; border-radius: var(--border-radius-small); font-size: 0.95rem; font-weight: 600; transition: all var(--transition-smooth); }
+        .official-link:hover { transform: translateY(-2px); opacity: 0.9; }
+        .status-btn { padding: 0.75rem 1.5rem; border-radius: var(--border-radius-small); font-weight: 600; font-size: 0.95rem; border: none; cursor: default; color: #fff; }
+        .expired { background: var(--c-status-expired); }
+        .active { background: var(--c-status-active); }
+
+        footer { background: var(--c-bg-glass); backdrop-filter: blur(var(--backdrop-blur-value)); border-top: 1px solid var(--c-border-glass); padding: 2rem; margin-top: 4rem; text-align: center; }
+        footer p { font-size: 0.9rem; color: var(--c-text-secondary); }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .hero { margin: 1rem; padding: 4rem 1.5rem; }
+            header.shrink { padding: 1rem; }
+            .schemes-container { padding: 0 1rem; }
+        }
+    </style>
 </head>
 <body>
-  <!-- Back to Dashboard Link -->
-  <a href="dashboard.html" class="back-to-dashboard"><span>← Back to Dashboard</span></a>
-
-  <!-- Hamburger Menu -->
-  <button class="hamburger"><i class="fas fa-bars"></i></button>
-
-  <!-- Side Navigation (Quick Links) -->
-  <nav class="side-nav">
-    <h3>Quick Links</h3>
-    <ul>
-      <li><a href="#pm-kisan">PM-KISAN</a></li>
-      <li><a href="#soil-health">Soil Health Card</a></li>
-      <li><a href="#pmfby">PMFBY</a></li>
-      <li><a href="#kcc">Kisan Credit Card</a></li>
-      <li><a href="#mahadbt">Mahadbt Krishi</a></li>
-    </ul>
-  </nav>
-
-  <!-- Hero Section -->
-  <div class="hero">
-    <h1>Support for Maharashtra Farmers</h1>
-    <p>Discover government schemes designed to empower farmers with financial and agricultural assistance.</p>
-    <a href="#schemes">Explore Schemes</a>
-  </div>
-
-  <!-- Floating Agricultural Icons -->
-  <div class="icons-right">
-    <div class="icon"></div>
-    <div class="icon"></div>
-    <div class="icon"></div>
-  </div>
-
-  <!-- Header -->
-  <header id="main-header">
-    <h1>Maharashtra Farmers Schemes</h1>
-  </header>
-
-  <!-- Schemes Container -->
-  <div class="schemes-container" id="schemes">
-    <div class="scheme-card" id="pm-kisan">
-      <div class="scheme-content">
-        <h2>Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)</h2>
-        <p>
-          PM-KISAN is a central government initiative that provides income support to small and marginal farmers by directly transferring financial assistance to their bank accounts.
-        </p>
-        <strong>Start Date:</strong> <span class="start">2018-12-01</span><br/>
-        <strong>End Date:</strong> <span class="end">2030-12-31</span><br/>
-        <strong>Eligibility:</strong>
+    <div class="top-ui-container">
+        <a href="dashboard.html" class="back-to-dashboard ui-btn">
+            <span class="arrow-icon">&larr;</span>
+            <span class="text">Back to Dashboard</span>
+        </a>
+        <div class="top-right-controls">
+            <button id="hamburger-menu" class="ui-btn square" aria-label="Open Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+    
+    <nav class="side-nav">
+        <h3>Quick Links</h3>
         <ul>
-          <li>Small and marginal farmers with cultivable land</li>
-          <li>Excludes institutional landholders and certain farmer groups</li>
-          <li>Must have a valid Aadhaar and bank account</li>
+            <li><a href="#pm-kisan">PM-KISAN</a></li>
+            <li><a href="#soil-health">Soil Health Card</a></li>
+            <li><a href="#pmfby">PMFBY</a></li>
+            <li><a href="#kcc">Kisan Credit Card</a></li>
+            <li><a href="#mahadbt">Mahadbt Farmer Schemes</a></li>
         </ul>
-        <a href="https://pmkisan.gov.in/" target="_blank">Official Details</a>
-        <button class="status-btn">Checking...</button>
-      </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Support for Maharashtra's Farmers</h1>
+        <p>Discover government schemes designed to empower farmers with financial and agricultural assistance.</p>
+        <a href="#main-header" class="explore-btn">Explore Schemes</a>
     </div>
 
-    <div class="scheme-card" id="soil-health">
-      <div class="scheme-content">
-        <h2>Soil Health Card Scheme</h2>
-        <p>
-          This scheme provides farmers with a Soil Health Card that contains crop-wise recommendations of fertilizers and amendments, aiming to improve soil productivity and overall crop yield.
-        </p>
-        <strong>Start Date:</strong> <span class="start">2015-02-01</span><br/>
-        <strong>End Date:</strong> <span class="end">2024-03-31</span><br/>
-        <strong>Eligibility:</strong>
-        <ul>
-          <li>All farmers owning cultivable land</li>
-          <li>Request for the card can be made at designated centers</li>
-        </ul>
-        <a href="https://soilhealth.dac.gov.in/" target="_blank">Official Details</a>
-        <button class="status-btn">Checking...</button>
-      </div>
-    </div>
+    <header id="main-header">
+        <h1>Maharashtra Farmers Schemes</h1>
+    </header>
 
-    <div class="scheme-card" id="pmfby">
-      <div class="scheme-content">
-        <h2>Pradhan Mantri Fasal Bima Yojana (PMFBY)</h2>
-        <p>
-          PMFBY provides insurance coverage and financial support to farmers in the event of crop failure due to natural calamities, pests, or diseases, aiming to reduce the financial burden during tough times.
-        </p>
-        <strong>Start Date:</strong> April 2016<br />
-        <strong>End Date:</strong> Ongoing<br />
-        <strong>Eligibility:</strong>
-        <ul>
-          <li>All farmers with cultivable land are eligible</li>
-          <li>Enrollment is conducted via state government offices</li>
-          <li>Premium is subsidized by the government</li>
-        </ul>
-        <a href="https://pmfby.gov.in/" target="_blank">Official Details</a>
-        <button class="status-btn">Checking...</button>
-      </div>
-    </div>
+    <main>
+        <div class="schemes-container">
+            <div class="scheme-card" id="pm-kisan">
+                <div class="scheme-content">
+                    <h2>Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)</h2>
+                    <p>PM-KISAN provides direct income support to small and marginal farmer families, helping them with their agricultural and domestic needs.</p>
+                    <strong>Eligibility:</strong> <ul><li>All landholding farmer families are eligible, subject to certain exclusion criteria.</li></ul>
+                    <div class="card-footer">
+                        <a href="https://pmkisan.gov.in/" target="_blank" class="official-link">Official Site</a>
+                        <button class="status-btn" data-end-date="2030-12-31"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="scheme-card" id="soil-health">
+                <div class="scheme-content">
+                    <h2>Soil Health Card Scheme</h2>
+                    <p>This scheme provides farmers with a Soil Health Card which contains crop-wise recommendations of nutrients and fertilizers to improve productivity.</p>
+                    <strong>Eligibility:</strong><ul><li>Available to all farmers upon request for soil sample testing.</li></ul>
+                    <div class="card-footer">
+                        <a href="https://soilhealth.dac.gov.in/" target="_blank" class="official-link">Official Site</a>
+                        <button class="status-btn" data-end-date="2024-03-31"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="scheme-card" id="pmfby">
+                <div class="scheme-content">
+                    <h2>Pradhan Mantri Fasal Bima Yojana (PMFBY)</h2>
+                    <p>PMFBY is a crop insurance scheme providing financial support to farmers suffering crop loss or damage arising out of unforeseen events.</p>
+                    <strong>Eligibility:</strong><ul><li>All farmers including sharecroppers and tenant farmers growing notified crops in notified areas are eligible.</li></ul>
+                    <div class="card-footer">
+                        <a href="https://pmfby.gov.in/" target="_blank" class="official-link">Official Site</a>
+                        <button class="status-btn" data-end-date="Ongoing"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="scheme-card" id="kcc">
+                <div class="scheme-content">
+                    <h2>Kisan Credit Card (KCC) Scheme</h2>
+                    <p>The KCC scheme aims at providing adequate and timely credit support from the banking system to farmers for their cultivation and other needs.</p>
+                    <strong>Eligibility:</strong><ul><li>All farmers, individuals, or joint borrowers who are owner cultivators are eligible.</li></ul>
+                    <div class="card-footer">
+                        <a href="https://www.maharashtragov.in/" target="_blank" class="official-link">Official Site</a>
+                        <button class="status-btn" data-end-date="Ongoing"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="scheme-card" id="mahadbt">
+                <div class="scheme-content">
+                    <h2>Mahadbt Farmer Schemes</h2>
+                    <p>A unified portal by the Government of Maharashtra for farmers to apply for various schemes related to agriculture, including subsidies on seeds and equipment.</p>
+                    <strong>Eligibility:</strong><ul><li>Farmers must be residents of Maharashtra and registered on the Mahadbt portal.</li></ul>
+                    <div class="card-footer">
+                        <a href="https://mahadbt.maharashtra.gov.in/" target="_blank" class="official-link">Official Site</a>
+                        <button class="status-btn" data-end-date="Ongoing"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
-    <div class="scheme-card" id="kcc">
-      <div class="scheme-content">
-        <h2>Maharashtra Kisan Credit Card (KCC) Scheme</h2>
-        <p>
-          The Kisan Credit Card scheme facilitates timely access to short-term credit for farmers, helping them meet agricultural and operational expenses with minimal collateral requirements.
-        </p>
-        <strong>Start Date:</strong> August 1998<br />
-        <strong>End Date:</strong> Ongoing<br />
-        <strong>Eligibility:</strong>
-        <ul>
-          <li>Farmers owning cultivable land in Maharashtra</li>
-          <li>Subject to income verification and credit assessment</li>
-          <li>Offers flexible interest rates and repayment options</li>
-        </ul>
-        <a href="https://www.maharashtragov.in/" target="_blank">Official Details</a>
-        <button class="status-btn">Checking...</button>
-      </div>
-    </div>
+    <footer>
+        <p>&copy; 2025 Bridging the Gap - Farmer Schemes</p>
+    </footer>
 
-    <div class="scheme-card" id="mahadbt">
-      <div class="scheme-content">
-        <h2>Mahadbt Krishi Sanjeevani Yojana</h2>
-        <p>
-          A scheme under Mahadbt portal providing direct benefit transfer of subsidies to farmers for seeds, irrigation equipment, and other agricultural resources.
-        </p>
-        <strong>Start Date:</strong> June 2020<br />
-        <strong>End Date:</strong> Ongoing<br />
-        <strong>Eligibility:</strong>
-        <ul>
-          <li>Registered farmers on Mahadbt portal</li>
-          <li>Residents of Maharashtra</li>
-          <li>Eligible crops and seasons as per government guidelines</li>
-        </ul>
-        <a href="https://mahadbt.maharashtra.gov.in/" target="_blank">Official Details</a>
-        <button class="status-btn">Checking...</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 Maharashtra Farmers Schemes</p>
-  </footer>
-
-  <script>
-    // Status Button Logic
-    const cards = document.querySelectorAll('.scheme-card');
-
-    cards.forEach(card => {
-      let btn = card.querySelector('.status-btn');
-
-      if (!btn) {
-        btn = document.createElement('button');
-        btn.classList.add('status-btn');
-        card.querySelector('.scheme-content').appendChild(btn);
-      }
-
-      const allStrongTags = card.querySelectorAll('strong');
-      let endDateText = '';
-
-      allStrongTags.forEach(strong => {
-        const text = strong.textContent.trim().toLowerCase();
-        if (text.includes('end date')) {
-          const next = strong.nextSibling;
-          if (next && next.nodeType === Node.TEXT_NODE) {
-            endDateText = next.textContent.trim();
-          }
-          const span = strong.nextElementSibling;
-          if (span && span.classList.contains('end')) {
-            endDateText = span.textContent.trim();
-          }
-        }
-      });
-
-      const today = new Date();
-      btn.classList.remove('active', 'expired');
-
-      if (endDateText.toLowerCase() === 'ongoing') {
-        btn.textContent = 'Active';
-        btn.classList.add('active');
-      } else {
-        const parsedDate = new Date(endDateText);
-        if (!isNaN(parsedDate)) {
-          if (parsedDate < today) {
-            btn.textContent = 'Expired';
-            btn.classList.add('expired');
-          } else {
-            btn.textContent = 'Active';
-            btn.classList.add('active');
-          }
-        } else {
-          btn.textContent = 'Invalid Date';
-          btn.classList.add('expired');
-        }
-      }
-    });
-
-    // Hamburger Toggle, Animations, Header Shrink, and Back Button Arrow
+    <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const hamburger = document.querySelector(".hamburger");
-      const sideNav = document.querySelector(".side-nav");
-      const backButton = document.querySelector(".back-to-dashboard");
-
-      hamburger.addEventListener("click", () => {
-        sideNav.classList.toggle("open");
-      });
-
-      sideNav.querySelectorAll("a").forEach(link => {
-        link.addEventListener("click", () => {
-          sideNav.classList.remove("open");
+        
+        document.querySelectorAll('.status-btn').forEach(btn => {
+            const endDateText = btn.dataset.endDate;
+            if (!endDateText) return;
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            if (endDateText.toLowerCase() === 'ongoing') {
+                btn.textContent = 'Active';
+                btn.classList.add('active');
+            } else {
+                const parsedDate = new Date(endDateText);
+                if (!isNaN(parsedDate)) {
+                    btn.textContent = parsedDate < today ? 'Expired' : 'Active';
+                    btn.classList.add(parsedDate < today ? 'expired' : 'active');
+                } else {
+                     btn.textContent = 'Status N/A';
+                     btn.classList.add('expired');
+                }
+            }
         });
-      });
 
-      document.addEventListener("click", (e) => {
-        if (!sideNav.contains(e.target) && !hamburger.contains(e.target)) {
-          sideNav.classList.remove("open");
-        }
-      });
-
-      const observerOptions = {
-        threshold: 0.2,
-        rootMargin: "0px 0px -50px 0px"
-      };
-
-      const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
+        const hamburger = document.getElementById("hamburger-menu");
+        const sideNav = document.querySelector(".side-nav");
+        hamburger.addEventListener("click", (e) => {
+            e.stopPropagation();
+            sideNav.classList.toggle("open");
         });
-      }, observerOptions);
+        sideNav.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => sideNav.classList.remove("open"));
+        });
+        document.addEventListener("click", (e) => {
+            if (sideNav.classList.contains('open') && !sideNav.contains(e.target)) {
+                sideNav.classList.remove("open");
+            }
+        });
 
-      document.querySelectorAll(".scheme-card").forEach(card => {
-        observer.observe(card);
-      });
+        const cards = document.querySelectorAll(".scheme-card");
+        cards.forEach((card, index) => {
+            card.style.transitionDelay = `${index * 100}ms`;
+        });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        cards.forEach(card => observer.observe(card));
 
-      const header = document.getElementById("main-header");
-      const shrinkOn = 50;
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > shrinkOn) {
-          header.classList.add("shrink");
-          hamburger.classList.add("shrink");
-          backButton.classList.add("arrow");
-        } else {
-          header.classList.remove("shrink");
-          hamburger.classList.remove("shrink");
-          backButton.classList.remove("arrow");
-        }
-      });
+        const header = document.getElementById("main-header");
+        const backButton = document.querySelector(".back-to-dashboard");
+        const uiContainer = document.querySelector(".top-ui-container");
+        const hero = document.querySelector('.hero');
+        const shrinkOn = hero.offsetHeight + hero.offsetTop - 70; 
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > shrinkOn) {
+                header.classList.add("shrink");
+                backButton.classList.add("arrow");
+                uiContainer.classList.add("scrolled");
+            } else {
+                header.classList.remove("shrink");
+                backButton.classList.remove("arrow");
+                uiContainer.classList.remove("scrolled");
+            }
+        }, { passive: true });
     });
-  </script>
+    </script>
 </body>
 </html>

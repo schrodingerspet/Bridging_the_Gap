@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bridging the Gap - Admin Dashboard</title>
+
+    <script>
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        } else {
+          document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+        }
+      })();
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+        :root {
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --transition-smooth: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius-main: 18px;
+            --border-radius-small: 12px;
+            --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-strong: 0 8px 24px rgba(0, 0, 0, 0.15);
+            --backdrop-blur-value: 20px;
+        }
+
+        html[data-theme='light'] {
+            --c-text-primary: #1d1d1f;
+            --c-text-secondary: #515154;
+            --c-text-accent: #007aff;
+            --c-bg-glass: rgba(255, 255, 255, 0.75);
+            --c-border-glass: rgba(60, 60, 67, 0.29);
+            --c-bg-btn: #007aff;
+            --c-text-btn: #ffffff;
+            --c-bg-btn-secondary: rgba(100, 100, 100, 0.1);
+            --c-bg-input: rgba(220, 220, 225, 0.5);
+            --c-status-replied: #34c759;
+            --c-status-unreplied: #ff9500;
+            --c-danger: #ff3b30;
+        }
+
+        html[data-theme='dark'] {
+            --c-text-primary: #f5f5f7;
+            --c-text-secondary: #8e8e93;
+            --c-text-accent: #0a84ff;
+            --c-bg-glass: rgba(28, 28, 30, 0.75);
+            --c-border-glass: rgba(84, 84, 88, 0.65);
+            --c-bg-btn: #0a84ff;
+            --c-text-btn: #ffffff;
+            --c-bg-btn-secondary: rgba(200, 200, 200, 0.1);
+            --c-bg-input: rgba(58, 58, 60, 0.5);
+            --c-status-replied: #30d158;
+            --c-status-unreplied: #ff9f0a;
+            --c-danger: #ff453a;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-primary);
+            background: url('https://res.cloudinary.com/ddkisbcrp/image/upload/f_auto,q_auto/v1/anime/bfvspaoqepxye0ddwdxt') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--c-text-primary);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--c-bg-glass);
+            backdrop-filter: blur(var(--backdrop-blur-value));
+            border-bottom: 1px solid var(--c-border-glass);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-logo { font-size: 1.5rem; font-weight: 700; }
+        .header-nav a, .header-nav button {
+            text-decoration: none;
+            color: var(--c-text-primary);
+            font-weight: 500;
+            margin-left: 1.5rem;
+            transition: color var(--transition-smooth);
+            background: none;
+            border: none;
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .header-nav a:hover, .header-nav button:hover { color: var(--c-text-accent); }
+        .header-nav i { margin-right: 0.5rem; }
+
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            gap: 2rem;
+        }
+        .admin-card {
+            background: var(--c-bg-glass);
+            backdrop-filter: blur(var(--backdrop-blur-value));
+            border: 1px solid var(--c-border-glass);
+            border-radius: var(--border-radius-main);
+            padding: 2rem;
+            box-shadow: var(--shadow-strong);
+            animation: fadeInUp 0.6s ease-out;
+        }
+        .admin-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--c-border-glass);
+            padding-bottom: 1rem;
+        }
+        #user-status { font-weight: 500; }
+        #user-status span { font-weight: 700; color: var(--c-text-accent); }
+
+        /* FEEDBACK ITEM STYLES */
+        .feedback-item {
+            background: var(--c-bg-btn-secondary);
+            border-radius: var(--border-radius-small);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--c-border-glass);
+            transition: all var(--transition-smooth);
+        }
+        .feedback-item:hover { transform: translateY(-3px); box-shadow: var(--shadow-soft); }
+        .feedback-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; }
+        .user-info { display: flex; flex-direction: column; }
+        .user-info strong { font-size: 1.1rem; }
+        .user-info small { color: var(--c-text-secondary); }
+        .feedback-actions { display: flex; align-items: center; gap: 1rem; }
+        .status-badge { font-size: 0.8rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 20px; text-transform: uppercase; }
+        .status-badge.replied { background-color: var(--c-status-replied); color: #fff; }
+        .status-badge.unreplied { background-color: var(--c-status-unreplied); color: #fff; }
+        .delete-btn { background: none; border: none; color: var(--c-danger); cursor: pointer; font-size: 1.2rem; transition: all var(--transition-smooth); }
+        .delete-btn:hover { transform: scale(1.2); }
+        .feedback-body { margin: 1rem 0; font-size: 1rem; }
+        
+        .admin-reply, .reply-form { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--c-border-glass); }
+        .admin-reply strong { color: var(--c-text-accent); }
+        .reply-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--c-bg-input);
+            border: 1px solid transparent;
+            border-radius: var(--border-radius-small);
+            color: var(--c-text-primary);
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 80px;
+            transition: all var(--transition-smooth);
+        }
+        .reply-form textarea:focus { outline: none; border-color: var(--c-text-accent); background: transparent; }
+        .reply-form button {
+            margin-top: 0.75rem;
+            background: var(--c-bg-btn);
+            color: var(--c-text-btn);
+            border: none;
+            border-radius: var(--border-radius-small);
+            padding: 0.5rem 1.25rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+        .reply-form button:hover { opacity: 0.85; }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-logo">Admin Panel</div>
+        <nav class="header-nav">
+            <a href="add-schemes.html"><i class="fas fa-plus-circle"></i> Add Schemes</a>
+            <a href="feedback.html"><i class="fas fa-arrow-left"></i> User View</a>
+            <button id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </nav>
+    </header>
+
+    <main class="content-wrapper">
+        <div class="admin-card">
+            <p id="user-status">Loading...</p>
+        </div>
+
+        <div class="admin-card">
+            <h2>Feedback Management</h2>
+            <div id="admin-feedback-list"><p>Loading feedback...</p></div>
+        </div>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // -- 1. Firebase Setup --
+            const firebaseConfig = {
+                apiKey: "AIzaSyD9Y_saGbwRdVsJr_zyFjwAayY8dkBUrXg",
+                authDomain: "bridging-the-gap-af65a.firebaseapp.com",
+                projectId: "bridging-the-gap-af65a",
+                databaseURL: "https://bridging-the-gap-af65a-default-rtdb.firebaseio.com",
+                storageBucket: "bridging-the-gap-af65a.appspot.com",
+                messagingSenderId: "608387568756",
+                appId: "1:608387568756:web:a563a78ea0e6e61d3dad21",
+            };
+            firebase.initializeApp(firebaseConfig);
+            const auth = firebase.auth();
+            const db = firebase.database();
+            const feedbackRef = db.ref("feedback");
+
+            const userStatusElem = document.getElementById("user-status");
+            const logoutBtn = document.getElementById("logoutBtn");
+            const feedbackListElem = document.getElementById("admin-feedback-list");
+
+            // -- 3. Authentication --
+            auth.onAuthStateChanged(user => {
+                if (user && user.emailVerified) {
+                    userStatusElem.innerHTML = `Welcome, <span>${user.email}</span>`;
+                    loadFeedback();
+                } else {
+                    userStatusElem.textContent = "Redirecting to login...";
+                    setTimeout(() => window.location.href = "index.html", 1500);
+                }
+            });
+
+            logoutBtn.addEventListener("click", () => {
+                auth.signOut().then(() => window.location.href = "index.html");
+            });
+
+            function loadFeedback() {
+                feedbackRef.orderByChild('timestamp').on("value", snapshot => {
+                    feedbackListElem.innerHTML = "";
+                    if (snapshot.exists()) {
+                        const feedbacks = [];
+                        snapshot.forEach(childSnapshot => {
+                            feedbacks.push({ id: childSnapshot.key, ...childSnapshot.val() });
+                        });
+                        displayAdminFeedback(feedbacks.reverse());
+                    } else {
+                        feedbackListElem.innerHTML = "<p>No feedback submissions yet.</p>";
+                    }
+                });
+            }
+
+            function displayAdminFeedback(feedbacks) {
+                feedbacks.forEach(data => {
+                    const item = document.createElement("div");
+                    item.className = "feedback-item";
+                    
+                    const replied = !!data.reply;
+                    const statusBadge = replied 
+                        ? `<div class="status-badge replied">Replied</div>`
+                        : `<div class="status-badge unreplied">Awaiting Reply</div>`;
+
+                    const replySection = replied
+                        ? `<div class="admin-reply"><strong>Your Reply:</strong> <p>${escapeHTML(data.reply)}</p></div>`
+                        : `<div class="reply-form">
+                               <textarea id="reply-${data.id}" placeholder="Type your official reply here..."></textarea>
+                               <button data-id="${data.id}" class="send-reply-btn">Send Reply</button>
+                           </div>`;
+
+                    item.innerHTML = `
+                        <div class="feedback-header">
+                            <div class="user-info">
+                                <strong>${escapeHTML(data.name)}</strong>
+                                <small>${escapeHTML(data.email)} - ${new Date(data.timestamp).toLocaleString()}</small>
+                            </div>
+                            <div class="feedback-actions">
+                                ${statusBadge}
+                                <button data-id="${data.id}" class="delete-btn" title="Delete Feedback"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <p class="feedback-body">${escapeHTML(data.message)}</p>
+                        ${replySection}
+                    `;
+                    feedbackListElem.appendChild(item);
+                });
+
+                addEventListeners();
+            }
+
+            function addEventListeners() {
+                document.querySelectorAll('.send-reply-btn').forEach(button => {
+                    button.addEventListener('click', sendAdminReply);
+                });
+                document.querySelectorAll('.delete-btn').forEach(button => {
+                    button.addEventListener('click', deleteFeedback);
+                });
+            }
+
+            function sendAdminReply(event) {
+                const feedbackId = event.target.dataset.id;
+                const replyTextArea = document.getElementById(`reply-${feedbackId}`);
+                const reply = replyTextArea.value.trim();
+
+                if (!reply) {
+                    alert("Please enter a reply.");
+                    return;
+                }
+                
+                feedbackRef.child(feedbackId).update({ reply: reply })
+                    .catch(error => console.error("Error sending reply:", error));
+            }
+
+            function deleteFeedback(event) {
+                const feedbackId = event.currentTarget.dataset.id;
+                if (confirm("Are you sure you want to permanently delete this feedback?")) {
+                    feedbackRef.child(feedbackId).remove()
+                        .catch(error => console.error("Error deleting feedback:", error));
+                }
+            }
+            
+            function escapeHTML(str) {
+                const p = document.createElement('p');
+                p.textContent = str;
+                return p.innerHTML;
+            }
+        });
+    </script>
+</body>
+</html>

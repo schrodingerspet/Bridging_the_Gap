@@ -1,659 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Feedback - Bridging the Gap</title>
-  <style>
-    /* Global Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Feedback - Bridging the Gap</title>
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: url('https://res.cloudinary.com/ddkisbcrp/image/upload/f_auto,q_auto/v1/anime/uxzsli4gd1nt2orxikty') no-repeat center center fixed;
-      background-size: cover;
-      color: #fff;
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-    }
+    <script>
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        } else {
+          document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+        }
+      })();
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+        :root {
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --transition-smooth: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius-main: 18px;
+            --border-radius-small: 12px;
+            --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-strong: 0 8px 24px rgba(0, 0, 0, 0.15);
+            --backdrop-blur-value: 20px;
+        }
 
-    /* Dark overlay to tone down the background */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      z-index: -1;
-    }
+        html[data-theme='light'] {
+            --c-text-primary: #1d1d1f;
+            --c-text-secondary: #515154;
+            --c-text-accent: #007aff;
+            --c-bg-glass: rgba(255, 255, 255, 0.7);
+            --c-border-glass: rgba(60, 60, 67, 0.29);
+            --c-bg-btn: #007aff;
+            --c-text-btn: #ffffff;
+            --c-bg-input: rgba(220, 220, 225, 0.5);
+            --c-status-success: #34c759;
+            --c-status-error: #ff3b30;
+        }
 
-    /* Floating Shapes */
-    .shapes-left,
-    .shapes-right {
-      position: fixed;
-      top: 0;
-      width: 300px;
-      height: 100%;
-      z-index: 0;
-      overflow: hidden;
-    }
+        html[data-theme='dark'] {
+            --c-text-primary: #f5f5f7;
+            --c-text-secondary: #8e8e93;
+            --c-text-accent: #0a84ff;
+            --c-bg-glass: rgba(28, 28, 30, 0.75);
+            --c-border-glass: rgba(84, 84, 88, 0.65);
+            --c-bg-btn: #0a84ff;
+            --c-text-btn: #ffffff;
+            --c-bg-input: rgba(58, 58, 60, 0.5);
+            --c-status-success: #30d158;
+            --c-status-error: #ff453a;
+        }
 
-    .shapes-left {
-      left: 0;
-    }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    .shapes-right {
-      right: 0;
-    }
+        body {
+            font-family: var(--font-primary);
+            background: url('https://res.cloudinary.com/ddkisbcrp/image/upload/f_auto,q_auto/v1/anime/bfvspaoqepxye0ddwdxt') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--c-text-primary);
+            line-height: 1.6;
+        }
 
-    .shape {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 50%;
-      opacity: 0.7;
-      animation: float 15s infinite ease-in-out;
-    }
+        /* UI & LAYOUT */
+        .top-ui-container {
+            position: fixed; top: 1rem; left: 1rem; z-index: 1000;
+            pointer-events: none;
+        }
+        .top-ui-container > * { pointer-events: auto; }
+        .ui-btn {
+            display: flex; align-items: center; justify-content: center; height: 44px;
+            padding: 0 1rem; background: var(--c-bg-glass); color: var(--c-text-primary);
+            text-decoration: none; border-radius: var(--border-radius-small); border: 1px solid var(--c-border-glass);
+            backdrop-filter: blur(var(--backdrop-blur-value)); font-size: 0.9rem; font-weight: 500;
+            transition: all var(--transition-smooth); cursor: pointer;
+        }
+        .ui-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-soft); }
+        .back-to-dashboard.arrow { width: 44px; padding: 0; }
+        .back-to-dashboard.arrow .text { display: none; }
+        .back-to-dashboard:not(.arrow) .arrow-icon { display: none; }
 
-    .shapes-left .shape:nth-child(1) {
-      width: 80px;
-      height: 80px;
-      top: 20%;
-      left: 30%;
-      animation-duration: 12s;
-    }
+        .content-wrapper {
+            max-width: 800px; margin: 6rem auto 4rem; padding: 0 1rem;
+            display: grid; gap: 2rem;
+        }
+        
+        .feedback-card {
+            background: var(--c-bg-glass); backdrop-filter: blur(var(--backdrop-blur-value));
+            border: 1px solid var(--c-border-glass); border-radius: var(--border-radius-main);
+            box-shadow: var(--shadow-strong); padding: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .feedback-card h2 {
+            font-size: clamp(1.8rem, 4vw, 2.2rem); font-weight: 700;
+            color: var(--c-text-primary); margin-bottom: 1.5rem; text-align: center;
+        }
+        
+        /* FORM STYLES */
+        form label { display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--c-text-secondary); }
+        form input, form textarea {
+            width: 100%; padding: 0.8rem 1rem; margin-bottom: 1rem;
+            border-radius: var(--border-radius-small); border: 1px solid transparent; background: var(--c-bg-input);
+            color: var(--c-text-primary); font-family: var(--font-primary); font-size: 1rem;
+            transition: all var(--transition-smooth);
+        }
+        form input:focus, form textarea:focus { 
+            outline: none; border-color: var(--c-text-accent); background: transparent; 
+        }
+        form button {
+            width: 100%; padding: 0.8rem 1rem; background: var(--c-bg-btn); color: var(--c-text-btn);
+            border: none; border-radius: var(--border-radius-small); font-size: 1rem; font-weight: 600;
+            cursor: pointer; transition: all var(--transition-smooth);
+        }
+        form button:hover:not(:disabled) { opacity: 0.85; transform: translateY(-2px); }
+        form button:disabled { background: var(--c-text-secondary); cursor: wait; opacity: 0.5; }
+        .feedback-status {
+            text-align: center; margin-top: 1rem; font-weight: 500; height: 1.5rem;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .feedback-status.show { opacity: 1; }
+        .feedback-status.success { color: var(--c-status-success); }
+        .feedback-status.error { color: var(--c-status-error); }
+        z
+        #feedback-items { max-height: 500px; overflow-y: auto; padding-right: 10px; }
+        .feedback-item {
+            padding-bottom: 1rem; margin-bottom: 1rem; 
+            border-bottom: 1px solid var(--c-border-glass);
+        }
+        .feedback-item:last-child { border-bottom: none; margin-bottom: 0; }
+        .feedback-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; }
+        .feedback-header strong { font-size: 1.1rem; color: var(--c-text-primary); }
+        .feedback-header span { font-size: 0.8rem; color: var(--c-text-secondary); }
+        .feedback-item p { margin: 0.5rem 0; white-space: pre-wrap; word-wrap: break-word; }
+        .admin-reply {
+            margin-top: 0.75rem; padding: 0.75rem; background: var(--c-bg-input);
+            border-radius: var(--border-radius-small); font-size: 0.9rem; border-left: 3px solid var(--c-text-accent);
+        }
+        .admin-reply strong { font-size: 0.9rem; color: var(--c-text-primary); display: block; margin-bottom: 0.25rem; }
 
-    .shapes-left .shape:nth-child(2) {
-      width: 50px;
-      height: 50px;
-      top: 50%;
-      left: 50%;
-      animation-duration: 18s;
-      animation-delay: 2s;
-    }
-
-    .shapes-left .shape:nth-child(3) {
-      width: 100px;
-      height: 100px;
-      top: 70%;
-      left: 20%;
-      animation-duration: 15s;
-      animation-delay: 4s;
-    }
-
-    .shapes-right .shape:nth-child(1) {
-      width: 70px;
-      height: 70px;
-      top: 30%;
-      right: 40%;
-      animation-duration: 14s;
-    }
-
-    .shapes-right .shape:nth-child(2) {
-      width: 90px;
-      height: 90px;
-      top: 60%;
-      right: 20%;
-      animation-duration: 16s;
-      animation-delay: 3s;
-    }
-
-    .shapes-right .shape:nth-child(3) {
-      width: 60px;
-      height: 60px;
-      top: 80%;
-      right: 50%;
-      animation-duration: 20s;
-      animation-delay: 5s;
-    }
-
-    /* Header */
-    header {
-      display: flex;
-      align-items: center;
-      padding: 0.8rem 2rem;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      transition: padding 0.3s ease, background 0.3s ease;
-    }
-
-    header.shrink {
-      padding: 0.5rem 2rem;
-      background: rgba(0, 0, 0, 0.9);
-    }
-
-    header a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: color 0.3s ease;
-    }
-
-    header a:hover {
-      color: #ccc;
-    }
-
-    /* Main Container */
-    .page-container {
-      max-width: 800px;
-      margin: 4rem auto;
-      padding: 0 2rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Form Section */
-    .form-container {
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      margin-bottom: 3rem;
-      animation: fadeIn 1s ease;
-    }
-
-    .form-container h2 {
-      font-size: 2.5rem;
-      font-weight: 600;
-      color: #fff;
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-
-    label {
-      display: block;
-      margin-top: 1rem;
-      font-weight: 500;
-      color: #fff;
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      margin-top: 0.5rem;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
-      outline: none;
-      transition: background 0.3s ease;
-    }
-
-    input::placeholder,
-    textarea::placeholder {
-      color: rgba(255, 255, 255, 0.6);
-    }
-
-    input:focus,
-    textarea:focus {
-      background: rgba(255, 255, 255, 0.3);
-    }
-
-    button {
-      margin-top: 1.5rem;
-      width: 100%;
-      padding: 0.75rem;
-      font-size: 1rem;
-      border: none;
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
-      font-weight: 500;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.3s ease;
-    }
-
-    button:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: scale(1.03);
-    }
-
-    #feedback-status {
-      margin-top: 1rem;
-      text-align: center;
-      font-weight: 500;
-      color: #ccc;
-    }
-
-    /* Feedback List Section */
-    #feedback-list {
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      margin-bottom: 3rem;
-    }
-
-    #feedback-list h3 {
-      font-size: 2rem;
-      font-weight: 600;
-      color: #fff;
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-
-    .feedback-item {
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin-bottom: 1rem;
-      opacity: 1;
-      transform: translateY(0);
-      transition: transform 0.5s ease, opacity 0.5s ease;
-    }
-
-    .feedback-item:not(.visible) {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    .feedback-item.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .feedback-item:hover {
-      transform: translateY(-5px);
-    }
-
-    .feedback-item strong {
-      font-size: 1.1rem;
-      color: #fff;
-    }
-
-    .feedback-item span {
-      font-size: 0.85rem;
-      color: #ccc;
-      margin-left: 0.5rem;
-    }
-
-    .feedback-item p {
-      margin: 0.5rem 0;
-      font-size: 1rem;
-      color: #ddd;
-    }
-
-    .admin-reply {
-      background: rgba(255, 255, 255, 0.2);
-      padding: 0.75rem;
-      border-radius: 4px;
-      font-weight: 500;
-      margin-top: 0.75rem;
-      font-size: 0.9rem;
-      color: #fff;
-    }
-
-    /* Footer Section (Combined Sidebar Content) */
-    footer {
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 3rem 1rem;
-      animation: fadeIn 1s ease;
-    }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-    }
-
-    .footer-section h4 {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 1rem;
-    }
-
-    .footer-section ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .footer-section li {
-      font-size: 0.95rem;
-      color: #ccc;
-      margin-bottom: 0.5rem;
-      line-height: 1.6;
-    }
-
-    .footer-section a {
-      color: #fff;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-section a:hover {
-      color: #ccc;
-    }
-
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-50px); }
-      100% { transform: translateY(0); }
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .page-container {
-        padding: 0 1rem;
-        margin: 2rem auto;
-      }
-
-      .form-container,
-      #feedback-list {
-        padding: 1.5rem;
-      }
-
-      .form-container h2,
-      #feedback-list h3 {
-        font-size: 1.8rem;
-      }
-
-      .footer-content {
-        gap: 1.5rem;
-      }
-
-      .shapes-left,
-      .shapes-right {
-        width: 150px; /* Reduced width on smaller screens */
-      }
-
-      .shapes-left .shape:nth-child(3),
-      .shapes-right .shape:nth-child(3) {
-        display: none; /* Hide one shape to reduce clutter */
-      }
-    }
-
-    @media (max-width: 480px) {
-      .form-container h2,
-      #feedback-list h3 {
-        font-size: 1.5rem;
-      }
-
-      .feedback-item {
-        padding: 1rem;
-      }
-
-      .footer-section h4 {
-        font-size: 1.1rem;
-      }
-
-      .footer-section li {
-        font-size: 0.9rem;
-      }
-
-      .shapes-left,
-      .shapes-right {
-        width: 100px;
-      }
-
-      .shapes-left .shape:nth-child(2),
-      .shapes-right .shape:nth-child(2) {
-        display: none; /* Hide another shape for very small screens */
-      }
-    }
-
-    /* Scrollbar Styling */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 10px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(255, 255, 255, 0.5);
-    }
-  </style>
+        footer {
+            background: var(--c-bg-glass); backdrop-filter: blur(var(--backdrop-blur-value));
+            border-top: 1px solid var(--c-border-glass); padding: 2rem; margin-top: 4rem; text-align: center;
+        }
+        footer p { font-size: 0.9rem; color: var(--c-text-secondary); }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
 </head>
 <body>
-  <!-- Floating Shapes -->
-  <div class="shapes-left">
-    <div class="shape"></div>
-    <div class="shape"></div>
-    <div class="shape"></div>
-  </div>
-  <div class="shapes-right">
-    <div class="shape"></div>
-    <div class="shape"></div>
-    <div class="shape"></div>
-  </div>
-
-  <!-- Header -->
-  <header id="main-header">
-    <a href="dashboard.html">Back to Dashboard</a>
-  </header>
-
-  <!-- Main Content -->
-  <div class="page-container">
-    <!-- Feedback Form -->
-    <div class="form-container">
-      <h2>We Value Your Feedback</h2>
-      <form id="feedback-form">
-        <label for="name">Name</label>
-        <input type="text" id="name" required />
-        <label for="email">Email</label>
-        <input type="email" id="email" required />
-        <label for="message">Message</label>
-        <textarea id="message" rows="4" required></textarea>
-        <button type="submit">Send Feedback</button>
-      </form>
-      <p id="feedback-status"></p>
+    <div class="top-ui-container">
+        <a href="dashboard.html" class="back-to-dashboard ui-btn">
+            <span class="arrow-icon">&larr;</span>
+            <span class="text">Back to Dashboard</span>
+        </a>
     </div>
 
-    <!-- Recent Feedback -->
-    <div id="feedback-list">
-      <h3>Recent Feedback</h3>
-      <div id="feedback-items"><p>Loading feedback...</p></div>
-    </div>
-  </div>
+    <main class="content-wrapper">
+        <div class="feedback-card" id="form-card" style="display: none;">
+            <h2>We Value Your Feedback</h2>
+            <form id="feedback-form">
+                <label for="name">Name</label>
+                <input type="text" id="name" required />
+                
+                <label for="email">Email</label>
+                <input type="email" id="email" required />
+                
+                <label for="message">Message</label>
+                <textarea id="message" rows="5" required placeholder="Share your thoughts, suggestions, or issues..."></textarea>
+                
+                <button type="submit" id="submit-btn">Send Feedback</button>
+            </form>
+            <p class="feedback-status" id="feedback-status"></p>
+        </div>
 
-  <!-- Footer (Combined Sidebar Content) -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-section">
-        <h4>Why Feedback Matters?</h4>
-        <ul>
-          <li>Improve our services</li>
-          <li>Help us fix bugs</li>
-          <li>Share your experience</li>
-          <li>We listen to you!</li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h4>Did You Know?</h4>
-        <ul>
-          <li>Feedback increases engagement by 70%</li>
-          <li>90% of users trust peer reviews</li>
-          <li>Your voice shapes our features!</li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h4>Need Help?</h4>
-        <ul>
-          <li><a href="#">Visit FAQ</a></li>
-          <li><a href="#">Contact Support</a></li>
-          <li><a href="#">Join Community</a></li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h4>© 2025 Bridging the Gap</h4>
-      </div>
-    </div>
-  </footer>
+        <div class="feedback-card" id="list-card">
+            <h2>Recent Feedback</h2>
+            <div id="feedback-items">
+                <p>Loading feedback...</p>
+            </div>
+        </div>
+    </main>
 
-  <!-- Firebase Integration -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyD9Y_saGbwRdVsJr_zyFjwAayY8dkBUrXg",
-      authDomain: "bridging-the-gap-af65a.firebaseapp.com",
-      projectId: "bridging-the-gap-af65a",
-      storageBucket: "bridging-the-gap-af65a.appspot.com",
-      messagingSenderId: "608387568756",
-      appId: "1:608387568756:web:a563a78ea0e6e61d3dad21",
-      measurementId: "G-9V1P6M82KD",
-      databaseURL: "https://bridging-the-gap-af65a-default-rtdb.firebaseio.com"
-    };
-  
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const feedbackRef = firebase.database().ref("feedback");
-  
-    const feedbackForm = document.getElementById("feedback-form");
-    const statusElem = document.getElementById("feedback-status");
-  
-    // Check authentication state
-    auth.onAuthStateChanged(user => {
-      if (!user || !user.emailVerified) {
-        statusElem.innerText = "Please log in to submit or view feedback.";
-        statusElem.style.color = "#ff5555";
-        feedbackForm.style.display = "none"; // Hide form
-        document.getElementById("feedback-items").innerHTML = "<p>Please log in to view feedback.</p>";
-      } else {
-        feedbackForm.style.display = "block"; // Show form
-        // Fetch feedback only for authenticated users
-        feedbackRef.on("value", (snapshot) => {
-          const data = snapshot.val();
-          if (data) {
-            displayFeedback(data);
-          } else {
-            document.getElementById("feedback-items").innerHTML = "<p>No feedback yet.</p>";
-          }
+    <footer>
+        <p>&copy; 2025 Bridging the Gap</p>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // -- 1. Firebase Setup --
+            const firebaseConfig = {
+                apiKey: "AIzaSyD9Y_saGbwRdVsJr_zyFjwAayY8dkBUrXg",
+                authDomain: "bridging-the-gap-af65a.firebaseapp.com",
+                projectId: "bridging-the-gap-af65a",
+                storageBucket: "bridging-the-gap-af65a.appspot.com",
+                messagingSenderId: "608387568756",
+                appId: "1:608387568756:web:a563a78ea0e6e61d3dad21",
+                databaseURL: "https://bridging-the-gap-af65a-default-rtdb.firebaseio.com"
+            };
+
+            firebase.initializeApp(firebaseConfig);
+            const auth = firebase.auth();
+            const db = firebase.database();
+            const feedbackRef = db.ref("feedback");
+
+            // -- 2. DOM Element References --
+            const formCard = document.getElementById("form-card");
+            const feedbackForm = document.getElementById("feedback-form");
+            const nameInput = document.getElementById("name");
+            const emailInput = document.getElementById("email");
+            const messageInput = document.getElementById("message");
+            const submitBtn = document.getElementById("submit-btn");
+            const statusElem = document.getElementById("feedback-status");
+            const feedbackItemsContainer = document.getElementById("feedback-items");
+
+            let statusTimeout;
+
+            // -- 3. Utility Functions --
+            const showStatus = (message, type, duration = 4000) => {
+                clearTimeout(statusTimeout);
+                statusElem.textContent = message;
+                statusElem.className = `feedback-status show ${type}`;
+                if (duration) {
+                    statusTimeout = setTimeout(() => statusElem.classList.remove('show'), duration);
+                }
+            };
+            
+            const escapeHTML = (str) => {
+                const p = document.createElement('p');
+                p.textContent = str;
+                return p.innerHTML;
+            };
+
+            auth.onAuthStateChanged(user => {
+                if (user && user.emailVerified) {
+                    formCard.style.display = 'block';
+                    
+                    nameInput.value = user.displayName || ''; 
+                    emailInput.value = user.email || '';
+
+                    feedbackRef.orderByChild('timestamp').limitToLast(15).on("value", snapshot => {
+                        feedbackItemsContainer.innerHTML = "";
+                        if (snapshot.exists()) {
+                            const feedbacks = [];
+                            snapshot.forEach(childSnapshot => {
+                                feedbacks.push({ id: childSnapshot.key, ...childSnapshot.val() });
+                            });
+                            displayFeedback(feedbacks.reverse());
+                        } else {
+                            feedbackItemsContainer.innerHTML = "<p>No feedback yet. Be the first!</p>";
+                        }
+                    });
+                } else {
+                    formCard.style.display = 'none';
+                    feedbackItemsContainer.innerHTML = `<p style="text-align: center; font-weight: 500;">Please log in to your dashboard to submit or view feedback.</p>`;
+                }
+            });
+
+            feedbackForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const name = nameInput.value.trim();
+                const email = emailInput.value.trim();
+                const message = messageInput.value.trim();
+                
+                if (!name || !email || !message) {
+                    showStatus("All fields are required.", "error");
+                    return;
+                }
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Sending...";
+
+                const feedbackData = {
+                    name: name, 
+                    email: email, 
+                    message: message,
+                    timestamp: firebase.database.ServerValue.TIMESTAMP,
+                    uid: auth.currentUser.uid 
+                };
+
+                feedbackRef.push(feedbackData)
+                    .then(() => {
+                        showStatus("Thank you for your feedback!", "success");
+                        messageInput.value = ""; 
+                    })
+                    .catch(error => {
+                        console.error("Firebase Write Error:", error);
+                        showStatus("An error occurred. Please try again.", "error");
+                    })
+                    .finally(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = "Send Feedback";
+                    });
+            });
+
+            function displayFeedback(feedbacks) {
+                feedbacks.forEach(data => {
+                    const item = document.createElement("div");
+                    item.className = "feedback-item";
+                    item.innerHTML = `
+                        <div class="feedback-header">
+                            <strong>${escapeHTML(data.name)}</strong>
+                            <span>${new Date(data.timestamp).toLocaleString()}</span>
+                        </div>
+                        <p>${escapeHTML(data.message)}</p>
+                        ${data.reply ? `<div class="admin-reply"><strong>Admin Reply:</strong> ${escapeHTML(data.reply)}</div>` : ''}
+                    `;
+                    feedbackItemsContainer.appendChild(item);
+                });
+            }
+
+            const backButton = document.querySelector(".back-to-dashboard");
+            window.addEventListener("scroll", () => {
+                backButton.classList.toggle("arrow", window.scrollY > 50);
+            }, { passive: true });
         });
-      }
-    });
-  
-    feedbackForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-  
-      if (!auth.currentUser) {
-        statusElem.innerText = "Please log in to submit feedback.";
-        statusElem.style.color = "#ff5555";
-        return;
-      }
-  
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const message = document.getElementById("message").value.trim();
-  
-      if (!name || !email || !message) {
-        statusElem.innerText = "All fields are required.";
-        statusElem.style.color = "#ff5555";
-        return;
-      }
-  
-      const feedbackData = {
-        name,
-        email,
-        message,
-        timestamp: new Date().toISOString()
-      };
-  
-      feedbackRef.push(feedbackData)
-        .then(() => {
-          statusElem.innerText = "Thank you for your feedback!";
-          statusElem.style.color = "#55ff55";
-          feedbackForm.reset();
-        })
-        .catch((error) => {
-          console.error("Error submitting feedback:", error);
-          statusElem.innerText = "Something went wrong. Please try again.";
-          statusElem.style.color = "#ff5555";
-        });
-    });
-  
-    function displayFeedback(feedbacks) {
-      const feedbackItems = document.getElementById("feedback-items");
-      feedbackItems.innerHTML = "";
-  
-      const sortedFeedbacks = Object.entries(feedbacks).sort(
-        (a, b) => new Date(b[1].timestamp) - new Date(a[1].timestamp)
-      );
-  
-      sortedFeedbacks.forEach(([id, data]) => {
-        const div = document.createElement("div");
-        div.className = "feedback-item";
-        div.innerHTML = `
-          <strong>${data.name}</strong>
-          <span>(${new Date(data.timestamp).toLocaleString()})</span>
-          <p>${data.message}</p>
-          ${data.reply ? `<p class="admin-reply">Admin Reply: ${data.reply}</p>` : ``}
-        `;
-        feedbackItems.appendChild(div);
-      });
-  
-      // Trigger scroll animation for feedback items
-      const observerOptions = {
-        threshold: 0.2,
-        rootMargin: "0px 0px -50px 0px"
-      };
-  
-      const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      }, observerOptions);
-  
-      document.querySelectorAll(".feedback-item").forEach(item => {
-        observer.observe(item);
-      });
-    }
-  
-    // Header Shrink on Scroll
-    document.addEventListener("DOMContentLoaded", () => {
-      const header = document.getElementById("main-header");
-      const shrinkOn = 50;
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > shrinkOn) {
-          header.classList.add("shrink");
-        } else {
-          header.classList.remove("shrink");
-        }
-      });
-    });
-  </script>
+    </script>
 </body>
 </html>
