@@ -63,7 +63,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
+            padding: 1rem;
             position: relative;
         }
         
@@ -90,7 +90,7 @@
         .flip-card {
             background-color: transparent;
             width: 440px;
-            max-width: 90%;
+            max-width: 100%;
             height: 600px; 
             perspective: 1500px;
         }
@@ -128,7 +128,7 @@
             font-size: 2rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            text-align: center;
+            text-align:center;
         }
         .toggle-form {
             display: block;
@@ -221,11 +221,43 @@
         #status-message.success { color: var(--c-status-success); }
         #status-message.error { color: var(--c-status-error); }
         
+        /* --- MOBILE VIEW  --- */
         @media (max-width: 480px) {
-            .flip-card { height: auto; min-height: 580px; }
-            .flip-card-front, .flip-card-back { padding: 30px; }
-            h1 { font-size: 1.8rem; }
-            .form-row { flex-direction: column; gap: 0; }
+            body {
+                overflow-y: auto;
+                align-items: flex-start;
+                padding: 2rem 1rem;
+            }
+            h1 {
+                font-size: 1.8rem;     
+                font-weight: 700;
+                margin-bottom: 1rem;   
+                text-align: center;
+                position: relative;
+                bottom: 20px;
+
+            }
+            .flip-card { 
+                height: auto; 
+                min-height: 590px;
+            }
+            .flip-card-front, .flip-card-back { 
+                padding: 35px 50px; 
+            }
+            h1 { 
+                font-size: 1.8rem;
+                margin-top: 0;
+                margin-bottom: 1rem;
+            }
+            .form-group {
+                margin-bottom: 0.8rem;
+            }
+            label, input, button {
+                font-size: 0.95rem; 
+            }
+            input[type="text"], input[type="email"], input[type="password"] {
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -307,7 +339,6 @@
         })();
 
         document.addEventListener("DOMContentLoaded", () => {
-            // --- 1. FIREBASE SETUP ---
             const firebaseConfig = {
                 apiKey: "AIzaSyD9Y_saGbwRdVsJr_zyFjwAayY8dkBUrXg",
                 authDomain: "bridging-the-gap-af65a.firebaseapp.com",
@@ -324,13 +355,11 @@
             const toggleToLogin = document.getElementById('toggle-to-login');
             const toggleToSignup = document.getElementById('toggle-to-signup');
             const statusMessage = document.getElementById('status-message');
-            
             let adminLoginAttempted = false;
 
-            // --- UI/UX LOGIC ---
             toggleToLogin.addEventListener('click', () => {
                 flipCard.classList.remove('is-flipped');
-                showStatus('', 'success', 1);
+                showStatus('', 'success', 1); 
             });
             toggleToSignup.addEventListener('click', () => {
                 flipCard.classList.add('is-flipped');
@@ -469,7 +498,7 @@
                     }
                 }
             });
-            
+        
             window.onpopstate = function() {
                 if (!auth.currentUser) {
                     window.location.replace("index.html");
