@@ -1,18 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="A portal to explore government schemes for health, farmers, students, and more." />
     <title>Bridging the Gap - Government Schemes Portal</title>
 
+    <script>
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        } else {
+          document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+        }
+      })();
+    </script>
+
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="shortcut icon" href="/favicon.ico">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
@@ -28,7 +41,10 @@
     <header id="main-header">
         <div class="header-content">
             <div class="header-left">
-                <div class="logo">Bridging the Gap</div>
+                <div class="logo">
+                    <img src="https://res.cloudinary.com/ddkisbcrp/image/upload/v1754680190/logo_pjqn4r.png" alt="Bridging the Gap Logo">
+                    <span>Bridging the Gap</span>
+                </div>
             </div>
             
             <div class="header-center">
@@ -88,7 +104,6 @@
                         <a href="health.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-
                 <div class="card">
                     <div class="card-content">
                         <i class="fas fa-tractor"></i>
@@ -97,7 +112,6 @@
                         <a href="farmer.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-                
                 <div class="card">
                     <div class="card-content">
                         <i class="fas fa-graduation-cap"></i>
@@ -106,7 +120,6 @@
                         <a href="student.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-
                 <div class="card">
                     <div class="card-content">
                         <i class="fas fa-futbol"></i>
@@ -115,7 +128,6 @@
                         <a href="sports.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-            
                 <div class="card">
                     <div class="card-content">
                         <i class="fas fa-ellipsis-h"></i>
@@ -148,9 +160,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="faq-answer">
-                        <div>
-                            <p>Each scheme has a "Learn More" page with detailed eligibility criteria and application links.</p>
-                        </div>
+                        <div><p>Each scheme has a "Learn More" page with detailed eligibility criteria and application links.</p></div>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -159,9 +169,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="faq-answer">
-                        <div>
-                            <p>No, this is an independent portal designed to simplify access to official government scheme information.</p>
-                        </div>
+                        <div><p>No, this is an independent portal designed to simplify access to official government scheme information.</p></div>
                     </div>
                 </div>
             </section>
@@ -170,24 +178,18 @@
 
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">Bridging the Gap</div>
-    
+            <div class="footer-logo">
+                 <img src="https://res.cloudinary.com/ddkisbcrp/image/upload/v1754680190/logo_pjqn4r.png" alt="Bridging the Gap Logo">
+                 <span>Bridging the Gap</span>
+            </div>
             <div class="footer-developer">
                 <h4 class="developer-name-prominent">𝚜𝚌𝚑𝚛𝚘𝚍𝚒𝚗𝚐𝚎𝚛𝚜𝚙𝚎𝚝</h4>
-                
                 <div class="footer-social-links">
-                    <a href="https://github.com/schrodingerspet" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://t.me/pawticle_box" target="_blank" rel="noopener noreferrer" aria-label="Telegram Profile">
-                        <i class="fab fa-telegram"></i>
-                    </a>
-                    <a href="https://www.instagram.com/_schrodingerspet_" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile">
-                        <i class="fab fa-instagram"></i>
-                    </a>
+                    <a href="https://github.com/schrodingerspet" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+                    <a href="https://t.me/pawticle_box" target="_blank" rel="noopener noreferrer" aria-label="Telegram Profile"><i class="fab fa-telegram"></i></a>
+                    <a href="https://www.instagram.com/_schrodingerspet_" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-    
             <div class="footer-contact">
                 <h3>Contact Us</h3>
                 <p><i class="fas fa-envelope"></i> support@example.com</p>
@@ -202,42 +204,29 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
     <script>
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyD9Y_saGbwRdVsJr_zyFjwAayY8dkBUrXg", 
-            authDomain: "bridging-the-gap-af65a.firebaseapp.com",
-            projectId: "bridging-the-gap-af65a",
-            storageBucket: "bridging-the-gap-af65a.firebasestorage.app",
-            messagingSenderId: "608387568756",
-            appId: "1:608387568756:web:a563a78ea0e6e61d3dad21"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-
         document.addEventListener("DOMContentLoaded", () => {
+            const firebaseConfig = {
+                apiKey: "AIzaSyD9Y_saGbwRdVsJr_zyFjwAayY8dkBUrXg", 
+                authDomain: "bridging-the-gap-af65a.firebaseapp.com",
+                projectId: "bridging-the-gap-af65a",
+                storageBucket: "bridging-the-gap-af65a.firebasestorage.app",
+                messagingSenderId: "608387568756",
+                appId: "1:608387568756:web:a563a78ea0e6e61d3dad21"
+            };
+            firebase.initializeApp(firebaseConfig);
+            const auth = firebase.auth();
+
             const themeToggle = document.getElementById('theme-toggle');
             const htmlEl = document.documentElement;
-
             const setTheme = (theme) => {
                 htmlEl.setAttribute('data-theme', theme);
                 localStorage.setItem('theme', theme);
             };
-
-            const savedTheme = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            
-            if (savedTheme) {
-                setTheme(savedTheme);
-            } else {
-                setTheme(prefersDark ? 'dark' : 'light');
-            }
-
             themeToggle.addEventListener('click', () => {
                 const currentTheme = htmlEl.getAttribute('data-theme');
                 setTheme(currentTheme === 'light' ? 'dark' : 'light');
             });
 
-            // --- AUTH CHECK & LOGOUT ---
             auth.onAuthStateChanged(user => {
                 if (!user || !user.emailVerified) {
                     window.location.href = "index.html"; 
@@ -255,9 +244,7 @@
                         alert("An error occurred during logout. Please try again.");
                     });
             };
-            
-            const logoutButtons = document.querySelectorAll("#logout-btn, #logout-btn-mobile");
-            logoutButtons.forEach(btn => btn.addEventListener("click", handleLogout));
+            document.querySelectorAll("#logout-btn, #logout-btn-mobile").forEach(btn => btn.addEventListener("click", handleLogout));
 
             const searchInput = document.getElementById("search-input");
             const allCards = document.querySelectorAll(".card");
@@ -267,7 +254,7 @@
                     const title = card.querySelector("h3").innerText.toLowerCase();
                     const description = card.querySelector("p").innerText.toLowerCase();
                     const isVisible = title.includes(query) || description.includes(query);
-                    card.style.display = isVisible ? "flex" : "none";
+                    card.style.display = isVisible ? "block" : "none";
                 });
             });
 
@@ -279,18 +266,19 @@
                     }
                 });
             }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-            allCards.forEach(card => cardObserver.observe(card));
+            allCards.forEach((card, index) => {
+                card.style.transitionDelay = `${index * 50}ms`;
+                cardObserver.observe(card);
+            });
 
             const faqItems = document.querySelectorAll('.faq-item');
             faqItems.forEach(item => {
                 const question = item.querySelector('.faq-question');
                 question.addEventListener('click', () => {
-                    const wasOpen = item.classList.contains('open');
                     item.classList.toggle('open');
                 });
             });
 
-            // --- MOBILE MENU ---
             const hamburger = document.getElementById("hamburger");
             const menu = document.getElementById("menu");
             hamburger.addEventListener("click", () => {
