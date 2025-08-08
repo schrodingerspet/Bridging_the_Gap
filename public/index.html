@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Sign Up & Login - Bridging the Gap</title>
+    <title>Welcome - Bridging the Gap</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="shortcut icon" href="/favicon.ico">
 
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -19,312 +20,323 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
     
     <style>
+        /* 1. THEME & BASE STYLES */
         :root {
-            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            --transition-smooth: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --border-radius-main: 18px;
+            --font-display: 'Playfair Display', serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --transition-smooth: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius-main: 24px;
             --border-radius-small: 12px;
-            --shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.25);
-            --backdrop-blur-value: 12px;
+            --shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.2);
+            --backdrop-blur-value: 16px;
         }
 
         html[data-theme='light'] {
             --c-text-primary: #1d1d1f;
-            --c-text-on-glass: #000;
             --c-text-secondary: #515154;
             --c-text-accent: #007aff;
-            --c-bg-glass: rgba(255, 255, 255, 0.6);
+            --c-bg-glass: rgba(255, 255, 255, 0.75);
             --c-border-glass: rgba(60, 60, 67, 0.2);
             --c-bg-btn: #007aff;
             --c-text-btn: #ffffff;
             --c-bg-btn-admin: #c62828;
             --c-bg-input: rgba(0, 0, 0, 0.05);
+            --c-bg-divider: rgba(60, 60, 67, 0.15);
             --c-status-success: #28a745;
             --c-status-error: #d32f2f;
+            --c-spotlight: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(0, 122, 255, 0.15), transparent 40%);
         }
 
         html[data-theme='dark'] {
             --c-text-primary: #f5f5f7;
-            --c-text-on-glass: #fff;
             --c-text-secondary: #8e8e93;
             --c-text-accent: #0a84ff;
-            --c-bg-glass: rgba(28, 28, 30, 0.5);
+            --c-bg-glass: rgba(28, 28, 30, 0.55);
             --c-border-glass: rgba(84, 84, 88, 0.5);
             --c-bg-btn: #0a84ff;
             --c-text-btn: #ffffff;
             --c-bg-btn-admin: #d32f2f;
             --c-bg-input: rgba(255, 255, 255, 0.1);
+            --c-bg-divider: rgba(84, 84, 88, 0.4);
             --c-status-success: #32d74b;
             --c-status-error: #ff453a;
+            --c-spotlight: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(10, 132, 255, 0.2), transparent 40%);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: var(--font-primary);
+            font-family: var(--font-sans);
             background-color: #000; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: grid;
+            place-items: center;
             min-height: 100vh;
-            padding: 1rem;
+            padding: 1.5rem;
             position: relative;
+            overflow: hidden;
         }
         
         .background-container {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed;
+            top: -5%; left: -5%; width: 110%; height: 110%;
             background: url('https://res.cloudinary.com/ddkisbcrp/image/upload/f_auto,q_auto/v1/anime/aftuw166jigihk5ziykl') no-repeat center center;
             background-size: cover;
             z-index: -1;
-        }
-        .background-gradient {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(45deg, rgba(118, 75, 162, 0.3), rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
-            background-size: 200% 200%;
-            animation: gradient-animation 15s ease infinite;
-        }
-        @keyframes gradient-animation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); 
+            transform: translate(var(--mouse-x-bg, 0), var(--mouse-y-bg, 0)) scale(1);
         }
 
-        .flip-card {
-            background-color: transparent;
-            width: 440px;
-            max-width: 100%;
-            height: 600px; 
-            perspective: 1500px;
-        }
-        .flip-card-inner {
-            position: relative;
+        /* 2. MAIN LAYOUT CONTAINER */
+        .page-container {
             width: 100%;
-            height: 100%;
-            transition: transform 0.8s;
-            transform-style: preserve-3d;
-        }
-        .flip-card.is-flipped .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-        .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden; 
-            backface-visibility: hidden;
+            max-width: 1024px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
             background: var(--c-bg-glass);
             border: 1px solid var(--c-border-glass);
             backdrop-filter: blur(var(--backdrop-blur-value));
             border-radius: var(--border-radius-main);
             box-shadow: var(--shadow-strong);
-            padding: 40px;
-            color: var(--c-text-on-glass);
-            display: flex;
-            flex-direction: column;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+            position: relative;
+            transition: transform 0.1s ease-out;
+            transform: perspective(1500px) rotateX(var(--rotate-x, 0)) rotateY(var(--rotate-y, 0));
         }
-        .flip-card-back {
-            transform: rotateY(180deg);
+        
+        .page-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--c-spotlight);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-smooth);
+        }
+        .page-container:hover::before {
+            opacity: 1;
         }
 
-        h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            text-align:center;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
         }
-        .toggle-form {
-            display: block;
-            color: var(--c-text-accent);
-            font-weight: 500;
-            margin-bottom: 2rem;
-            cursor: pointer;
-            transition: color 0.3s;
+        
+        .info-panel > * {
+            opacity: 0;
+            animation: fadeUp 0.6s var(--transition-smooth) forwards;
+        }
+        .info-panel .brand-header { animation-delay: 0.2s; }
+        .info-panel h2 { animation-delay: 0.3s; }
+        .info-panel .subtitle { animation-delay: 0.4s; }
+        .info-panel .category-icons { animation-delay: 0.5s; }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 3. INFO & FORM PANELS */
+        .info-panel {
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .brand-header { text-align: center; }
+        .brand-header img { width: 64px; height: 64px; margin-bottom: 1rem; }
+        .brand-header h1 { 
+            font-family: var(--font-display);
+            font-size: 2rem; 
+            color: var(--c-text-primary);
+        }
+        
+        .info-panel h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--c-text-primary);
+            line-height: 1.3;
             text-align: center;
         }
-        .toggle-form:hover { text-decoration: underline; }
+        .info-panel .subtitle {
+            font-size: 1rem;
+            color: var(--c-text-secondary);
+            line-height: 1.6;
+            text-align: center;
+        }
+        
+        .category-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.25rem;
+        }
+        .icon-item { text-align: center; }
+        .icon-item i {
+            font-size: 1.5rem;
+            width: 50px; height: 50px;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--c-bg-input);
+            border-radius: 50%;
+            color: var(--c-text-accent);
+            margin-bottom: 0.5rem;
+            transition: transform var(--transition-smooth);
+        }
+        .icon-item:hover i {
+            transform: scale(1.15) translateY(-2px);
+        }
+        .icon-item span { font-size: 0.8rem; color: var(--c-text-secondary); }
 
-        form {
+        .form-panel { 
+            padding: 48px; 
+            border-left: 1px solid var(--c-border-glass);
             display: flex;
             flex-direction: column;
-            flex-grow: 1; 
+            justify-content: center;
         }
-        .form-content { flex-grow: 1; }
+        
+        .form-panel h1 { font-size: 1.8rem; text-align: center; }
+        .toggle-form {
+            display: block; color: var(--c-text-accent); font-weight: 500;
+            margin-bottom: 1.5rem; cursor: pointer; transition: color 0.3s;
+            text-align: center;
+        }
         .form-group { margin-bottom: 1rem; }
         .form-row { display: flex; gap: 1rem; }
         .form-row .form-group { flex: 1; }
-
-        label {
-            display: block;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: var(--c-text-secondary);
-        }
-        input[type="text"], input[type="email"], input[type="password"] {
-            width: 100%;
-            padding: 12px;
-            background: var(--c-bg-input);
-            border: 1px solid transparent;
-            border-radius: var(--border-radius-small);
-            font-size: 1rem;
-            color: var(--c-text-primary);
-            font-family: var(--font-primary);
-            outline: none;
+        label { display: block; font-weight: 500; margin-bottom: 0.5rem; color: var(--c-text-secondary); }
+        input {
+            width: 100%; padding: 12px; background: var(--c-bg-input);
+            border: 1px solid transparent; border-radius: var(--border-radius-small);
+            font-size: 1rem; color: var(--c-text-primary); font-family: var(--font-sans);
+            outline: none; 
             transition: all var(--transition-smooth);
         }
         input::placeholder { color: var(--c-text-secondary); }
-        input:focus { border-color: var(--c-text-accent); background: transparent; }
-        
+        input:focus { 
+            transform: scale(1.02);
+            border-color: var(--c-text-accent); 
+            background: transparent;
+        }
         .password-container { position: relative; }
-        .toggle-password {
-            position: absolute;
-            right: 12px; top: 50%; transform: translateY(-50%);
-            color: var(--c-text-secondary);
-            cursor: pointer;
-        }
-        
-        #forgot-password {
-            display: block; text-align: right; color: var(--c-text-accent);
-            font-size: 0.9rem; margin-top: 0.5rem; text-decoration: none;
-        }
-
+        .toggle-password { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--c-text-secondary); cursor: pointer; }
+        #forgot-password { display: block; text-align: right; color: var(--c-text-accent); font-size: 0.9rem; margin-top: 0.5rem; text-decoration: none; }
         button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: var(--border-radius-small);
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all var(--transition-smooth);
-            margin-top: 1rem;
+            width: 100%; padding: 12px; border: none; border-radius: var(--border-radius-small);
+            font-size: 1rem; font-weight: 600; cursor: pointer;
+            transition: all var(--transition-smooth); margin-top: 1rem;
         }
         .primary-btn { background: var(--c-bg-btn); color: var(--c-text-btn); }
         .primary-btn:hover { opacity: 0.85; transform: translateY(-2px); }
         #admin-login-btn { background: var(--c-bg-btn-admin); color: var(--c-text-btn); }
         
         #status-message {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 10px 20px;
-            background: var(--c-bg-glass);
-            border: 1px solid var(--c-border-glass);
-            border-radius: var(--border-radius-small);
-            font-weight: 500;
-            text-align: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s, visibility 0.4s;
-            z-index: 100;
-            max-width: 90%;
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            padding: 10px 20px; background: var(--c-bg-glass); border: 1px solid var(--c-border-glass);
+            border-radius: var(--border-radius-small); font-weight: 500; text-align: center;
+            opacity: 0; visibility: hidden; transition: opacity 0.4s, visibility 0.4s;
+            z-index: 100; max-width: 90%;
         }
-        #status-message.show { opacity: 1; visibility: visible; }
-        #status-message.success { color: var(--c-status-success); }
-        #status-message.error { color: var(--c-status-error); }
+        .hidden { display: none; }
         
-        /* --- MOBILE VIEW   --- */
-        @media (max-width: 480px) {
-          .flip-card-front,
-          .flip-card-back {
-            background-color: rgba(255, 255, 255, 0.4) !important;
-          }
-          html[data-theme='dark'] .flip-card-front,
-          html[data-theme='dark'] .flip-card-back {
-            background-color: rgba(28, 28, 30, 0.4) !important;
-          }
-
-          input[type="text"],
-          input[type="email"],
-          input[type="password"] {
-            background-color: rgba(255, 255, 255, 0.4) !important;
-            color: var(--c-text-primary) !important;
-          }
-          html[data-theme='dark'] input[type="text"],
-          html[data-theme='dark'] input[type="email"],
-          html[data-theme='dark'] input[type="password"] {
-            background-color: rgba(255, 255, 255, 0.02) !important;
-          }
-
-          .flip-card-front,
-          .flip-card-back,
-          label,
-          input::placeholder {
-            color: var(--c-text-primary) !important;
-          }
+        /* 4. RESPONSIVE DESIGN */
+        @media (max-width: 960px) {
+            body { overflow-y: auto; }
+            .page-container {
+                grid-template-columns: 1fr;
+                width: 480px;
+                max-width: 100%;
+            }
+            .info-panel {
+                border-bottom: 1px solid var(--c-bg-divider);
+            }
+            .form-panel {
+                border-left: none;
+            }
         }
-
-
+        @media (max-width: 480px) {
+            body { padding: 0; align-items: stretch; }
+            .page-container { border-radius: 0; min-height: 100vh; }
+            .info-panel h2 { font-size: 1.5rem; }
+            .info-panel .subtitle { font-size: 1rem; }
+            .info-panel, .form-panel { padding: 30px 25px; }
+            .form-row { flex-direction: column; gap: 0; }
+        }
+        
+        @media (hover: none) and (pointer: coarse) {
+            .page-container::before {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="background-container">
-        <div class="background-gradient"></div>
-    </div>
+    <div class="background-container"></div>
 
-    <div class="flip-card" id="flip-card">
-        <div class="flip-card-inner">
-            
-            <div class="flip-card-front">
-                <h1>Welcome Back.</h1>
+    <div class="page-container">
+        <div class="info-panel">
+            <div class="brand-header">
+                <img src="https://res.cloudinary.com/ddkisbcrp/image/upload/v1754680190/logo_pjqn4r.png" alt="Bridging the Gap Logo">
+                <h1>Bridging the Gap</h1>
+            </div>
+            <h2>Navigate Government Schemes with Ease.</h2>
+            <p class="subtitle">Search, understand, and apply for programs in Health, Agriculture, Education, and more—all in one place.</p>
+            <div class="category-icons">
+                <div class="icon-item"><i class="fas fa-heart-pulse"></i><span>Health</span></div>
+                <div class="icon-item"><i class="fas fa-tractor"></i><span>Farmers</span></div>
+                <div class="icon-item"><i class="fas fa-graduation-cap"></i><span>Students</span></div>
+                <div class="icon-item"><i class="fas fa-futbol"></i><span>Sports</span></div>
+            </div>
+        </div>
+        <div class="form-panel">
+            <div id="login-section">
+                <h1>Welcome Back</h1>
                 <span id="toggle-to-signup" class="toggle-form">No account? Create one</span>
                 <form id="login-form">
-                    <div class="form-content">
-                        <div class="form-group">
-                            <label for="login-email">Email</label>
-                            <input type="email" id="login-email" required placeholder="your.email@example.com" />
-                        </div>
-                        <div class="form-group">
-                            <label for="login-password">Password</label>
-                            <div class="password-container">
-                                <input type="password" id="login-password" required placeholder="Enter your password" />
-                                <i class="fas fa-eye toggle-password" id="toggle-login-password"></i>
-                            </div>
-                            <a href="#" id="forgot-password">Forgot Password?</a>
-                        </div>
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required placeholder="your.email@example.com" />
                     </div>
-                    <div class="form-actions">
-                        <button type="submit" class="primary-btn">Login</button>
-                        <button type="button" id="admin-login-btn">Admin Login</button>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <div class="password-container">
+                            <input type="password" id="login-password" required placeholder="Enter your password" />
+                            <i class="fas fa-eye toggle-password" id="toggle-login-password"></i>
+                        </div>
+                        <a href="#" id="forgot-password">Forgot Password?</a>
                     </div>
+                    <button type="submit" class="primary-btn">Login</button>
+                    <button type="button" id="admin-login-btn">Admin Login</button>
                 </form>
             </div>
-
-            <div class="flip-card-back">
-                <h1>Create Account.</h1>
+            <div id="signup-section" class="hidden">
+                <h1>Create Account</h1>
                 <span id="toggle-to-login" class="toggle-form">Already a member? Log in</span>
                 <form id="signup-form">
-                    <div class="form-content">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="signup-firstname">First name</label>
-                                <input type="text" id="signup-firstname" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="signup-lastname">Last name</label>
-                                <input type="text" id="signup-lastname" required />
-                            </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="signup-firstname">First name</label>
+                            <input type="text" id="signup-firstname" required />
                         </div>
                         <div class="form-group">
-                            <label for="signup-email">Email</label>
-                            <input type="email" id="signup-email" required placeholder="your.email@example.com" />
-                        </div>
-                        <div class="form-group">
-                            <label for="signup-password">Password</label>
-                            <div class="password-container">
-                                <input type="password" id="signup-password" required placeholder="At least 6 characters" />
-                                <i class="fas fa-eye toggle-password" id="toggle-signup-password"></i>
-                            </div>
+                            <label for="signup-lastname">Last name</label>
+                            <input type="text" id="signup-lastname" required />
                         </div>
                     </div>
-                    <div class="form-actions">
-                        <button type="submit" class="primary-btn">Create Account</button>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" required placeholder="your.email@example.com" />
                     </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <div class="password-container">
+                            <input type="password" id="signup-password" required placeholder="At least 6 characters" />
+                            <i class="fas fa-eye toggle-password" id="toggle-signup-password"></i>
+                        </div>
+                    </div>
+                    <button type="submit" class="primary-btn">Create Account</button>
                 </form>
             </div>
-
         </div>
     </div>
     
@@ -348,24 +360,73 @@
             firebase.initializeApp(firebaseConfig);
             const auth = firebase.auth();
             const db = firebase.firestore();
+            
+            /* --- INTERACTIVE EFFECTS (Desktop vs. Mobile) --- */
+            const pageContainer = document.querySelector('.page-container');
+            const bgContainer = document.querySelector('.background-container');
+            const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
-            const flipCard = document.getElementById('flip-card');
+            if (pageContainer && bgContainer) {
+                if (isTouchDevice) {
+                    // --- MOBILE: TILT EFFECT ---
+                    // This requires user permission on some devices (e.g., iOS)
+                    window.addEventListener('deviceorientation', (e) => {
+                        const { beta, gamma } = e; // beta: front-back tilt, gamma: left-right tilt
+                        if (beta !== null && gamma !== null) {
+                            // Normalize values and apply a limit to prevent extreme rotation
+                            const rotateX = Math.min(Math.max(beta - 45, -30), 30) * 0.15;
+                            const rotateY = Math.min(Math.max(gamma, -30), 30) * 0.15;
+                            const dx = gamma * -0.3;
+                            const dy = (beta - 45) * -0.3;
+
+                            pageContainer.style.setProperty('--rotate-x', `${rotateX}deg`);
+                            pageContainer.style.setProperty('--rotate-y', `${rotateY}deg`);
+                            bgContainer.style.setProperty('--mouse-x-bg', `${dx}px`);
+                            bgContainer.style.setProperty('--mouse-y-bg', `${dy}px`);
+                        }
+                    });
+                } else {
+                    // --- DESKTOP: MOUSEMOVE EFFECT ---
+                    document.body.addEventListener('mousemove', (e) => {
+                        const { clientX, clientY } = e;
+                        const { left, top, width, height } = pageContainer.getBoundingClientRect();
+                        
+                        // Spotlight on the card
+                        const x = clientX - left;
+                        const y = clientY - top;
+                        pageContainer.style.setProperty('--mouse-x', `${x}px`);
+                        pageContainer.style.setProperty('--mouse-y', `${y}px`);
+
+                        // 3D Tilt
+                        const rotateX = -1 * (y - height / 2) / (height / 2) * 8; // Intensity = 8
+                        const rotateY = (x - width / 2) / (width / 2) * 8;
+                        pageContainer.style.setProperty('--rotate-x', `${rotateX}deg`);
+                        pageContainer.style.setProperty('--rotate-y', `${rotateY}deg`);
+
+                        // Background Parallax
+                        const dx = (clientX / window.innerWidth - 0.5) * -30;
+                        const dy = (clientY / window.innerHeight - 0.5) * -30;
+                        bgContainer.style.setProperty('--mouse-x-bg', `${dx}px`);
+                        bgContainer.style.setProperty('--mouse-y-bg', `${dy}px`);
+                    });
+
+                    pageContainer.addEventListener('mouseleave', () => {
+                        pageContainer.style.setProperty('--rotate-x', '0deg');
+                        pageContainer.style.setProperty('--rotate-y', '0deg');
+                    });
+                }
+            }
+
+            // --- FUNCTIONAL JAVASCRIPT (Login, Signup, etc.) ---
+            const loginSection = document.getElementById('login-section');
+            const signupSection = document.getElementById('signup-section');
             const toggleToLogin = document.getElementById('toggle-to-login');
             const toggleToSignup = document.getElementById('toggle-to-signup');
             const statusMessage = document.getElementById('status-message');
             let adminLoginAttempted = false;
 
-            toggleToLogin.addEventListener('click', () => {
-                flipCard.classList.remove('is-flipped');
-                showStatus('', 'success', 1); 
-            });
-            toggleToSignup.addEventListener('click', () => {
-                flipCard.classList.add('is-flipped');
-                showStatus('', 'success', 1); 
-            });
-
-            let statusTimeout;
             const showStatus = (message, type, duration = 6000) => {
+                let statusTimeout;
                 clearTimeout(statusTimeout);
                 statusMessage.textContent = message;
                 statusMessage.className = `show ${type}`;
@@ -374,17 +435,26 @@
                 }
             };
 
+            toggleToLogin.addEventListener('click', () => {
+                loginSection.classList.remove('hidden');
+                signupSection.classList.add('hidden');
+                showStatus('', 'success', 1);
+            });
+            toggleToSignup.addEventListener('click', () => {
+                signupSection.classList.remove('hidden');
+                loginSection.classList.add('hidden');
+                showStatus('', 'success', 1);
+            });
+
             const togglePasswordVisibility = (input, icon) => {
                 const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
                 input.setAttribute('type', type);
                 icon.classList.toggle('fa-eye');
                 icon.classList.toggle('fa-eye-slash');
             };
-            
             document.getElementById('toggle-signup-password').addEventListener('click', (e) => togglePasswordVisibility(document.getElementById('signup-password'), e.target));
             document.getElementById('toggle-login-password').addEventListener('click', (e) => togglePasswordVisibility(document.getElementById('login-password'), e.target));
 
-            // --- 4. FIREBASE AUTH LOGIC ---
             document.getElementById('signup-form').addEventListener('submit', (e) => {
                 e.preventDefault();
                 const firstName = document.getElementById('signup-firstname').value;
@@ -392,43 +462,29 @@
                 const email = document.getElementById('signup-email').value;
                 const password = document.getElementById('signup-password').value;
                 const fullName = `${firstName} ${lastName}`.trim();
-
                 auth.createUserWithEmailAndPassword(email, password)
                     .then(userCredential => {
                         const user = userCredential.user;
-                        return user.updateProfile({ displayName: fullName })
-                            .then(() => {
-                                db.collection('users').doc(user.uid).set({
-                                    firstName: firstName, lastName: lastName, email: user.email,
-                                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                                });
-                                return user;
+                        return user.updateProfile({ displayName: fullName }).then(() => {
+                            db.collection('users').doc(user.uid).set({
+                                firstName: firstName, lastName: lastName, email: user.email,
+                                createdAt: firebase.firestore.FieldValue.serverTimestamp()
                             });
+                            return user;
+                        });
                     })
                     .then(user => {
                         user.sendEmailVerification();
-                        showStatus(`Account created! A verification link was sent to ${user.email}. Check your inbox. This page will auto-refresh once you've verified.`, 'success', null);
-                        
-                        const verificationInterval = setInterval(() => {
-                            user.reload().then(() => {
-                                if (user.emailVerified) {
-                                    clearInterval(verificationInterval);
-                                    showStatus('Email verified! Logging you in...', 'success', 3000);
-                                    setTimeout(() => window.location.href = "dashboard.html", 2000);
-                                }
-                            });
-                        }, 3000);
+                        showStatus(`Account created! A verification link was sent to ${user.email}. Please check your inbox.`, 'success', null);
                     })
                     .catch(error => showStatus(error.message, 'error'));
             });
 
-            // LOGIN
             document.getElementById('login-form').addEventListener('submit', (e) => {
                 e.preventDefault();
                 adminLoginAttempted = false;
                 const email = document.getElementById('login-email').value;
                 const password = document.getElementById('login-password').value;
-
                 auth.signInWithEmailAndPassword(email, password)
                     .then(userCredential => {
                         if (userCredential.user.emailVerified) {
@@ -443,16 +499,13 @@
                     .catch(error => showStatus(error.message, 'error'));
             });
 
-            // ADMIN LOGIN
             document.getElementById('admin-login-btn').addEventListener('click', () => {
                 adminLoginAttempted = true;
                 const email = document.getElementById('login-email').value;
                 const password = document.getElementById('login-password').value;
-
                 if (!email || !password) {
                     return showStatus("Enter email and password for admin login.", "error");
                 }
-
                 auth.signInWithEmailAndPassword(email, password)
                     .then(userCredential => {
                         if (!userCredential.user.emailVerified) {
@@ -473,7 +526,6 @@
                     .catch(error => showStatus(error.message, 'error'));
             });
 
-            // FORGOT PASSWORD
             document.getElementById('forgot-password').addEventListener('click', (e) => {
                 e.preventDefault();
                 const email = document.getElementById('login-email').value;
@@ -496,12 +548,6 @@
                     }
                 }
             });
-        
-            window.onpopstate = function() {
-                if (!auth.currentUser) {
-                    window.location.replace("index.html");
-                }
-            };
         });
     </script>
 </body>
