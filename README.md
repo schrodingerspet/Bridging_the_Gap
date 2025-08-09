@@ -8,9 +8,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
 [![Latest Commit](https://img.shields.io/github/last-commit/schrodingerspet/Bridging_the_Gap?style=for-the-badge)](https://github.com/schrodingerspet/Bridging_the_Gap/commits/main)
 [![Repo Views](https://img.shields.io/badge/dynamic/json?label=Repo%20views&query=value&url=https://api.countapi.xyz/hit/schrodingerspet/Bridging_the_Gap&style=for-the-badge)](https://github.com/schrodingerspet/Bridging_the_Gap)
-
-
-
 [![Deployed](https://img.shields.io/website?down_color=red&down_message=offline&up_color=brightgreen&up_message=live&url=https://bridging-the-gap-af65a.web.app&style=for-the-badge)](https://bridging-the-gap-af65a.web.app)
 
 ---
