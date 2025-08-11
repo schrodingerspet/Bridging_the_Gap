@@ -8,6 +8,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
 [![Latest Commit](https://img.shields.io/github/last-commit/schrodingerspet/Bridging_the_Gap?style=for-the-badge)](https://github.com/schrodingerspet/Bridging_the_Gap/commits/main)
 [![Deployed](https://img.shields.io/website?down_color=red&down_message=offline&up_color=brightgreen&up_message=live&url=https://bridging-the-gap-af65a.web.app&style=for-the-badge)](https://bridging-the-gap-af65a.web.app)
+[![Visitors](https://komarev.com/ghpvc/?username=schrodingerspet&repo=Bridging_the_Gap&label=VISITORS&color=brightgreen&style=for-the-badge)](https://github.com/schrodingerspet/Bridging_the_Gap)
 
 ---
 
