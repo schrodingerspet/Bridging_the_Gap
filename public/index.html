@@ -34,6 +34,7 @@
             --c-text-primary: #1d1d1f;
             --c-text-secondary: #515154;
             --c-text-accent: #007aff;
+            --c-bg-main: #f0f2f5;
             --c-bg-glass: rgba(255, 255, 255, 0.75);
             --c-border-glass: rgba(60, 60, 67, 0.2);
             --c-bg-btn: #007aff;
@@ -50,6 +51,7 @@
             --c-text-primary: #f5f5f7;
             --c-text-secondary: #8e8e93;
             --c-text-accent: #0a84ff;
+            --c-bg-main: #000000;
             --c-bg-glass: rgba(28, 28, 30, 0.55);
             --c-border-glass: rgba(84, 84, 88, 0.5);
             --c-bg-btn: #0a84ff;
@@ -66,7 +68,7 @@
         
         body {
             font-family: var(--font-sans);
-            background-color: #f0f2f5; 
+            background-color: var(--c-bg-main); 
             display: grid;
             place-items: center;
             min-height: 100vh;
@@ -112,9 +114,7 @@
             pointer-events: none;
             transition: opacity var(--transition-smooth);
         }
-        .page-container:hover::before {
-            opacity: 1;
-        }
+        .page-container:hover::before { opacity: 1; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.98); }
@@ -122,61 +122,41 @@
         }
         
         .info-panel {
-            padding: 48px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 2rem;
+            padding: 48px; display: flex; flex-direction: column;
+            justify-content: center; gap: 2rem;
         }
         .brand-header { text-align: center; }
         .brand-header img { width: 64px; height: 64px; margin-bottom: 1rem; }
         .brand-header h1 { 
-            font-family: var(--font-display);
-            font-size: 2rem; 
+            font-family: var(--font-display); font-size: 2rem; 
             color: var(--c-text-primary);
         }
         
         .info-panel h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--c-text-primary);
-            line-height: 1.3;
-            text-align: center;
+            font-size: 1.8rem; font-weight: 700; color: var(--c-text-primary);
+            line-height: 1.3; text-align: center;
         }
         .info-panel .subtitle {
-            font-size: 1rem;
-            color: var(--c-text-secondary);
-            line-height: 1.6;
-            text-align: center;
+            font-size: 1rem; color: var(--c-text-secondary);
+            line-height: 1.6; text-align: center;
         }
         
         .category-icons {
-            display: flex;
-            justify-content: center;
-            gap: 1.25rem;
+            display: flex; justify-content: center; gap: 1.25rem;
         }
         .icon-item { text-align: center; }
         .icon-item i {
-            font-size: 1.5rem;
-            width: 50px; height: 50px;
-            display: flex; align-items: center; justify-content: center;
-            background: var(--c-bg-input);
-            border-radius: 50%;
-            color: var(--c-text-accent);
-            margin-bottom: 0.5rem;
+            font-size: 1.5rem; width: 50px; height: 50px; display: flex;
+            align-items: center; justify-content: center; background: var(--c-bg-input);
+            border-radius: 50%; color: var(--c-text-accent); margin-bottom: 0.5rem;
             transition: transform var(--transition-smooth);
         }
-        .icon-item:hover i {
-            transform: scale(1.15) translateY(-2px);
-        }
+        .icon-item:hover i { transform: scale(1.15) translateY(-2px); }
         .icon-item span { font-size: 0.8rem; color: var(--c-text-secondary); }
 
         .form-panel { 
-            padding: 48px; 
-            border-left: 1px solid var(--c-border-glass);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            padding: 48px; border-left: 1px solid var(--c-border-glass);
+            display: flex; flex-direction: column; justify-content: center;
         }
         
         .form-panel h1 { font-size: 1.8rem; text-align: center; }
@@ -204,33 +184,55 @@
             width: 100%; padding: 12px; border: none; border-radius: var(--border-radius-small);
             font-size: 1rem; font-weight: 600; cursor: pointer;
             transition: all var(--transition-smooth); margin-top: 1rem;
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
         }
         .primary-btn { background: var(--c-bg-btn); color: var(--c-text-btn); }
-        .primary-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+        .primary-btn:hover:not(:disabled) { opacity: 0.85; transform: translateY(-2px); }
+        button:disabled { cursor: not-allowed; opacity: 0.6; }
+
         #admin-login-btn { background: var(--c-bg-btn-admin); color: var(--c-text-btn); }
         
-        #status-message {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            padding: 10px 20px; background: var(--c-bg-glass); border: 1px solid var(--c-border-glass);
-            border-radius: var(--border-radius-small); font-weight: 500; text-align: center;
-            opacity: 0; visibility: hidden; transition: opacity 0.4s, visibility 0.4s;
-            z-index: 100; max-width: 90%;
+        /* --- MODAL FOR STATUS MESSAGES --- */
+        .status-modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(4px);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000; opacity: 0; visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
         }
+        .status-modal-overlay.show { opacity: 1; visibility: visible; }
+        
+        .status-modal-content {
+            background: var(--c-bg-glass); border: 1px solid var(--c-border-glass);
+            padding: 2rem; border-radius: var(--border-radius-small);
+            box-shadow: var(--shadow-strong); text-align: center;
+            max-width: 90%; width: 400px;
+            transform: scale(0.95); transition: transform 0.3s;
+        }
+        .status-modal-overlay.show .status-modal-content { transform: scale(1); }
+
+        .status-modal-content i { font-size: 2.5rem; margin-bottom: 1rem; }
+        .status-modal-content .success { color: var(--c-status-success); }
+        .status-modal-content .error { color: var(--c-status-error); }
+        .status-modal-content p { font-size: 1.1rem; color: var(--c-text-primary); margin-bottom: 1.5rem; line-height: 1.6; }
+        .modal-close-btn { max-width: 120px; margin: 0 auto; }
+
         .hidden { display: none; }
         
+        /* --- LOADING SPINNER --- */
+        .spinner {
+            width: 20px; height: 20px; border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%; border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
         /* RESPONSIVE DESIGN */
         @media (max-width: 960px) {
             body { overflow-y: auto; }
-            .page-container {
-                grid-template-columns: 1fr;
-                max-width: 480px;
-            }
-            .info-panel {
-                border-bottom: 1px solid var(--c-bg-divider);
-            }
-            .form-panel {
-                border-left: none;
-            }
+            .page-container { grid-template-columns: 1fr; max-width: 480px; }
+            .info-panel { border-bottom: 1px solid var(--c-bg-divider); }
+            .form-panel { border-left: none; }
         }
         @media (max-width: 480px) {
             body { padding: 0; }
@@ -241,9 +243,7 @@
             .form-row { flex-direction: column; gap: 0; }
         }
         @media (hover: none) and (pointer: coarse) {
-            .page-container::before {
-                display: none;
-            }
+            .page-container::before { display: none; }
         }
     </style>
 </head>
@@ -283,7 +283,10 @@
                         </div>
                         <a href="#" id="forgot-password">Forgot Password?</a>
                     </div>
-                    <button type="submit" class="primary-btn">Login</button>
+                    <button type="submit" class="primary-btn" id="login-btn">
+                        <span class="btn-text">Login</span>
+                        <span class="spinner hidden"></span>
+                    </button>
                     <button type="button" id="admin-login-btn">Admin Login</button>
                 </form>
             </div>
@@ -319,7 +322,13 @@
         </div>
     </div>
     
-    <div id="status-message"></div>
+    <div id="status-modal" class="status-modal-overlay">
+        <div class="status-modal-content">
+            <i id="status-modal-icon"></i>
+            <p id="status-modal-message"></p>
+            <button id="modal-close-btn" class="primary-btn modal-close-btn">OK</button>
+        </div>
+    </div>
 
     <script>
         (function() {
@@ -392,28 +401,41 @@
             const signupSection = document.getElementById('signup-section');
             const toggleToLogin = document.getElementById('toggle-to-login');
             const toggleToSignup = document.getElementById('toggle-to-signup');
-            const statusMessage = document.getElementById('status-message');
             let adminLoginAttempted = false;
 
-            const showStatus = (message, type, duration = 6000) => {
-                let statusTimeout;
-                clearTimeout(statusTimeout);
-                statusMessage.textContent = message;
-                statusMessage.className = `show ${type}`;
-                if (duration) {
-                    statusTimeout = setTimeout(() => statusMessage.classList.remove('show'), duration);
+            // --- Enhanced Status Modal Logic ---
+            const statusModal = document.getElementById('status-modal');
+            const statusModalIcon = document.getElementById('status-modal-icon');
+            const statusModalMessage = document.getElementById('status-modal-message');
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+
+            const showStatus = (message, type) => {
+                statusModalMessage.textContent = message;
+                statusModalIcon.className = ''; // Clear previous classes
+                if (type === 'success') {
+                    statusModalIcon.classList.add('fas', 'fa-check-circle', 'success');
+                } else {
+                    statusModalIcon.classList.add('fas', 'fa-exclamation-circle', 'error');
                 }
+                statusModal.classList.add('show');
             };
 
+            const hideStatus = () => {
+                statusModal.classList.remove('show');
+            };
+            modalCloseBtn.addEventListener('click', hideStatus);
+            statusModal.addEventListener('click', (e) => {
+                if (e.target === statusModal) { hideStatus(); }
+            });
+
+            // --- UI Toggling Logic ---
             toggleToLogin.addEventListener('click', () => {
                 loginSection.classList.remove('hidden');
                 signupSection.classList.add('hidden');
-                showStatus('', 'success', 1);
             });
             toggleToSignup.addEventListener('click', () => {
                 signupSection.classList.remove('hidden');
                 loginSection.classList.add('hidden');
-                showStatus('', 'success', 1);
             });
 
             const togglePasswordVisibility = (input, icon) => {
@@ -424,14 +446,52 @@
             };
             document.getElementById('toggle-signup-password').addEventListener('click', (e) => togglePasswordVisibility(document.getElementById('signup-password'), e.target));
             document.getElementById('toggle-login-password').addEventListener('click', (e) => togglePasswordVisibility(document.getElementById('login-password'), e.target));
+            
+            // --- Loading Indicator Logic ---
+            const loginBtn = document.getElementById('login-btn');
+            const btnText = loginBtn.querySelector('.btn-text');
+            const spinner = loginBtn.querySelector('.spinner');
 
-            document.getElementById('signup-form').addEventListener('submit', (e) => {
+            const showLoader = () => {
+                loginBtn.disabled = true;
+                btnText.textContent = "Please wait...";
+                spinner.classList.remove('hidden');
+            };
+
+            const hideLoader = () => {
+                loginBtn.disabled = false;
+                btnText.textContent = "Login";
+                spinner.classList.add('hidden');
+            };
+            
+            // --- Firebase Auth Logic ---
+
+            // **NEW** Submit signup form on Enter key press
+            const signupForm = document.getElementById('signup-form');
+            signupForm.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    // Find all required inputs within the form
+                    const inputs = signupForm.querySelectorAll('input[required]');
+                    // Check if all of them have a value
+                    const allFilled = [...inputs].every(input => input.value.trim() !== '');
+                    
+                    if (allFilled) {
+                        // If all fields are filled, prevent the default Enter behavior 
+                        // and programmatically click the submit button.
+                        e.preventDefault();
+                        signupForm.querySelector('button[type="submit"]').click();
+                    }
+                }
+            });
+
+            signupForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const firstName = document.getElementById('signup-firstname').value;
                 const lastName = document.getElementById('signup-lastname').value;
                 const email = document.getElementById('signup-email').value;
                 const password = document.getElementById('signup-password').value;
                 const fullName = `${firstName} ${lastName}`.trim();
+
                 auth.createUserWithEmailAndPassword(email, password)
                     .then(userCredential => {
                         const user = userCredential.user;
@@ -445,7 +505,7 @@
                     })
                     .then(user => {
                         user.sendEmailVerification();
-                        showStatus(`Account created! A verification link was sent to ${user.email}. Please check your inbox.`, 'success', null);
+                        showStatus(`Verification mail has been sent to ${user.email}. Please check your inbox to continue.`, 'success');
                     })
                     .catch(error => showStatus(error.message, 'error'));
             });
@@ -455,18 +515,24 @@
                 adminLoginAttempted = false;
                 const email = document.getElementById('login-email').value;
                 const password = document.getElementById('login-password').value;
+                
+                showLoader(); // Show loader on login attempt
+
                 auth.signInWithEmailAndPassword(email, password)
                     .then(userCredential => {
+                        hideLoader(); // Hide loader on success/fail
                         if (userCredential.user.emailVerified) {
-                            showStatus('Login successful! Redirecting...', 'success', 2000);
-                            setTimeout(() => window.location.href = "dashboard.html", 1500);
+                            setTimeout(() => window.location.href = "dashboard.html", 500);
                         } else {
                             auth.signOut();
                             showStatus('Please verify your email. A new link has been sent.', 'error');
                             userCredential.user.sendEmailVerification();
                         }
                     })
-                    .catch(error => showStatus(error.message, 'error'));
+                    .catch(error => {
+                        hideLoader(); // Hide loader on error
+                        showStatus(error.message, 'error');
+                    });
             });
 
             document.getElementById('admin-login-btn').addEventListener('click', () => {
@@ -486,7 +552,7 @@
                     })
                     .then(doc => {
                         if (doc && doc.exists && doc.data().role === 'admin') {
-                            showStatus('Admin login successful! Redirecting...', 'success', 2000);
+                            showStatus('Admin login successful! Redirecting...', 'success');
                             setTimeout(() => window.location.href = "admin_dashboard.html", 1500);
                         } else if (doc) {
                             auth.signOut();
